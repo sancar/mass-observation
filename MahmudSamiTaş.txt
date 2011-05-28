@@ -1,0 +1,22 @@
+1) What did you think of Google Code?
+
+Google Code is an organizing environment for project groups. It's helpful for issue management, communication and keeping track of 
+all previous advancements and communications. Also it's compatibility with svn programs and it's serving as a repository and backup 
+for project codes are very important.
+
+2) What did you think about your project?
+
+It can be used among public users. It may be useful at some points in real life. This project can be integrated to small to medium size 
+social network sites. For example, bucampus.com for Bogazici University. Some aspects of the project might be hard to implement, but it's still
+not that hard in overall.
+
+3)Would you like to work on this project in CMPE 451?
+
+I have already taken CMPE 451 course and I worked on Schematizing Maps project. Mass Observation is also a nice project but i would still prefer
+Schematizing Maps.
+
+4)Do you feel you have gained some idea about the tools and approaches used in software engineering?
+
+Yes. I have worked on many project since it's my fifth year in the school, I've taken CMPE 451 course, worked at the Industry and I'm going to 
+graduate in a few weeks. Therefore, I have some experience about Software Engineering. However, this course made my mind clear about many 
+principles, especially about group communication. Moreover, this course made me think about the importance of using svn.
