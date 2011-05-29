@@ -1,0 +1,14 @@
+1) What did you think of Google Code?
+Google code is a fine tool which enables good solutions to team development systems. I used github which is a similar tool to google code.
+I think it is more easy to use . But i am not sure about its functionalities, because i did not use sophistacated functionalities then. 
+
+2) What did you think about your project?
+Mob system is  a good project and idea . It can be used by lot of people if implemented with a easy-to-use interface.
+
+3)Would you like to work on this project in CMPE 451?
+Yes, i want to work on this project.
+
+4)Do you feel you have gained some idea about the tools and approaches used in software engineering?
+Yes, i did. I was already familiar with uml and google code like systems, but in this course i gain more insides of them.
+As a new tool, i learned mercurial(svn).Other than tools, issues about the importance of planning, testing, configuration 
+and people management was really instructive.
