@@ -1,0 +1,25 @@
+Your final project comes in two parts. Each of the parts is a project by itself, and only the first one is mandatory.
+Your final project comes in two parts. Each of the parts is a project by itself, and only the first one is mandatory.
+ Both will be graded and weighted equally, so attempt the second one if you want to increase your grade.
+
+
+The subject of your final project(s) is auto transcription of music, i.e. automatic extraction of the note sequence used in a music file. Doing this requires you to:
+
+
+For each note,
+1) first determine the octave of the note being played (e.g. #4)
+2) then determine its actual label (e.g. C4)
+
+
+The first project requires you to determine the octave, and the second project requires you to determine the note. 
+In order to do this, you will design and analyse sets of band pass filters, as explained in the attached pdf file.
+ You are to follow the lab work described in the document step by step.
+ The document only covers the octave detection process, but having done and understood the first part, you should be able to extend the same idea to detection of every single note. 
+
+
+The most notable difference from the lab document is that you will use the midi file you have used in the previous project. 
+You can use the music file you have produced, or the original file.
+ Make use that the filters and the frequency of your music file are compatible (not necessarily 8000 Hz as stated in the document). 
+
+
+Due date is 03.06.2011, i.e. the day of the final exam, for both projects.
