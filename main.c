@@ -4,8 +4,10 @@ int add(int num1, int num2)
 {
 	return num1 + num2;
 }
-
-
+int subtract(int num1, int num2)
+{	
+	return num1 - num2;
+}
 
 int main()
 {
@@ -21,10 +23,11 @@ int main()
 
 	if(selection == 1){
          result=add(x,y);
-			printf(("%d",result);
+			printf("%d",result);
 	}
 	else if(selection == 2){
-	//subtract func call
+		result=subtract(x,y);
+		printf("%d",result);
 	}
 	else if(selection == 3){
 	//mult func call
