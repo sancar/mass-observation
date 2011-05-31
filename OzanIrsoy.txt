@@ -1,7 +1,15 @@
 1. What did you think of Google Code?
 
+Google Code is very helpful for a software project. This was the first time I used a service like Google Code, so I cannot compare it to other well known project hosting services like Github, or Sourceforge. But it provides the basic functionality, a wiki system, project hosting, issue tracking, svn system. Those features are essential for a middle or large scale project, hence Google Code (or other similar services) is a must.
+
 2. What did you think about your project?
+
+My project was Mass-Observation. I think it is the best project among the 4 projects in the class and has the most potential. Since its contributors are volunteered people, it has social aspects to it. This makes it the most fun project to work. There are places for so many different ideas. It has also very different components like web service, mobile app, and database, which require different kinds of knowledge.
 
 3. Would you like to work on this project in CMPE 451?
 
+Yes. But my main concern is that it may be difficut to get the project to working state. I have very little experience on database and web programming, and no experience on mobile programming at all. So implementation of the different components of the project may be hard for me. Also integration of those components may also be difficult.
+
 4. Do you feel you have gained some idea about the tools and approaches used in software engineering?
+
+Absolutely. This was the first time I used a service like Google Code, version control, uml diagrams, wiki system, and so forth. Almost everything in the class was new to me. Now I know the main problems in software engineering and how to deal with them.
