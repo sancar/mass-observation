@@ -1,0 +1,7 @@
+1. What did you think of Google Code?
+
+2. What did you think about your project?
+
+3. Would you like to work on this project in CMPE 451?
+
+4. Do you feel you have gained some idea about the tools and approaches used in software engineering?
