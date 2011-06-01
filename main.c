@@ -15,7 +15,7 @@ int modulo(int num1, int num2)
 
 int multiplication(int num1,int num2)
 {
-return num1*num2;
+        return num1*num2;
 }
 
 int main()
@@ -41,8 +41,9 @@ int main()
                 printf("%d\n",result);
         }
         else if(selection == 3){
-         result = multiplication(x,y);
-         printf("%d\n",result);
+         
+               result = multiplication(x,y);
+               printf("%d\n",result);
         }
         else if(selection == 4){
         //div func call
