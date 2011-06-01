@@ -18,6 +18,11 @@ int multiplication(int num1,int num2)
         return num1*num2;
 }
 
+int division(int num1,int num2)
+{
+        return num1/num2;
+}
+
 int main()
 {
         int x,y,selection,result;
@@ -46,7 +51,11 @@ int main()
                printf("%d\n",result);
         }
         else if(selection == 4){
-        //div func call
+               if(y!=0)
+               {
+                   result=division(x,y);
+                   printf("%d\n",result);
+               }
         }
         else if(selection == 5){
         
