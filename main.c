@@ -44,11 +44,11 @@ int main()
         }
         else if(selection == 5){
         
-			      if(y != 0)
-			      {
-			          result = modulo(x,y);
-			          printf("%d\n",result);
-			      }
+			if(y != 0)
+			{
+			  result = modulo(x,y);
+			  printf("%d\n",result);
+			}
         }
 
         return 0;
