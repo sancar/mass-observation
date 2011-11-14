@@ -1,0 +1,16 @@
+
+1.What did you think of Google Code?
+
+Google code creates an oppurtunity to complete project succesfully and communicate others. Also in this way the advance can be seen very easily
+Moreover we can feedback from others who are not in the project.
+
+2.What did you think about your project?
+I think this project can be very useful if some of its properties will be changed. Because applicablity is a little bit low. Especially in mobile platform there are a lot of compability problem.
+But the data collection can be very effective for people who needs information. So if we update this project and change the problems like compability or data traffic which is a little bit high the project will be applicable.
+
+3.Would you like to work on this project in CMPE 451?
+Yes I can but as I said the description and objective of this project must be updated. The design part can be easier but developing part can be so hard.
+
+4.Do you feel you have gained some idea about the tools and approaches used in software engineering?
+I think this part is the most important part because by the way I saw how a project managed and how a team can work.
+Also now I think one of the most important part is in a project communication with team members. Because if synchronization lost, everthing lost.
