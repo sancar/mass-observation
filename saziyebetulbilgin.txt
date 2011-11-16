@@ -1,0 +1,46 @@
+
+What did you think of Google Code?
+
+Google Code makes developing and managing a project much easier with many facilities 
+it provides. Especially in group projects, it offers an environment in which team members
+can work together on the same project.
+I think Google Code is useful not only in team works, but also when working alone on a
+project; it provides many utilities such as ordering project documents in a systematic way
+and easier monitoring of progress in a project. It was the first time I experienced such 
+a teamworking tool but I can easily sense the professional features of the system.
+ 
+
+
+What did you think about your project?
+
+When implemented, MOb Project will be a useful project that can be used in various areas,
+particularly in social studies. It fits into the new trend of social media. In addition, 
+I feel myself lucky to work on this project because I think, MOb Project is more enjoyable 
+than the other projects within the scope of this course. 
+   
+
+
+Would you like to work on this project in CMPE 451?
+
+Yes. I have 2 reasons for my wish to work on this project:
+
+First, MOb Project is related to today's life and have a social side in it. If I take a role
+in the implementation of this project, I feel myself useful because society benefits from
+these kinds of projects.
+
+Second, we've worked on MOb Project whole semester as a group. Hopefully, the project is
+almost ready for implementation stage now . I want to see how and to what extend our 
+work up to now will work in the implemetation phase of the project.  
+
+
+ 
+Do you feel you have gained some idea about the tools and approaches used in software engineering?
+
+Yes. Not only I feel that I gained such idea but also I've realized how little knowledge about
+software engineering i had before this course. I plan to use approaches i've learned and tools 
+i've used in this course in my future projects. What i've learned about software engineering 
+showed me a door and then opened it for me. Now, I see that there are other doors behind this 
+door and I have an intention to open them by further exploration. If i take into account the 
+possibility of working on various projects in future, I should start immediately to practise 
+the taught material in my engineering projects.     
+

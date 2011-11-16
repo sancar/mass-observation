@@ -1,0 +1,36 @@
+1.What did you think of Google Code?
+
+It's a very useful tool I think. It provides various functionalities that 
+we needed for our team project. And I think the best part of Google Code is
+easy track of changes.
+
+
+2.What did you think about your project?
+
+I think it's a very useful and serviceable project.
+Project can be carried out into real life in various areas.
+I'm working in a consulting firm and there is a similarity
+between the work consulting firms do and the work that our project does.
+You collect data according to customer's requests and make analyses
+of gathered data and make suggestions to the customer. Customer may 
+be a person who wants to open a private hospital in Hisarustu and he needs
+information about hospitals(price,quality,service..) and people's needs.
+So, I think that our project can be utilized in different areas.
+
+
+
+3.Would you like to work on this project in CMPE 451?
+
+Yes, I'd like to work on this project in Cmpe451. I'd want to see the 
+project working and being utilized in many business services.
+
+
+4.Do you feel you have gained some idea about the tools and approaches used in software engineering?
+
+Yes, both the book and the google code helped me a lot. Google code helped
+ in the "tools" part, and actually more interesting part was "approaches" in software engineering.
+Now I can see that there is more than just 
+the design, implementation, codes etc..
+There are different personalities, project manager's
+responsibilities, risk analyzing.. So in general it was a good experience taking this course and 
+learning the connection between software projects and human relations.
