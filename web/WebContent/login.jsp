@@ -3,7 +3,17 @@
 
 <%
 	if(session.getAttribute("name") != null){
-		response.sendRedirect("/welcome.jsp");
+		response.sendRedirect("/mob/welcome.jsp");
+	}
+%>
+
+<% 
+	
+	String message = (String)request.getAttribute("message");
+	if(!(message == null)){
+		%>
+	<a style="color:red;"> <% out.print(message); %></a>
+		<% 
 	}
 %>
 
@@ -18,7 +28,7 @@
 	
 	<tr>
 		<td align="right">Password: </td>
-		<td><input type="text" name="password1"  /> </td>
+		<td><input type="password" name="password1"  /> </td>
 	</tr>
 	
 	<tr>
