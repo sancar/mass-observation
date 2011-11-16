@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,14 +44,13 @@ public class SignIn extends HttpServlet {
 	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String name = "", password1 = "", password2 = "" , email = "";
 		
 		PrintWriter out = response.getWriter();
+		
 		
 		if (request.getParameter("name")!= null && request.getParameter("email") != null 
 				&&	request.getParameter("password1") != null && request.getParameter("password2") != null){
@@ -73,7 +74,11 @@ public class SignIn extends HttpServlet {
 						   count++;
 						 }
 						 if(count == 1){
-							 out.print("This email is used by another user");
+							String message = "This email is used by another user";
+							RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signin.jsp");
+							request.setAttribute("message", message);
+							dispatcher.forward(request, response);
+							
 						 }else if(count == 0){
 							//generate a random activation key
 							int randomNumber = (int)(Math.random() * Math.random() * 10000);
@@ -81,6 +86,10 @@ public class SignIn extends HttpServlet {
 							String activation_key = MD5(Integer.toString(randomNumber));
 							activation_key = "1"; //TODO change this part when email confirmation system is added
 							//out.print(activation_key);	
+							
+							//encrypt the password then save it
+							password1 = MD5(password1);
+							
 							 statement.executeUpdate("INSERT INTO users ( email , name, password, activation_key) " +
 						 								"VALUES ( '"+ email + "' , '"+ name +"'  , '"+ password1 +"' , '"+ activation_key +"' ) " );
 							 
@@ -88,9 +97,9 @@ public class SignIn extends HttpServlet {
 							 session.setAttribute("email", email);
 							 session.setAttribute("name", name);
 							 
-							 out.print("new user account is succesfully created");
+							 //out.print("new user account is succesfully created");
 							 
-							 response.sendRedirect("/welcome.jsp");
+							 response.sendRedirect("/mob/welcome.jsp");
 							 // TODO send email with activation key
 							 // TODO make a ActivationController class
 						 }else{
@@ -103,10 +112,18 @@ public class SignIn extends HttpServlet {
 						out.print("Connection time out");
 					}
 				}else{
-					out.print("passwords did not match");
+					String message = "Passwords did not match";
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signin.jsp");
+					request.setAttribute("message", message);
+					dispatcher.forward(request, response);
+					
 				}
 			}else{
-				out.print("please fill the form");
+				String message = "Please fill the form";
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signin.jsp");
+				request.setAttribute("message", message);
+				dispatcher.forward(request, response);
+				
 			}
 			
 		}else{
