@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MObActivity!</string>
+    <string name="app_name">MOb</string>
+    <string name="name">Username:</string>
+    <string name="password">Password:</string>
+    <color name="blue">#6495ED</color>
+    <string name="Login">Login</string>
+
+
+</resources>
