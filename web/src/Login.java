@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
 						 HttpSession session = request.getSession();
 						 session.setAttribute("email", email);
 						 session.setAttribute("name", (String)result.getObject(1));
-						 response.sendRedirect("/mob/welcome.jsp");
+						 response.sendRedirect("./welcome.jsp");
 					 }else{
 						String message = "There is no account with matching email and password";
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
 				}
 			}else{
 				String message = "please enter email and password to login";
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login.jsp");
 				request.setAttribute("message", message);
 				dispatcher.forward(request, response);
 				

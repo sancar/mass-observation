@@ -2,22 +2,15 @@
 <%@ include file = "./includes/header.jsp" %>
 
 <%
-	if(session.getAttribute("name") != null){
-		response.sendRedirect("./welcome.jsp");
+	if(session.getAttribute("name") == null){
+		response.sendRedirect("/mob/login.jsp");
 	}
+
 %>
 
-<% 
-	
-	String message = (String)request.getAttribute("message");
-	if(!(message == null)){
-		%>
-	<a style="color:red;"> <% out.print(message); %></a>
-		<% 
-	}
-%>
+<h1>Observation Event Creation Page</h1>
 
-<form action="Login" method = "POST" >
+<form action="CrateOE" method = "POST" >
 <div>
 <table>
 
@@ -38,7 +31,5 @@
 	</table>
 </div>
 </form>
-<br/>
-<a href="./signin.jsp">Sign in as a new user</a>
 
 <%@ include file = "./includes/footer.jsp" %>
