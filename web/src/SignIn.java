@@ -99,7 +99,7 @@ public class SignIn extends HttpServlet {
 							 
 							 //out.print("new user account is succesfully created");
 							 
-							 response.sendRedirect("/mob/welcome.jsp");
+							 response.sendRedirect("./welcome.jsp");
 							 // TODO send email with activation key
 							 // TODO make a ActivationController class
 						 }else{
