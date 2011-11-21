@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +14,11 @@ import java.sql.*;
 
 @WebServlet("/Login")
 public class Login extends HttpServlet {
-	String dbUrl = "jdbc:mysql://localhost:3306/mob";
+   //to try the database on the titan server uncomment the following lines and comment other three lines. 
+	//String dbUrl = "jdbc:mysql://titan.cmpe.boun.edu.tr/database3";
+	//String username = "project3";
+	//String password = "şifremiz"; i did not commit the password, you should change it
+  String dbUrl = "jdbc:mysql://localhost:3306/mob";
 	String username = "root";
 	String password = "admin";
 	private static final long serialVersionUID = 1L;
