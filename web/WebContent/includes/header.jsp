@@ -7,3 +7,6 @@
 <title>MOB</title>
 </head>
 <body>
+<a href="./welcome.jsp"><font face="Calibri"><font color="#68caf9"></font></font>
+<font face="Calibri"><font color="#68caf9" size="240"> mass</font><font color="#000080" size="240">observation</font></font></a>
+<hr width="100%" size="2">
