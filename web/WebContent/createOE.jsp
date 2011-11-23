@@ -6,10 +6,12 @@
 	}
 
 %>
-                        <em><font face="Calibri"><font color="#40424d">                                                                                   Welcome</font></font>   <% out.print(session.getAttribute("name"));%></em> <br><div><font color="#0000ff"></font><font color="#0000ff">                                                     </font><u><font color="#0000ff">Log Out</font></u></div><h1><font face="Calibri"><font color="#68caf9"></font></font><font face="Calibri"><font color="#68caf9" size="240"> mass</font><font color="#000080" size="240">observation</font></font></h1><hr width="100%" size="2">
+<div align="right">
+<em><font face="Calibri" color="#40424d">Welcome </font><% out.print(session.getAttribute("name"));%></em><font color="#0000ff"></font>
+<a href="./Logout">Log Out</a>
+</div>
 
-
-<form action="CreateOE" method = "POST" >
+<form action="CreateOE" name="CreateOE" method = "POST" >
 <table>
 <tr>
 <td>
@@ -70,39 +72,39 @@ border-color: #68caf9
 function addText(val) {
 if (val.value == "radio_mail_part") {
 
-document.forms['form1'].elements['text_mail_part'].style.display = "block";
-document.forms['form1'].elements['text_name_part'].style.display = "none";	
-document.forms['form1'].elements['text_name_part'].value="";
+document.forms['CreateOE'].elements['text_mail_part'].style.display = "block";
+document.forms['CreateOE'].elements['text_name_part'].style.display = "none";	
+document.forms['CreateOE'].elements['text_name_part'].value="";
 }
 else if(val.value=="radio_name_part")
 	{
-	document.forms['form1'].elements['text_mail_part'].style.display = "none";	
-	document.forms['form1'].elements['text_mail_part'].value="";
-	document.forms['form1'].elements['text_name_part'].style.display = "block";
+	document.forms['CreateOE'].elements['text_mail_part'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_mail_part'].value="";
+	document.forms['CreateOE'].elements['text_name_part'].style.display = "block";
 	}
 else {
-	document.forms['form1'].elements['text_mail_part'].style.display = "none";	
-	document.forms['form1'].elements['text_mail_part'].value="";
-	document.forms['form1'].elements['text_name_part'].style.display = "none";	
-	document.forms['form1'].elements['text_name_part'].value="";
+	document.forms['CreateOE'].elements['text_mail_part'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_mail_part'].value="";
+	document.forms['CreateOE'].elements['text_name_part'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_name_part'].value="";
 }
 if(val.value=="radio_name_see")
 {
-document.forms['form1'].elements['text_mail_see'].style.display = "none";	
-document.forms['form1'].elements['text_mail_see'].value="";
-document.forms['form1'].elements['text_name_see'].style.display = "block";
+document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
+document.forms['CreateOE'].elements['text_mail_see'].value="";
+document.forms['CreateOE'].elements['text_name_see'].style.display = "block";
 }
 else if(val.value=="radio_mail_see")
 {
-document.forms['form1'].elements['text_name_see'].style.display = "none";	
-document.forms['form1'].elements['text_name_see'].value="";
-document.forms['form1'].elements['text_mail_see'].style.display = "block";
+document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
+document.forms['CreateOE'].elements['text_name_see'].value="";
+document.forms['CreateOE'].elements['text_mail_see'].style.display = "block";
 }
 else {
-	document.forms['form1'].elements['text_mail_see'].style.display = "none";	
-	document.forms['form1'].elements['text_mail_see'].value="";
-	document.forms['form1'].elements['text_name_see'].style.display = "none";	
-	document.forms['form1'].elements['text_name_see'].value="";
+	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_mail_see'].value="";
+	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_name_see'].value="";
 }
 
 }
@@ -111,21 +113,21 @@ else {
 function addText2(val) {
 if(val.value=="radio_name_see")
 {
-	document.forms['form2'].elements['text_mail_see'].style.display = "none";	
-	document.forms['form2'].elements['text_mail_see'].value="";
-	document.forms['form2'].elements['text_name_see'].style.display = "block";
+	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_mail_see'].value="";
+	document.forms['CreateOE'].elements['text_name_see'].style.display = "block";
 }
 else if(val.value=="radio_mail_see")
 {
-	document.forms['form2'].elements['text_name_see'].style.display = "none";	
-	document.forms['form2'].elements['text_name_see'].value="";
-	document.forms['form2'].elements['text_mail_see'].style.display = "block";
+	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_name_see'].value="";
+	document.forms['CreateOE'].elements['text_mail_see'].style.display = "block";
 }
 else {
-	document.forms['form2'].elements['text_mail_see'].style.display = "none";	
-	document.forms['form2'].elements['text_mail_see'].value="";
-	document.forms['form2'].elements['text_name_see'].style.display = "none";	
-	document.forms['form2'].elements['text_name_see'].value="";
+	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_mail_see'].value="";
+	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
+	document.forms['CreateOE'].elements['text_name_see'].value="";
 }
 
 }
