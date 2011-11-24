@@ -16,13 +16,10 @@ import java.sql.*;
 @WebServlet("/CreateOE")
 public class CreateOE extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	 //to try the database on the titan server uncomment the following lines and comment other three lines. 
-		//String dbUrl = "jdbc:mysql://titan.cmpe.boun.edu.tr/database3";
-		//String username = "project3";
-		//String password = "şifremiz"; i did not commit the password, you should change it
-	  String dbUrl = "jdbc:mysql://localhost:3306/mob";
-		String username = "root";
-		String password = "admin";  
+	String dbUrl = "jdbc:mysql://localhost:3306/mob";
+	String username = "root";
+	String password = "admin";
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -34,7 +31,7 @@ public class CreateOE extends HttpServlet {
 		String name = (String) session.getAttribute("name");
 		String email = (String) session.getAttribute("email");
 		String message = "";
-		String txt_eventname, txt_summary, radio , radio2,  id;
+		String txt_eventname = null, txt_summary=null, radio = null , radio2 = null,  id = null;
 		PrintWriter out = response.getWriter();
 		boolean error = false;
 		if(request.getParameter("txt_eventname") == null ){
@@ -78,12 +75,8 @@ public class CreateOE extends HttpServlet {
 				Connection connection = DriverManager.getConnection(dbUrl , username, password);
 				Statement statement = connection.createStatement();
 				
-				ResultSet result = 	statement.executeQuery("");
-					
-				 /* $query = "INSERT INTO per_page (company_id, description, key_words, products, main_category , sub_category ) 
-							VALUES (".$_GET["id"].",'".$description."','".$_POST["key_words"]."','" .$_POST["products"] . "','".$_POST["main_category"]."','".$_POST["sub_category"]."')";
-								
-						 */
+				int result = 	statement.executeUpdate("INSERT INTO cretead_events ( event_id, created_by, event_name, public_to_observe, public_to_see, observation_types, score, number_of_scores )" + 
+														                       "VALUES ( 0 ,"+ email +", "+ txt_eventname + ", 1 , 1, 00001 , 0 , 0  ) ");
 				
 				
 			} catch (SQLException e) {
@@ -107,3 +100,4 @@ public class CreateOE extends HttpServlet {
 	}
 
 }
+
