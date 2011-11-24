@@ -52,7 +52,7 @@ public class InitActivity extends Activity {
 				p.setParameter("password", password);
 				HttpClient hc = new DefaultHttpClient(p);
 				try {
-					HttpResponse response = hc.execute(new HttpPost("http://localhost:5839/myServer/MyServlet"));
+					HttpResponse response = hc.execute(new HttpPost("http://10.0.2.2:8080/myServer/MyServlet"));
 					InputStream is = response.getEntity().getContent();
 					//output.append(convertToString(is));
 					Toast.makeText(getApplicationContext(), convertToString(is), Toast.LENGTH_LONG).show();
