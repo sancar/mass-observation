@@ -16,7 +16,13 @@ import java.sql.*;
 @WebServlet("/CreateOE")
 public class CreateOE extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	 //to try the database on the titan server uncomment the following lines and comment other three lines. 
+		//String dbUrl = "jdbc:mysql://titan.cmpe.boun.edu.tr/database3";
+		//String username = "project3";
+		//String password = "şifremiz"; i did not commit the password, you should change it
+	  String dbUrl = "jdbc:mysql://localhost:3306/mob";
+		String username = "root";
+		String password = "admin";  
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -72,7 +78,7 @@ public class CreateOE extends HttpServlet {
 				Connection connection = DriverManager.getConnection(dbUrl , username, password);
 				Statement statement = connection.createStatement();
 				
-				ResultSet result = 	statement.executeQuery("SELECT name FROM users WHERE email = '"+ email +"' AND activation_key = '1' AND password  =  '"+ password1+ "'");
+				ResultSet result = 	statement.executeQuery("");
 					
 				 /* $query = "INSERT INTO per_page (company_id, description, key_words, products, main_category , sub_category ) 
 							VALUES (".$_GET["id"].",'".$description."','".$_POST["key_words"]."','" .$_POST["products"] . "','".$_POST["main_category"]."','".$_POST["sub_category"]."')";
