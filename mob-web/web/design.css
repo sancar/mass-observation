@@ -1,0 +1,53 @@
+
+/* logo */
+body{
+    background-color: #eeeeee;
+}
+#logo{
+    text-decoration: none;
+    font-family: Calibri;
+    font-size: 70px;
+}
+#logo:hover > #logo_tail{
+    color: #68caf9;
+}
+#logo:hover > #logo_head{
+    color: #000080;
+}
+#logo_head{
+    color: #68caf9;
+}
+#logo_tail{
+    color: #000080;
+}
+
+.container{
+    width: 100%;
+    /*border-style: solid;
+    border-color: red;*/
+}
+.c1of2{
+    padding: 5px;
+    float: left;
+    border-style: solid;
+    border-color: #68caf9;
+    width: 48%;
+    height: 300px;
+}
+
+.c1of3{
+    padding: 5px;
+    float: left;
+    border-style: solid;
+    border-color: #68caf9;
+    width: 32%;
+    height: 300px;
+}
+.font_header{
+    color: #68caf9;
+    font-size: 20px;
+}
+.font_normal{
+    font-family: Calibri;
+    color: #000080;
+}
