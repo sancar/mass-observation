@@ -6,68 +6,8 @@
 	}
 
 %>
-<div align="right">
-<em><font face="Calibri" color="#40424d">Welcome </font><% out.print(session.getAttribute("name"));%></em><font color="#0000ff"></font>
-<a href="./Logout">Log Out</a>
-</div>
-
-<form action="CreateOE" name="CreateOE" method = "POST" >
-<table>
-<tr>
-<td>
-
-<style type="text/css">
-p.one
-{
-width: 350px; height: 450px;
-border-style: solid;
-border-color: #68caf9
-}
-</style>
-
-<p class="one">
-<br>
 
 
-<font face="Calibri" size="4.2"><font color="#68caf9"><font color="#000080">  <b><u>Name of the Observation Event </u></b> </font><br></font></font>
-
-<br>
-
- 
- 
-   <input type="text" name="txt_eventname" size="30">
- 
- <br>
- <br>
- <br>
-<font face="Calibri" size="4.2"><font color="#68caf9"><font color="#000080">  <b><u>Summary</u></b></font><br></font></font>
-<br>
-  
-<textarea name="txt_summary" rows="6" id="txt_summary" checkMaxLength(event,this)" TAMaxLength="300" style="width:250px;"></textarea>
-
-
-</td>
-
-<td>
-
-
-
-<style type="text/css">
-p.two
-{
-width: 350px; height: 450px;
-border-style: solid;
-border-color: #68caf9
-}
-</style>
-
-<p class="two">
-
-<br>
-
-<font face="Calibri" size="4.2"><font color="#68caf9"><font color="#000080">  Who can participate? </font><br></font></font>
-
-<br>
 <script type="text/javascript">
 function addText(val) {
 if (val.value == "radio_mail_part") {
@@ -133,63 +73,79 @@ else {
 }
 </script>
 
-<input type="radio" name="radio" value="radio_anyone_part" onclick="addText(this);"> Anyone(public) <br>
-<input type="radio" name="radio" value="radio_mail_part" onclick="addText(this);"> Select by mail <br>
-<input type="text" name="text_mail_part" style="display:none;">
 
 
 
-<input type="radio" name="radio" value="radio_name_part" onclick="addText(this);"> Select by name <br>
-<input type="text" name="text_name_part" style="display:none;">
 
-<br>
-<br>
+<div class="container">
 
-<font face="Calibri" size="4.2"><font color="#68caf9"><font color="#000080">  Who can see? </font><br></font></font>
+    <form action="CreateOE" name="CreateOE" method = "post" >
 
-<br>
-<input type="radio" name="radio2" value="radio_anyone_see" onclick="addText2(this);"> Anyone(public) <br>
-<input type="radio" name="radio2" value="radio_mail_see" onclick="addText2(this);"> Select by mail <br>
-<input type="text" name="text_mail_see" style="display:none;">
-<input type="radio" name="radio2" value="radio_name_see" onclick="addText2(this);"> Select by name <br>
-<input type="text" name="text_name_see" style="display:none;">
+    <div class="c1of3">
+    
+        <a class="font_header">Name of the Observation Event </a>
+
+        <br>
+
+        <input type="text" name="txt_eventname" size="30">
+        
+        <br>
+         
+        <a class="font_header">Summary</a>
+        
+        <br>
+        
+        <textarea name="txt_summary" rows="6" id="txt_summary"  style="width:250px;"></textarea>
+
+    </div>
+
+   
+    <div class="c1of3">
+
+      
+
+        <a class="font_header">  Who can participate? </a>
+
+        <br>
+        <input type="radio" name="radio" value="radio_anyone_part" onclick="addText(this);"> Anyone(public) <br>
+        <input type="radio" name="radio" value="radio_mail_part" onclick="addText(this);"> Select by mail <br>
+        <input type="text" name="text_mail_part" style="display:none;">
+        <input type="radio" name="radio" value="radio_name_part" onclick="addText(this);"> Select by name <br>
+        <input type="text" name="text_name_part" style="display:none;">
+
+        <br>
+        <br>
+
+        <a class="font_header">  Who can see? </a>
+
+        <br>
+        <input type="radio" name="radio2" value="radio_anyone_see" onclick="addText2(this);"> Anyone(public) <br>
+        <input type="radio" name="radio2" value="radio_mail_see" onclick="addText2(this);"> Select by mail <br>
+        <input type="text" name="text_mail_see" style="display:none;">
+        <input type="radio" name="radio2" value="radio_name_see" onclick="addText2(this);"> Select by name <br>
+        <input type="text" name="text_name_see" style="display:none;">
 
 
-</td>
+    </div>
 
-<td>
+    <div class="c1of3">
 
-<style type="text/css">
-p.two
-{
-width: 350px; height: 450px;
-border-style: solid;
-border-color: #68caf9
-}
-</style>
+        <a class="font_header">What are the types of the observations? </a>
 
-<p class="two">
+        <br>
+        <br>
 
-<br>
+                <input type="checkbox" name="id" value="Java"> Poll<br>
+                <input type="checkbox" name="id" value="Text"> Text<br>
+                <input type="checkbox" name="id" value="Image"> Image<br>
+                <input type="checkbox" name="id" value="Audio record"> Audio record<br>
+                <input type="checkbox" name="id" value="Video record"> Video record<br>
+                <br>
+                <br>
+                <input type="submit" name="CREATE" value="Create" >  
+    </div>
 
-<font face="Calibri" size="4.2"><font color="#68caf9"><font color="#000080">  What are the types of <br>  the observations? </font><br></font></font>
-
-<br>
-<br>
-
-	<input type="checkbox" name="id" value="Java"> Poll<br>
-	<input type="checkbox" name="id" value="Text"> Text<br>
-	<input type="checkbox" name="id" value="Image"> Image<br>
-	<input type="checkbox" name="id" value="Audio record"> Audio record<br>
-	<input type="checkbox" name="id" value="Video record"> Video record<br>
-	<br>
-	<br>
-	<input type="submit" name="CREATE" value="Create" >  
-
-</td>
-</tr>
-
-</table>
-</form>
+    </form>
+</div>
 
 <%@ include file = "./includes/footer.jsp" %>

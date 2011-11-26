@@ -1,5 +1,6 @@
 <%@ include file = "./includes/header.jsp" %>
 
+
 <% 
 	
 	String message = (String)request.getAttribute("message");
@@ -10,50 +11,44 @@
 	}
 %>
 
-<style type="text/css">
-div.one
-{
-width: 300px; height: 300px;
-border-style: solid;
-border-color: #68caf9
-}
-</style>
+<div class="container">
+    <div class="c1of2">
+         <%@ include file = "./includes/what.jsp" %>
+    </div>
+    <div class="c1of2">
+        <form action="SignIn" method = "post" >
+            <table>
+                <tr>
+                    <td align="center" colspan="2" > <a class="font_header">Registration Form</a></td>
+                </tr>
+                <tr>
+                    <td align="center"><a class="font_normal">Name: </a></td>
+                        <td><input type="text" name="name"  /> </td>
+                </tr>
 
+                <tr>
+                    <td align="center"><a class="font_normal">Email: </a></td>
+                        <td><input type="text" name="email"  /> </td>
+                </tr>
+                <tr>
+                        <td align="center"><a class="font_normal">Choose a password: </a></td>
+                        <td><input type="password" name="password1"  /> </td>
+                </tr>
 
-<div class="one">
-<form action="SignIn" method = "POST" >
+                <tr>
+                        <td align="center"><a class="font_normal">Re-enter password: </a></td>
+                        <td><input type="password" name="password2"  /> </td>
+                </tr>
 
-
-<table>
-    <tr>
-    	<td align="center" colspan="2" ><font  face="Calibri" color="#000080" size="5">  <b>Registration Form</b></font></td>
-    </tr>
-	<tr>
-		<td align="center"><font face="Calibri"><font color="#000080" size="3.5"><b>Name: </b></font></font></td>
-		<td><input type="text" name="name"  /> </td>
-	</tr>
-	
-	<tr>
-		<td align="center"><font face="Calibri"><font color="#000080" size="3.5"><b>Email: </b></font></font></td>
-		<td><input type="text" name="email"  /> </td>
-	</tr>
-	<tr>
-		<td align="center"><font face="Calibri"><font color="#000080" size="3.5"><b>Choose a password: </b></font></font></td>
-		<td><input type="password" name="password1"  /> </td>
-	</tr>
-	
-	<tr>
-		<td align="center"><font face="Calibri"><font color="#000080" size="3.5"><b>Re-enter password: </b></font></font></td>
-		<td><input type="password" name="password2"  /> </td>
-	</tr>
-	
-	<tr>
-		<td align="center"></td>
-		<td><input type="submit" name="Sign In" value= "Sign in"/> </td>
-	</tr>
-	
-</table>
-</form>
+                <tr>
+                        <td align="center"></td>
+                        <td><input type="submit" name="Sign In" value= "Sign in"/> </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <br style="clear: left; clear: right;" />
 </div>
+
 
 <%@ include file = "./includes/footer.jsp" %>
