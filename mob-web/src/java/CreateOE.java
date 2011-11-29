@@ -21,21 +21,26 @@ public class CreateOE extends HttpServlet {
 	String password = "i52jm";
    
 	
-
+        @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 
-	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("name");
 		String email = (String) session.getAttribute("email");
 		String message = "";
-		String txt_eventname = null, txt_summary=null, radio = null , radio2 = null,  id = null;
-		PrintWriter out = response.getWriter();
+                String mail = "", mail_observe = "";
+                int event_id=0;
+		String txt_eventname = null, txt_summary=null, radio = null , radio2 = null  ;
+                int cb_Poll = 0, cb_Text = 0, cb_Image = 0, cb_Audio = 0, cb_Video = 0;
+		int public_to_observe = 0, public_to_see = 0;
+                PrintWriter out = response.getWriter();
 		boolean error = false;
-		if(request.getParameter("txt_eventname") == null ){
+	
+                if(request.getParameter("txt_eventname") == null ){
 			error = true;
 			message = "please enter an event name<br/>";
 		}else{
@@ -50,21 +55,69 @@ public class CreateOE extends HttpServlet {
 		
 		if(request.getParameter("radio") == null){
 			error = true;
-			message = "please select who can see your observation event<br/>";
+			message = "please select who can participate your observation event<br/>";
 		}else{
 			radio = request.getParameter("radio");
+                        if("radio_anyone_part".equals(radio))
+                           public_to_observe = 1;
+                         else if("radio_mail_part".equals(radio))
+                            mail_observe = request.getParameter("text_mail_part");
+                    
 		}
 		if(request.getParameter("radio2") == null){
 			error = true;
-			message = "please select who can participate to your observation event<br/>";
+			message = "please select who can see to your observation event<br/>";
 		}else{
 			radio2 = request.getParameter("radio2");
+                        
+                        if("radio_anyone_see".equals(radio2))
+                           public_to_see = 1;
+                         else if("radio_mail_see".equals(radio2))
+                            mail = request.getParameter("text_mail_see");
+                          
+                        
 		}
-		if(request.getParameter("id") == null){
-			error = true;
-			message = "please select the types that you wanted<br/>";
+		if(request.getParameterValues("cb_Poll") != null){
+		 
+                    cb_Poll = 1;
+                    
 		}else{
-			id = request.getParameter("id");
+			cb_Poll = 0;
+		}
+                if(request.getParameterValues("cb_Poll") != null){
+		 
+                    cb_Poll = 1;
+                    
+		}else{
+			cb_Poll = 0;
+		}
+                if(request.getParameterValues("cb_Text") != null){
+		 
+                    cb_Text = 1;
+                    
+		}else{
+		    cb_Text = 0;
+		}
+                if(request.getParameterValues("cb_Image") != null){
+		 
+                    cb_Image = 1;
+                    
+		}else{
+			cb_Image = 0;
+		}
+                if(request.getParameterValues("cb_Audio") != null){
+		 
+                    cb_Audio = 1;
+                    
+		}else{
+			cb_Audio = 0;
+		}
+                if(request.getParameterValues("cb_Video") != null){
+		 
+                    cb_Video = 1;
+                    
+		}else{
+			cb_Video = 0;
 		}
 		
 		if(error){
@@ -74,16 +127,88 @@ public class CreateOE extends HttpServlet {
 		}else{
 			try {
 				Connection connection = DriverManager.getConnection(dbUrl , username, password);
-				Statement statement = connection.createStatement();
+				Statement statement = connection.createStatement();										            //           " VALUES ("+name +","+ txt_eventname + ","+txt_summary+","+public_to_observe +","+ 
+                                
+				int result = statement.executeUpdate("INSERT INTO created_events ( created_by, event_name, event_summary, public_to_observe, public_to_see, score, number_of_scores, poll, text, image, audio, video )" + 
+														                       "VALUES ('"+email +"','"+ txt_eventname + "','"+txt_summary+"',"+public_to_observe +","+ 
+                                                                                                                                       public_to_see +"," + " 0 , 0, "+cb_Poll + "," + cb_Text + "," + cb_Image + "," + cb_Audio +
+                                                                                                                                       "," + cb_Video + " )");
+		          
+                                 statement.close();
+                                Statement stmt = connection.createStatement();
+                                ResultSet rs = stmt.executeQuery( "select LAST_INSERT_ID()" );
+                                if ( rs.next() )
+                                        {
+                                        event_id = rs.getInt(1);
+                                        }
+                                rs.close();
+                                stmt.close();
+                                connection.close();
+                               
 				
-				int result = 	statement.executeUpdate("INSERT INTO cretead_events ( event_id, created_by, event_name, public_to_observe, public_to_see, observation_types, score, number_of_scores )" + 
-														                       "VALUES ( 0 ,"+ email +", "+ txt_eventname + ", 1 , 1, 00001 , 0 , 0  ) ");
-				
-				
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
+			request.setAttribute(txt_eventname + " is successfully created.", message);
+			dispatcher.forward(request, response);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+                                out.print("error");
+				e.printStackTrace(out);
 			}
+                        
+                        
+                        if(!mail.equals(""))
+                        {
+                             try
+                            {
+                                Connection connection = DriverManager.getConnection(dbUrl , username, password);
+                                PreparedStatement statement;
+                                
+                                statement = connection.prepareStatement("SELECT email FROM users WHERE email LIKE '%"+mail+"'");
+                                Statement statement2 = connection.createStatement();
+                                
+                                ResultSet mails = statement.executeQuery();
+                                
+                                 while(mails.next())
+                                    statement2.executeUpdate("INSERT INTO users_can_see(event_id, user) VALUES("+event_id+",'"+mails.getString(1) +"')");
+                                 
+                                 mails.close();
+                                 
+                            }
+                            catch (SQLException e)
+                            {
+                                    out.print("error");
+                                    e.printStackTrace(out);
+                            }
+                             
+                             
+                            if(!mail_observe.equals(""))
+                        {
+                             try
+                            {
+                                Connection connection = DriverManager.getConnection(dbUrl , username, password);
+                                PreparedStatement statement;
+                                
+                                statement = connection.prepareStatement("SELECT email FROM users WHERE email LIKE '%"+mail_observe+"'");
+                                Statement statement2 = connection.createStatement();
+                                
+                                ResultSet mails = statement.executeQuery();
+                                
+                                 while(mails.next())
+                                    statement2.executeUpdate("INSERT INTO users_can_observe(event_id, user) VALUES("+event_id+",'"+mails.getString(1) +"')");
+                                 
+                                 mails.close();
+                                 
+                            }
+                            catch (SQLException e)
+                            {
+                                    out.print("error");
+                                    e.printStackTrace(out);
+                            }
+                        }
+                }
+                        session.setAttribute("email", email);
+		        session.setAttribute("name", name);
+		        response.sendRedirect("./welcome.jsp");
 		}
 		
 			/*
@@ -98,7 +223,7 @@ public class CreateOE extends HttpServlet {
 			"id" value "Text" "Image" "Audio record" "Video record"
 			*/
 			
-	}
+	}}
 
-}
+
 
