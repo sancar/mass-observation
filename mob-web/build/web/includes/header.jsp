@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html;">
     <title>MOB</title>
     <style type="text/css"></style> 
-    <link rel="stylesheet" href="../design.css">
+    <link rel="stylesheet" href="design.css">
 </head>
 <body>
 <a id="logo" href="./welcome.jsp">

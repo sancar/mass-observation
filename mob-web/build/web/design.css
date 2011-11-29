@@ -4,15 +4,15 @@ body{
     height: 700px;
     /*background-color: #eeeeee;*/
     /* gecko based browsers */
-    background: -moz-linear-gradient(top, #B2D1E5,  #ffffff);
+    background: -moz-linear-gradient(top, #B2D1E5,  #dddddd);
 
     /* webkit based browsers */
-    background: -webkit-gradient(linear, left top, left bottom, from(#B2D1E5), to(#ffffff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#B2D1E5), to(#dddddd));
 }
 #main_div{
-    height: 450px;
+    
     width: 1200px;
-    background-color: #6FB7E9;
+    
     margin-left: auto;
     margin-right: auto; 
     
@@ -86,6 +86,5 @@ body{
     font-size: 20px;
 }
 .font_normal{
-    font-family: Calibri;
-    color: #0070FF;
+    color: #000080;
 }
