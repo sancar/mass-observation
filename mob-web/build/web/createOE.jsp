@@ -65,9 +65,9 @@ else if(val.value=="radio_mail_see")
 }
 else {
 	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_mail_see'].value="";
+	//document.forms['CreateOE'].elements['text_mail_see'].value="";
 	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_name_see'].value="";
+	//document.forms['CreateOE'].elements['text_name_see'].value="";
 }
 
 }
