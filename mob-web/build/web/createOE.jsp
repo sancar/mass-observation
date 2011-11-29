@@ -9,143 +9,138 @@
 
 
 <script type="text/javascript">
+    var countPolls = 0;
+    var countOptions = 0;
 function addText(val) {
-if (val.value == "radio_mail_part") {
+    if (val.value == "radio_mail_part") {
 
-document.forms['CreateOE'].elements['text_mail_part'].style.display = "block";
-document.forms['CreateOE'].elements['text_name_part'].style.display = "none";	
-document.forms['CreateOE'].elements['text_name_part'].value="";
+        document.forms['CreateOE'].elements['text_mail_part'].style.display = "block";
+        	
+    }else if(val.value=="radio_mail_see")
+    {
+           
+            document.forms['CreateOE'].elements['text_mail_see'].style.display = "block";
+    }
+    
 }
-else if(val.value=="radio_name_part")
-	{
-	document.forms['CreateOE'].elements['text_mail_part'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_mail_part'].value="";
-	document.forms['CreateOE'].elements['text_name_part'].style.display = "block";
-	}
-else {
-	document.forms['CreateOE'].elements['text_mail_part'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_mail_part'].value="";
-	document.forms['CreateOE'].elements['text_name_part'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_name_part'].value="";
-}
-if(val.value=="radio_name_see")
-{
-document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
-document.forms['CreateOE'].elements['text_mail_see'].value="";
-document.forms['CreateOE'].elements['text_name_see'].style.display = "block";
-}
-else if(val.value=="radio_mail_see")
-{
-document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
-document.forms['CreateOE'].elements['text_name_see'].value="";
-document.forms['CreateOE'].elements['text_mail_see'].style.display = "block";
-}
-else {
-	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_mail_see'].value="";
-	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_name_see'].value="";
-}
+function removeText(val) {
+    if (val.value == "radio_name_part" || val.value == "radio_anyone_part") {
 
+        document.forms['CreateOE'].elements['text_mail_part'].style.display = "none";
+        	
+    }else if(val.value=="radio_name_see" || val.value == "radio_anyone_see")
+    {
+           
+            document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";
+    }
+}
+function addPoll(){
+
+    countPolls++;
+    countOptions++;
+
+    var newdiv = document.createElement("div");
+    newdiv.className = "c1of3";
+    newdiv.name = "poll";
+    newdiv.id = "poll" + countPolls;
+
+    newdiv.innerHTML = 
+        "<a class='font_header'> New Poll </a>"+
+        "<a href='#polls' class='font_normal' onClick='removePoll("+ countPolls +")' >remove</a><br>" +
+        "<a class='font_normal'> Question </a><input type='text' name='poll_name' /><br><br>"+
+        "<a class='font_normal'> Option </a><input type='text' name='optionsOf"+countPolls+"' />"+
+        "<input type='button' id='"+countPolls+","+countOptions+"' onclick='addOption("+countOptions+","+ countPolls +")'  value='Add Option' /><br>";
+    document.getElementById("polls").appendChild(newdiv); 
+
+}
+function checkbox(val){
+    if(!val.checked){
+        document.getElementById("newpoll").style.display = "none";
+        var polls = document.getElementById("polls");
+        
+        while ( polls.childNodes.length >= 1 )
+        {
+            polls.removeChild( polls.firstChild );       
+        } 
+        countOptions = 0;
+        countPolls = 0;
+    }else{
+        document.getElementById("newpoll").style.display = "block";
+    }
+}
+function addOption(pOptionID,pollID){
+    document.getElementById(  pollID + "," +pOptionID  ).style.display = "none";
+    pOptionID++;
+    
+    var newdiv = document.createElement("div");
+    newdiv.name = "options";
+    newdiv.innerHTML = 
+         "<a class='font_normal'> Option </a><input type='text' name='optionsOf"+pollID+"' />"+
+        "<input type='button' id='"+pollID+","+pOptionID+"' onclick='addOption("+pOptionID+","+ pollID +")'  value='Add Option' /><br>";
+    
+    
+    document.getElementById("poll"+pollID).appendChild(newdiv);
+   
+}
+function removePoll(pollID){
+    document.getElementById("polls").removeChild(document.getElementById("poll"+pollID));
+}
+function addTag(){
+    
 }
 </script>
-<script type="text/javascript">
-function addText2(val) {
-if(val.value=="radio_name_see")
-{
-	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_mail_see'].value="";
-	document.forms['CreateOE'].elements['text_name_see'].style.display = "block";
-}
-else if(val.value=="radio_mail_see")
-{
-	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
-	document.forms['CreateOE'].elements['text_name_see'].value="";
-	document.forms['CreateOE'].elements['text_mail_see'].style.display = "block";
-}
-else {
-	document.forms['CreateOE'].elements['text_mail_see'].style.display = "none";	
-	//document.forms['CreateOE'].elements['text_mail_see'].value="";
-	document.forms['CreateOE'].elements['text_name_see'].style.display = "none";	
-	//document.forms['CreateOE'].elements['text_name_see'].value="";
-}
-
-}
-</script>
-
-
-
-
 
 <div class="container">
 
     <form action="CreateOE" name="CreateOE" method = "post" >
 
-    <div class="c1of3">
-    
-        <a class="font_header">Name of the Observation Event </a>
-
-        <br>
-
-        <input type="text" name="txt_eventname" size="30">
-        
-        <br>
-         
-        <a class="font_header">Summary</a>
-        
-        <br>
-        
-        <textarea name="txt_summary" rows="6" id="txt_summary"  style="width:250px;"></textarea>
-
+    <div class="c1of3"> 
+        <a class="font_header">Name of the Observation Event </a><br>
+        <input type="text" name="txt_eventname" size="30"><br>
+        <a class="font_header">Summary</a><br>
+        <textarea name="txt_summary" rows="6" id="txt_summary"  style="width:250px;"></textarea><br>
+        <a class="font_header">Tags (not implemented yet)</a><br>
+        <div id="tags">
+            <input type="text" name="tag" size="10"><a href="#tags" onclick="addTag()" class="font_normal">Add a new tag</a><br>
+        </div>
     </div>
-
    
     <div class="c1of3">
-
-      
-
-        <a class="font_header">  Who can participate? </a>
-
-        <br>
-        <input type="radio" name="radio" value="radio_anyone_part" onclick="addText(this);"> Anyone(public) <br>
-        <input type="radio" name="radio" value="radio_mail_part" onclick="addText(this);"> Select by mail <br>
+        <a class="font_header">  Who can participate? </a><br>       
+        <input type="radio" name="radio" value="radio_anyone_part" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
+        <input type="radio" name="radio" value="radio_mail_part" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
         <input type="text" name="text_mail_part" style="display:none;">
-        <input type="radio" name="radio" value="radio_name_part" onclick="addText(this);"> Select by name <br>
-        <input type="text" name="text_name_part" style="display:none;">
-
+        <input type="radio" name="radio" value="radio_name_part" onclick="removeText(this);"><a class="font_normal"> Select by approval system</a><br>
         <br>
         <br>
-
         <a class="font_header">  Who can see? </a>
-
         <br>
-        <input type="radio" name="radio2" value="radio_anyone_see" onclick="addText2(this);"> Anyone(public) <br>
-        <input type="radio" name="radio2" value="radio_mail_see" onclick="addText2(this);"> Select by mail <br>
-        <input type="text" name="text_mail_see" style="display:none;">
-        <input type="radio" name="radio2" value="radio_name_see" onclick="addText2(this);"> Select by name <br>
-        <input type="text" name="text_name_see" style="display:none;">
-
-
-    </div>
+        <input type="radio" name="radio2" value="radio_anyone_see" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
+        <input type="radio" name="radio2" value="radio_mail_see" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
+        <input type="text" name="text_mail_see" style="display:none;"  >
+        <input type="radio" name="radio2" value="radio_name_see" onclick="removeText(this);"><a class="font_normal"> Select by approval system </a><br>
+   </div>
 
     <div class="c1of3">
 
         <a class="font_header">What are the types of the observations? </a>
-
         <br>
         <br>
-
-                <input type="checkbox" name="id" value="Java"> Poll<br>
-                <input type="checkbox" name="id" value="Text"> Text<br>
-                <input type="checkbox" name="id" value="Image"> Image<br>
-                <input type="checkbox" name="id" value="Audio record"> Audio record<br>
-                <input type="checkbox" name="id" value="Video record"> Video record<br>
+                <input type="checkbox" name="cb_Poll" value="Poll"  onclick="checkbox(this)"><a class="font_normal"> Poll</a>
+                <input type="button" onClick="addPoll()"  value="Add a new poll" id="newpoll" style="display: none;" ><br>
+                <input type="checkbox" name="cb_Text" value="Text"><a class="font_normal"> Text</a><br>
+                <input type="checkbox" name="cb_Image" value="Image"><a class="font_normal"> Image</a><br>
+                <input type="checkbox" name="cb_Audio" value="Audio record"><a class="font_normal"> Audio record</a><br>
+                <input type="checkbox" name="cb_Video" value="Video record"><a class="font_normal"> Video record</a><br>
                 <br>
                 <br>
-                <input type="submit" name="CREATE" value="Create" >  
+                <input type="submit" name="CREATE" value="Create" >   
     </div>
 
     </form>
 </div>
 
+<div id="polls" name="polls" class="container" >
+    
+</div>
 <%@ include file = "./includes/footer.jsp" %>
