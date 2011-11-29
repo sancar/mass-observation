@@ -2,10 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <script type="text/javascript" src="jquery-1.7.js"></script>
     <meta http-equiv="Content-Type" content="text/html;">
     <title>MOB</title>
     <style type="text/css"></style> 
-    <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="../design.css">
 </head>
 <body>
 <a id="logo" href="./welcome.jsp">
@@ -23,3 +24,4 @@
 
 %>
 <hr width="100%" size="2">
+<div id="main_div">
