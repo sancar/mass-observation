@@ -1,3 +1,5 @@
+package newpackage;
+
 
 import java.io.IOException;
 
@@ -60,6 +62,12 @@ public class Login extends HttpServlet {
 						 HttpSession session = request.getSession();
 						 session.setAttribute("email", email);
 						 session.setAttribute("name", (String)result.getObject(1));
+                                                 
+                                                 //ResultSet result2 =statement.executeQuery("SELECT event_name FROM created_events WHERE created_by = "+(String)result.getObject(1)+"'");
+                                                 //System.out.println("SELECT event_name FROM created_events WHERE created_by = "+(String)result.getObject(1)+"'");
+                                                 //session.setAttribute("events",result2); 
+
+                                                 
 						 response.sendRedirect("./index.jsp");
 					 }else{
 						String message = "There is no account with matching email and password";

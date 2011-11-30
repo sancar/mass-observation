@@ -135,14 +135,14 @@ else {
         <br>
         <br>
 
-                <input type="checkbox" name="id" value="Java"> Poll<br>
-                <input type="checkbox" name="id" value="Text"> Text<br>
-                <input type="checkbox" name="id" value="Image"> Image<br>
-                <input type="checkbox" name="id" value="Audio record"> Audio record<br>
-                <input type="checkbox" name="id" value="Video record"> Video record<br>
+                <input type="checkbox" name="cb_Poll" value="Poll"> Poll<br>
+                <input type="checkbox" name="cb_Text" value="Text"> Text<br>
+                <input type="checkbox" name="cb_Image" value="Image"> Image<br>
+                <input type="checkbox" name="cb_Audio" value="Audio record"> Audio record<br>
+                <input type="checkbox" name="cb_Video" value="Video record"> Video record<br>
                 <br>
                 <br>
-                <input type="submit" name="CREATE" value="Create" >  
+                <input type="submit" name="CREATE" value="Create" >   
     </div>
 
     </form>
