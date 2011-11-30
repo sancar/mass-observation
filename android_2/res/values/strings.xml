@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Mob2Activity!</string>
+    <string name="app_name">TheMOB</string>
+    <string name="Welcome">Welcome</string>
+    <string name="User_Name">User Name</string>
+    <string name="Password">Password</string>
+    <string name="byG3">by G3</string>
+    <string name="a">a</string>
+    <string name="Login">Login</string>
+    <string name="RecentOE">Recent OEs</string>
+
+</resources>
