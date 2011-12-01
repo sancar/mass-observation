@@ -19,7 +19,7 @@
 
 <div class="container">
     <div class="c1of3">
-            OBSERVATION EVENTS CREATED BY ME(sancar buna hos font koy:D) 
+            OBSERVATION EVENTS CREATED BY ME 
             <br>
         <%
         databaseConnections database=new databaseConnections();
