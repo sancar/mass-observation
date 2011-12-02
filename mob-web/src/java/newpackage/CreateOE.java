@@ -147,7 +147,8 @@ public class CreateOE extends HttpServlet {
                                
                                 
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
-                        request.setAttribute(txt_eventname + " is successfully created.", message);
+			message = txt_eventname + " is successfully created.";
+                        request.setAttribute("message", message);
                         dispatcher.forward(request, response);
                         } catch (SQLException e) {
                                 
