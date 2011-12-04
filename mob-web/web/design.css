@@ -39,7 +39,7 @@ body{
 }
 
 .container{
-    width: 100%;
+    
     /*border-style: solid;
     border-color: red;*/
 }
@@ -51,7 +51,7 @@ body{
     /*border-style: solid;
     border-color: #68caf9;*/
     width: 550px;
-    height: 300px;
+   
     
     -webkit-border-radius: 10px 10px 10px 10px;
     -moz-border-radius:  10px 10px 10px 10px;
@@ -60,6 +60,11 @@ body{
     -webkit-box-shadow: #B2D1E5 10px 10px 10px;
     -moz-box-shadow: #B2D1E5 10px 10px 10px; 
     box-shadow: #B2D1E5 10px 10px 10px;
+}
+.comment{
+    background-color: 	#CFCFE6;
+    padding: 10px;
+    margin: 10px;
 }
 
 
@@ -71,7 +76,7 @@ body{
     /*border-style: solid;
     border-color: #68caf9;*/
     width: 375px;
-    height: 300px;
+    
     
     -webkit-border-radius:  10px 10px 10px 10px;
     -moz-border-radius:  10px 10px 10px 10px;

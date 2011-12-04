@@ -19,24 +19,15 @@ public class databaseConnections {
     public ResultSet resultSet = null;
     public Statement statement = null;
 
-    public void connect() throws Exception {
-   	 
-   	 Driver driver = new com.mysql.jdbc.Driver();
+    public void connect() throws Exception {  	 
+  	 Driver driver = new com.mysql.jdbc.Driver();
    	 DriverManager.registerDriver(driver);
-   	 
-   	 
-
    	 String ConnectionURL = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database3";
-
-
    	 Properties prop = new Properties();
    	 	prop.put("user","project3"); 
    	 	prop.put("password","i52jm"); 
-   	 
-   	 
-   	 connection =DriverManager.getConnection(ConnectionURL, prop);
-   		 
-    if (connection == null) {
+   	 connection =DriverManager.getConnection(ConnectionURL, prop);   		 
+         if (connection == null) {
    		 System.out.println("Cannot connect to the database!");
    	 }
    	 connection.setAutoCommit(true);
@@ -44,25 +35,61 @@ public class databaseConnections {
    	 statement = connection.createStatement(
    			 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
    		 
-    }
-
- 
-   	   	 
-   	 public ArrayList<HashMap<String, Object>> return_my_events(String userName)
+    }  	   	 
+   	 public ArrayList<HashMap<String, Object>> return_my_events(String email)
+   	 {            
+   		 String query = "SELECT * FROM created_events WHERE created_by = '" + email + "'";   		 
+   	 	return returnListQuery(query);  		 
+   	 } 
+   	 public ArrayList<HashMap<String, Object>> return_public_events()
    	 {
-             
-   		 String query = "SELECT * FROM created_events WHERE created_by = '" + userName + "'";
-
-   		 
-   	 	return returnListQuery(query);
-   		 
-   	 }
-   	 
-   	   	 
+   		 String query = "SELECT * FROM created_events WHERE public_to_observe = '1' ";
+   	 	return returnListQuery(query);	 
+   	 }  	 
    
-   	
-   	 
-
+   	public ArrayList<HashMap<String, Object>> return_an_event(String id)
+   	 {
+   		String query = "SELECT * FROM created_events WHERE event_id = '"+id+"' ";
+                return returnListQuery(query);	 		 
+   	 } 
+   	 public ArrayList<HashMap<String, Object>> return_texts(String event_id)
+   	 {
+   		 String query = "SELECT * FROM observations_text WHERE event_id = '"+event_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 } 
+          public ArrayList<HashMap<String, Object>> return_comments(String comment_id)
+   	 {
+   		 String query = "SELECT * FROM comment_owner WHERE comment_id = '"+comment_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+          public ArrayList<HashMap<String, Object>> return_polls(String event_id)
+   	 {
+   		 String query = "SELECT * FROM observations_poll WHERE event_id = '"+event_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+          public ArrayList<HashMap<String, Object>> return_choices(String poll_id)
+   	 {
+   		 String query = "SELECT * FROM poll_choices WHERE poll_id = '"+poll_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+         public int return_n_answers(String choice_id){
+                String query = "SELECT * FROM poll_answers WHERE choice_id = '"+choice_id+"' " ;   
+                int rowCount = 0;
+                try {
+                  statement = connection.createStatement();
+                  resultSet = statement.executeQuery(query);
+                  while(resultSet.next()){
+                      rowCount++;
+                  }
+                 }
+                catch (SQLException e)
+                 {
+                     e.printStackTrace();
+                     return 0;
+                 }
+                
+                return rowCount;
+        }
    	 public ArrayList<HashMap<String, Object>> returnListQuery(String query){ 
    		 try
    		 {
