@@ -6,14 +6,14 @@
 
 <% 
 	if(session.getAttribute("name") == null){ 
-		response.sendRedirect("./login.jsp"); 
-        
-		
-       
-        
-                          
-}
+		response.sendRedirect("./login.jsp");           
+        }
 %>
+<%
+        databaseConnections database=new databaseConnections();
+        database.connect();
+%>
+
 <font face="Calibri"><br><a href="./createOE.jsp">Create a new observation event</a></font>	
 <% 
 	
@@ -25,36 +25,44 @@
 	}
 %>
 
-<div class="container">
-            OBSERVATION EVENTS CREATED BY ME 
-            <br>
-        <%
-        databaseConnections database=new databaseConnections();
-        database.connect();
+<div class="container">      
+    <div class="c1of3">
+        <a class="font_header">Observation Events created by me</a><br>
+<%
         ArrayList<HashMap<String, Object>> OEList = new ArrayList<HashMap<String, Object>>();
-        OEList = database.return_my_events((String)session.getAttribute("name"));
+        OEList = database.return_my_events((String)session.getAttribute("email"));
         if(!OEList.isEmpty()) {
             for(int i=0;i<OEList.size();i++) {
                 HashMap<String, Object> newMap = (HashMap<String, Object>) OEList.get(i);
                 %>
-                <a href="./EditOE.jsp"> <% out.print(newMap.get("event_name")); %></a> 
+                <a class="font_normal" href="./editOE.jsp?id=<%= newMap.get("event_id") %>"> <% out.print(newMap.get("event_name")); %></a> 
                 <br>
-                <p><% out.print(newMap.get("event_summary")); %></p>
+                <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
  <%
                 }
         }
         
-        %>
-    <div class="c1of3">
-        <a class="font_header">Observation Events created by me</a>
-        <%
-                ///oeedit.jsp?id=asda;//
-       
-        %>
+ %>
+  
     </div>
 
     <div class="c1of3">
+        <a class="font_header">Public Observation Events</a><br>
+ <%
+        ArrayList<HashMap<String, Object>> OEpublicList = new ArrayList<HashMap<String, Object>>();
+        OEpublicList = database.return_public_events();
+        if(!OEpublicList.isEmpty()) {
+            for(int i=0;i<OEpublicList.size();i++) {
+                HashMap<String, Object> newMap = (HashMap<String, Object>) OEpublicList.get(i);
+                %>
+                <a class="font_normal" href="./observeOE.jsp?id=<%= newMap.get("event_id") %>"> <% out.print(newMap.get("event_name")); %></a> 
+                <br>
+                <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
+ <%
+                }
+        }
         
+ %>       
     </div>
 
     <div class="c1of3">
@@ -66,5 +74,7 @@
     <br style="clear: left; clear: right;" />
 </div>
 <br/>
-
+<%
+    database.close();
+%>
 <%@include file="./includes/footer.jsp"%>
