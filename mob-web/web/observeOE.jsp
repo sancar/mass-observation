@@ -111,7 +111,7 @@ function showComments(val){
                          
                              <a class="font_normal"><% out.print(choiceMap.get("choice_name")); %></a>
                              <a class="font_normal">(<% out.print(database.return_n_answers(((Integer)choiceMap.get("choice_id")).toString())) ; %>)</a>   
-                             <input type="checkbox" value="<% out.print(choiceMap.get("choice_name")); %>" name="poll_answer"><br>
+                             <input type="radio" value="<% out.print(choiceMap.get("choice_name")); %>" name="poll_answer"><br>
                                       
  <%
                        }
