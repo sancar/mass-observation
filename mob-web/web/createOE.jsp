@@ -49,7 +49,7 @@ function addPoll(){
         "<a class='font_header'> New Poll </a>"+
         "<a href='#polls' class='font_normal' onClick='removePoll("+ countPolls +")' >remove</a><br>" +
         "<a class='font_normal'> Question </a><input type='text' name='poll_name' /><br><br>"+
-        "<a class='font_normal'> Option </a><input type='text' name='optionsOf"+countPolls+"' />"+
+        "<a class='font_normal'> Option </a><input type='text' name='poll"+countPolls+"' />"+
         "<input type='button' id='"+countPolls+","+countOptions+"' onclick='addOption("+countOptions+","+ countPolls +")'  value='Add Option' /><br>";
     document.getElementById("polls").appendChild(newdiv); 
 
@@ -98,9 +98,8 @@ function addTag(){
 }
 </script>
 
+<form action="CreateOE" name="CreateOE" method = "post" >
 <div class="container">
-
-    <form action="CreateOE" name="CreateOE" method = "post" >
 
     <div class="c1of3"> 
         <a class="font_header">Name of the Observation Event </a><br>
@@ -146,10 +145,11 @@ function addTag(){
                 <input type="submit" name="CREATE" value="Create" >   
     </div>
 
-    </form>
+    
 </div>
 
 <div id="polls" name="polls" class="container" >
     
 </div>
+</form>
 <%@ include file = "./includes/footer.jsp" %>
