@@ -11,6 +11,7 @@
 <script type="text/javascript">
     var countPolls = 0;
     var countOptions = 0;
+    var countTags = 0;
 function addText(val) {
     if (val.value == "radio_mail_part") {
 
@@ -85,6 +86,14 @@ function removePoll(pollID){
     document.getElementById("polls").removeChild(document.getElementById("poll"+pollID));
 }
 function addTag(){
+    countTags++;
+    var newdiv = document.createElement("div");
+    newdiv.name = "tag";
+    newdiv.id = "tag" + countTags;
+
+    newdiv.innerHTML = 
+        "<input type='text' name='tag"+ countPolls +"' size='10'>";
+    document.getElementById("tags").appendChild(newdiv); 
     
 }
 </script>
@@ -100,8 +109,9 @@ function addTag(){
         <textarea name="txt_summary" rows="6" id="txt_summary"  style="width:250px;"></textarea><br>
         <a class="font_header">Tags (not implemented yet)</a><br>
         <div id="tags">
-            <input type="text" name="tag" size="10"><a href="#tags" onclick="addTag()" class="font_normal">Add a new tag</a><br>
+            <input type="text" name="tag0" size="10">
         </div>
+        <a href="#tags" onclick="addTag()" class="font_normal">Add a new tag</a><br>
     </div>
    
     <div class="c1of3">
