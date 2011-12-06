@@ -75,7 +75,7 @@ function addOption(pOptionID,pollID){
     
     var newdiv = document.createElement("div");
     newdiv.innerHTML = 
-         "<a class='font_normal'> Option </a><input type='text' name='optionsOf"+pollID+"' />"+
+         "<a class='font_normal'> Option </a><input type='text' name='poll"+pollID+"' />"+
         "<input type='button' id='"+pollID+","+pOptionID+"' onclick='addOption("+pOptionID+","+ pollID +")'  value='Add Option' /><br>";
     
     
@@ -107,7 +107,7 @@ function addTag(){
         <input type="text" name="txt_eventname" size="30"><br>
         <a class="font_header">Summary</a><br>
         <textarea name="txt_summary" rows="6" id="txt_summary"  style="width:250px;"></textarea><br>
-        <a class="font_header">Tags (not implemented yet)</a><br>
+        <a class="font_header">Tags</a><br>
         <div id="tags">
             <input type="text" name="tag0" size="10">
         </div>

@@ -27,6 +27,9 @@ function showComments(val){
         <a class="font_header" href="./editOE.jsp?id=<%= id %>"> <% out.print(eventMap.get("event_name")); %></a> <br>
         <p class="font_normal"><% out.print(eventMap.get("event_summary")); %></p>
         <!-- TEXT OBSERVATIONS -->
+<%
+if((Integer)eventMap.get("text") == 1){
+%>
         <div class="c1of2">
             <a class="font_header">Text Observations</a><br>
 <%
@@ -46,23 +49,25 @@ function showComments(val){
                 
                 <a class="font_normal"  href="javascript:showComments('textcomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="textcomment<%= i %>" style="display: none;">
+                    <!-- TEXT OBSERVATIONS COMMENTS-->
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(((Integer)textMap.get("comment_id")).toString());
+                commentList = database.return_comments(((Integer)textMap.get("text_id")).toString(),"text");
                 if(!commentList.isEmpty()) {
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal"><% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
          <%             }else{
-         %>                <a class="font_normal">Anonymous</a><br>    
+         %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
          %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>                          
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>   
+                        <hr width="100%" size="2">   
 <%                                              
                     }
                 }
-%>          
+%>                  <!-- ADD TEXT OBSERVATIONS  COMMENT -->
                     <form action="AddComment?text_id=<% out.print(textMap.get("text_id")); %>" method="post">
                            <textarea cols="40" rows="3"></textarea><br>
                            <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
@@ -73,8 +78,10 @@ function showComments(val){
 <%
             }
         }
+ 
  %>
-            <br>
+ 
+            <br><!-- ADD TEXT OBSERVATION -->
             <a class="font_normal">Add a new text observation</a>
             <form action="AddText?event_id=<%= eventMap.get("event_id") %>" method="post">
                 <textarea cols="50" rows="5"></textarea><br>
@@ -82,8 +89,12 @@ function showComments(val){
                 <input type="submit" value="submit" name="submit">
             </form>
         </div>
- 
+ <%
+}
+if((Integer)eventMap.get("poll") == 1){
+%>
         <div class="c1of2">
+            <!-- POLL OBSERVATIONS -->
             <a class="font_header">Poll Observations</a><br>
 <%       ArrayList<HashMap<String, Object>> OEpollList = new ArrayList<HashMap<String, Object>>();
         OEpollList = database.return_polls(id);
@@ -120,26 +131,27 @@ function showComments(val){
                       </form>    
  <%
               }
-%>                               
+%>              <!-- POLL OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('pollcomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="pollcomment<%= i %>" style="display: none;">
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(((Integer)pollMap.get("comment_id")).toString());
+                commentList = database.return_comments(((Integer)pollMap.get("poll_id")).toString(),"poll");
                 if(!commentList.isEmpty()) {
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal"><% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
          <%             }else{
-         %>                <a class="font_normal">Anonymous</a><br>    
+         %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
          %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>                          
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br> 
+                        <hr width="100%" size="2">   
 <%                                              
                     }
                 }
-%>          
+%>          <!-- ADD POLL OBSERVATIONS COMMENT -->
                 <form action="AddComment?poll_id=<% out.print(pollMap.get("poll_id")); %>" method="post">
                        <textarea cols="40" rows="3"></textarea><br>
                        <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
@@ -152,13 +164,29 @@ function showComments(val){
         }
  %>
         </div>
- 
+ <%
+ }
+if((Integer)eventMap.get("image") == 1){
+%>
         <div class="c1of2">
             <a class="font_header">Image Observations</a><br>
         </div>
- 
+<%
+}
+if((Integer)eventMap.get("audio") == 1){
+%>
+        <div class="c1of2">
+            <a class="font_header">Audio Observations</a><br>
+        </div>
+<%
+}
+if((Integer)eventMap.get("video") == 1){
+%>
         <div class="c1of2">
             <a class="font_header">Video Observations</a><br>
         </div>
+<%
+}
+%>
     </div>
 <%@ include file = "./includes/footer.jsp" %>
