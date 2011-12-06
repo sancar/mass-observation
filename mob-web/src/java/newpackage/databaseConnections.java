@@ -57,9 +57,9 @@ public class databaseConnections {
    		 String query = "SELECT * FROM observations_text WHERE event_id = '"+event_id+"' ";
    	 	return returnListQuery(query);   		 
    	 } 
-          public ArrayList<HashMap<String, Object>> return_comments(String comment_id)
+          public ArrayList<HashMap<String, Object>> return_comments(String o_id , String o_type)
    	 {
-   		 String query = "SELECT * FROM comment_owner WHERE comment_id = '"+comment_id+"' ";
+   		 String query = "SELECT * FROM comment_owner WHERE observation_id = '"+o_id+"'  AND observation_type = '"+ o_type + "' ";
    	 	return returnListQuery(query);   		 
    	 }
           public ArrayList<HashMap<String, Object>> return_polls(String event_id)
