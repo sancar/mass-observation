@@ -2,6 +2,8 @@ package newpackage;
 
 import java.io.IOException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.Enumeration;
 
 @WebServlet("/CreateOE")
 public class CreateOE extends HttpServlet {
@@ -37,6 +40,9 @@ public class CreateOE extends HttpServlet {
                 String txt_eventname = null, txt_summary=null, radio = null , radio2 = null  ;
                 int cb_Poll = 0, cb_Text = 0, cb_Image = 0, cb_Audio = 0, cb_Video = 0;
                 int public_to_observe = 0, public_to_see = 0;
+                String[] polls = {""};
+                String[] poll_options = {""};
+                String[] tags = {""};
                 PrintWriter out = response.getWriter();
                 boolean error = false;
         
@@ -77,16 +83,11 @@ public class CreateOE extends HttpServlet {
                           
                         
                 }
+               
                 if(request.getParameterValues("cb_Poll") != null){
                  
                     cb_Poll = 1;
-                    
-                }else{
-                        cb_Poll = 0;
-                }
-                if(request.getParameterValues("cb_Poll") != null){
-                 
-                    cb_Poll = 1;
+                  
                     
                 }else{
                         cb_Poll = 0;
@@ -97,6 +98,7 @@ public class CreateOE extends HttpServlet {
                     
                 }else{
                     cb_Text = 0;
+                    
                 }
                 if(request.getParameterValues("cb_Image") != null){
                  
@@ -145,11 +147,6 @@ public class CreateOE extends HttpServlet {
                                 stmt.close();
                                 connection.close();
                                
-                                
-                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
-			message = txt_eventname + " is successfully created.";
-                        request.setAttribute("message", message);
-                        dispatcher.forward(request, response);
                         } catch (SQLException e) {
                                 
                                 out.print("error");
@@ -181,7 +178,7 @@ public class CreateOE extends HttpServlet {
                                     e.printStackTrace(out);
                             }
                              
-                             
+                        }
                             if(!mail_observe.equals(""))
                         {
                              try
@@ -206,7 +203,65 @@ public class CreateOE extends HttpServlet {
                                     e.printStackTrace(out);
                             }
                         }
+                             
+                        polls = request.getParameterValues("poll_name");
+                        
+                            if(polls != null)
+                            {
+                            int pollindex = 1, poll_id = 0;
+                           
+                            for(int i = 0; i < polls.length; i++)
+                            {
+                                try {
+                                    Connection connection = DriverManager.getConnection(dbUrl , username, password);
+                    
+                                    Statement statement = connection.createStatement();
+                
+                                    statement.executeUpdate("INSERT INTO observations_poll(event_id, supplied_by, score, name_visible, text) VALUES("+event_id+",'"+email +"',0,1,'"+polls[i]+"')");
+                                    ResultSet rs = statement.executeQuery( "select LAST_INSERT_ID()" );
+                                    if ( rs.next() )
+                                        {
+                                        poll_id = rs.getInt(1);
+                                        }
+                                     rs.close();
+                                    poll_options = request.getParameterValues("poll"+pollindex);
+                                    pollindex++;
+                                    for(int j = 0; j < poll_options.length ; j++)
+                                        statement.executeUpdate("INSERT INTO poll_choices(choice_name, poll_id) VALUES('"+poll_options[j]+"',"+poll_id+")");
+                                    
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(CreateOE.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+                                 
+                            }
+                            }
+                           
+                            int i=0;
+                            tags = request.getParameterValues("tag"+i);
+                            while(tags!=null)
+                            {
+                                 try {
+                                    Connection connection = DriverManager.getConnection(dbUrl , username, password);
+                    
+                                    Statement statement = connection.createStatement();
+                
+                                    statement.executeUpdate("INSERT INTO oe_tags(event_id, tag_name) VALUES("+event_id+",'"+tags[0].toString()+"')");
+                                  
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(CreateOE.class.getName()).log(Level.SEVERE, null, ex);
+                               }
+                                
+                                i++;
+                                tags = request.getParameterValues("tag"+i);
+                            }
                 }
+                        
+                                
+                        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
+			message = txt_eventname + " is successfully created.";
+                        request.setAttribute("message", message);
+                        dispatcher.forward(request, response);
+                        
                         session.setAttribute("email", email);
                         session.setAttribute("name", name);
                         response.sendRedirect("./welcome.jsp");
@@ -224,4 +279,4 @@ public class CreateOE extends HttpServlet {
                         "id" value "Text" "Image" "Audio record" "Video record"
                         */
                         
-        }}
+        }
