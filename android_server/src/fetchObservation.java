@@ -14,21 +14,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
- * Servlet implementation class getRecentOE
+ * Servlet implementation class fetchObservation
  */
-@WebServlet("/getRecentOE")
-public class getRecentOE extends HttpServlet {
+@WebServlet("/fetchObservation")
+public class fetchObservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getRecentOE() {
+    public fetchObservation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,35 +43,20 @@ public class getRecentOE extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		Connection connection;
+		String observation = request.getParameter("observation");
+		int OEID = Integer.parseInt(request.getParameter("oeid"));
+		String contributor = request.getParameter("username");
 		try {
 			connection = (Connection) DriverManager.getConnection(Common.dbUrl , Common.username, Common.password);
 			Statement statement = (Statement) connection.createStatement();
-			ResultSet result = 	statement.executeQuery("SELECT * FROM created_events ORDER BY event_id DESC LIMIT 10");
-			JSONArray jason = new JSONArray();
-			jason = writeJson(result);
-			out.print(jason);
+			int result = statement.executeUpdate("INSERT INTO observations_text (text, event_id, supplied_by, name_visible) VALUES ('"+observation+"',"+OEID+",'"+contributor+"',1)");
+			if(result == 1)
+				out.print("Success!");
+			else
+				out.print("Failure!");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private JSONArray writeJson(ResultSet result) throws JSONException, SQLException {
-		JSONArray jasonarray = new JSONArray();
-		while(result.next()){
-			JSONObject jason = new JSONObject();
-			jason.put("id", result.getInt("event_id"));
-			jason.put("name",result.getString("event_name"));
-			jason.put("desc", result.getString("event_summary"));
-			jason.put("poll", result.getString("poll"));
-			jason.put("text", result.getString("text"));
-			jason.put("audio",result.getString("audio"));
-			jason.put("video",result.getString("video"));
-			jason.put("image",result.getString("image"));
-			jasonarray.put(jason);
-		}
-		return jasonarray;
+		} 
 	}
 
 }
