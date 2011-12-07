@@ -92,7 +92,7 @@ function addTag(){
     newdiv.id = "tag" + countTags;
 
     newdiv.innerHTML = 
-        "<input type='text' name='tag"+ countPolls +"' size='10'>";
+        "<input type='text' name='tag"+ countTags +"' size='10'>";
     document.getElementById("tags").appendChild(newdiv); 
     
 }
