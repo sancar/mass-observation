@@ -90,6 +90,7 @@ public class databaseConnections {
                 
                 return rowCount;
         }
+
    	 public ArrayList<HashMap<String, Object>> returnListQuery(String query){ 
    		 try
    		 {
