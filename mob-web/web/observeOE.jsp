@@ -19,6 +19,7 @@ function showComments(val){
     database.connect();
 %>
 <%
+    
     ArrayList<HashMap<String, Object>> Oevent = new ArrayList<HashMap<String, Object>>();
     Oevent = database.return_an_event(id); 
     HashMap<String, Object> eventMap = (HashMap<String, Object>) Oevent.get(0);
@@ -112,11 +113,15 @@ if((Integer)eventMap.get("poll") == 1){
  <%       
                 ArrayList<HashMap<String, Object>> choiceList = new ArrayList<HashMap<String, Object>>();
                 choiceList = database.return_choices(((Integer)pollMap.get("poll_id")).toString());
-                              
+                
+                
+                
+                             
                 if(!choiceList.isEmpty()) {
                     
  %>             <!-- ADD POLL OBSERVATION -->    
                 <form method="post" action="AddPoll?poll_id=<%= pollMap.get("poll_id") %>"  >
+                    
  <%
                     for(int j=0;j<choiceList.size();j++) {
                          HashMap<String, Object> choiceMap = (HashMap<String, Object>) choiceList.get(j);
