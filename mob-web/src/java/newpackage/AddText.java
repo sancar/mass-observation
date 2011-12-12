@@ -50,12 +50,16 @@ public class AddText extends HttpServlet {
         String comment_id="";
         String score="0";
         String name_visible;
-        if(Integer.parseInt(request.getParameter("anonymous"))==0) name_visible="0";
+        if("0".equals(request.getParameter("anonymous"))) name_visible="0";
         else name_visible="1";
         
         String date_added=sdf.format(date);
+        
+        text = request.getParameter("textOE");
 
         PrintWriter out = response.getWriter();
+        
+        
         
         try
         {
@@ -66,9 +70,9 @@ public class AddText extends HttpServlet {
             Statement statement;
             statement=connection.createStatement();
             
-            String sql="INSERT INTO observations_text(text_id, text, event_id, supplied_by, comment_id, score, date_added"
+            String sql="INSERT INTO observations_text( text, event_id, supplied_by, comment_id, score"
                     + ", name_visible)"
-                    + " VALUES('"+text_id +"','"+ text + "','"+event_id+ "','"+email+"','"+comment_id+"','"+score+"','"+date_added+"','"+name_visible+" )";
+                    + " VALUES('"+ text + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
             statement.executeUpdate(sql);
 
 
@@ -85,7 +89,7 @@ public class AddText extends HttpServlet {
         
         session.setAttribute("email", email);
         session.setAttribute("name", name);
-        response.sendRedirect("./observeOE.jsp");
+        response.sendRedirect("./observeOE.jsp?id="+event_id);
         
         }
  

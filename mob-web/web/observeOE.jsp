@@ -85,7 +85,7 @@ if((Integer)eventMap.get("text") == 1){
             <br><!-- ADD TEXT OBSERVATION -->
             <a class="font_normal">Add a new text observation</a>
             <form action="AddText?event_id=<%= eventMap.get("event_id") %>" method="post">
-                <textarea cols="50" rows="5"></textarea><br>
+                <textarea name="textOE" cols="50" rows="5"></textarea><br>
                 <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
                 <input type="submit" value="submit" name="submit">
             </form>
@@ -125,6 +125,7 @@ if((Integer)eventMap.get("poll") == 1){
  <%
                     for(int j=0;j<choiceList.size();j++) {
                          HashMap<String, Object> choiceMap = (HashMap<String, Object>) choiceList.get(j);
+                         
  %>
                          
                              <a class="font_normal"><% out.print(choiceMap.get("choice_name")); %></a>
