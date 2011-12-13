@@ -182,6 +182,17 @@ if((Integer)eventMap.get("image") == 1){
 %>
         <div class="c1of2">
             <a class="font_header">Image Observations</a><br>
+            
+            
+            <form action="AddImage" method="post" enctype="multipart/form-data">
+
+              Select a file: 
+              <input type="file" name="first" />
+
+              <br />
+              <input type="submit" name="button" value="upload" />
+
+            </form>
         </div>
 <%
 }
