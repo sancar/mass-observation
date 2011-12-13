@@ -108,8 +108,12 @@ if((Integer)eventMap.get("poll") == 1){
  <%             }else{
  %>                <a class="font_normal">by Anonymous</a><br>    
  <%             }
- %>                 
-                 <a class="font_normal" > <% out.print(pollMap.get("text")); %></a> <br> 
+              if(database.voteCheck((pollMap.get("poll_id")).toString(),session.getAttribute("email").toString())) {
+ %>                   <a class="font_normal" > <% out.print("You have voted for this poll!"); %></a> <br>
+ <%               }
+ 
+
+ %>               <a class="font_normal" > <% out.print(pollMap.get("text")); %></a> <br> 
  <%       
                 ArrayList<HashMap<String, Object>> choiceList = new ArrayList<HashMap<String, Object>>();
                 choiceList = database.return_choices(((Integer)pollMap.get("poll_id")).toString());

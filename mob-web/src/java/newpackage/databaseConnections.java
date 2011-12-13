@@ -72,7 +72,29 @@ public class databaseConnections {
    		 String query = "SELECT * FROM poll_choices WHERE poll_id = '"+poll_id+"' ";
    	 	return returnListQuery(query);   		 
    	 }
-         public int return_n_answers(String choice_id){
+          public boolean voteCheck(String poll_id, String email)
+          {
+              
+              String query="SELECT * FROM poll_answers WHERE poll_id = '"+poll_id+"' AND answered_by = '"+ email + "' ";
+              
+              int rowCount=0;
+              try {
+                  statement=connection.createStatement();
+                  resultSet=statement.executeQuery(query);
+                  while(resultSet.next()) {
+                      rowCount++;
+                  }
+              }
+              catch(SQLException e)
+              {
+                  e.printStackTrace();
+                  return false;
+              }
+              if(rowCount!=0) return true; 
+              return false;
+          }
+          
+          public int return_n_answers(String choice_id){
                 String query = "SELECT * FROM poll_answers WHERE choice_id = '"+choice_id+"' " ;   
                 int rowCount = 0;
                 try {
