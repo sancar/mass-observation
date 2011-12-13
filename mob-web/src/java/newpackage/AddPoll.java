@@ -38,17 +38,12 @@ public class AddPoll extends HttpServlet {
         HttpSession session = request.getSession();
         
         String poll_id=request.getParameter("poll_id");
-//        int poll=Integer.parseInt(poll_id);
-        String choice_id=request.getParameter("choice_id");
-        //System.out.println(choice_id);
-        //System.out.println("eb-------------"+poll_id);
-//        int choice=Integer.parseInt(choice_name);
+        String event_id=request.getParameter("event_id");
+        String choice_id=request.getParameter("poll_answer");
+
         String name = (String) session.getAttribute("name");
         String email = (String) session.getAttribute("email");
         PrintWriter out = response.getWriter();
-        //BU ISI DUZELT
-        
-        databaseConnections db=new databaseConnections();
         
         try
         {
@@ -59,7 +54,6 @@ public class AddPoll extends HttpServlet {
             Statement statement;
             statement=connection.createStatement();
 
-//            String sql2="SELECT choice_id FROM poll_choices WHERE "
             String sql="INSERT INTO poll_answers(poll_id, answered_by, choice_id) VALUES("+poll_id +",'"+ email + "',"+choice_id+ " )";
             statement.executeUpdate(sql);
 
@@ -75,7 +69,7 @@ public class AddPoll extends HttpServlet {
         
         session.setAttribute("email", email);
         session.setAttribute("name", name);
-        response.sendRedirect("./observeOE.jsp");
+        response.sendRedirect("./observeOE.jsp?id="+event_id);
         
         }
  
