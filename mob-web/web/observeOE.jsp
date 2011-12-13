@@ -120,7 +120,7 @@ if((Integer)eventMap.get("poll") == 1){
                 if(!choiceList.isEmpty()) {
                     
  %>             <!-- ADD POLL OBSERVATION -->    
-                <form method="post" action="AddPoll?poll_id=<%= pollMap.get("poll_id") %>"  >
+                <form method="post" action="AddPoll?poll_id=<%= pollMap.get("poll_id") %>&event_id=<%= eventMap.get("event_id") %>"  >
                     
  <%
                     for(int j=0;j<choiceList.size();j++) {
@@ -130,7 +130,7 @@ if((Integer)eventMap.get("poll") == 1){
                          
                              <a class="font_normal"><% out.print(choiceMap.get("choice_name")); %></a>
                              <a class="font_normal">(<% out.print(database.return_n_answers(((Integer)choiceMap.get("choice_id")).toString())) ; %>)</a>   
-                             <input type="radio" value="<% out.print(choiceMap.get("choice_name")); %>" id="<% out.print(choiceMap.get("choice_id")); %>" name="poll_answer"><br>
+                             <input type="radio" value="<% out.print(choiceMap.get("choice_id")); %>"  name="poll_answer"><br>
                                       
  <%
                        }
