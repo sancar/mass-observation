@@ -37,8 +37,8 @@ public class AddPoll extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         
+        String event_id= request.getParameter("event_id");
         String poll_id=request.getParameter("poll_id");
-        String event_id=request.getParameter("event_id");
         String choice_id=request.getParameter("poll_answer");
 
         String name = (String) session.getAttribute("name");

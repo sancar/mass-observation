@@ -69,8 +69,8 @@ if((Integer)eventMap.get("text") == 1){
                     }
                 }
 %>                  <!-- ADD TEXT OBSERVATIONS  COMMENT -->
-                    <form action="AddComment?text_id=<% out.print(textMap.get("text_id")); %>" method="post">
-                           <textarea cols="40" rows="3"></textarea><br>
+                    <form action="AddComment?text_id=<% out.print(textMap.get("text_id")); %>&event_id=<%= eventMap.get("event_id") %>" method="post">
+                           <textarea name="Comment" cols="40" rows="3"></textarea><br>
                            <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
                            <input type="submit" value="submit" name="submit">
                      </form>
@@ -164,8 +164,8 @@ if((Integer)eventMap.get("poll") == 1){
                     }
                 }
 %>          <!-- ADD POLL OBSERVATIONS COMMENT -->
-                <form action="AddComment?poll_id=<% out.print(pollMap.get("poll_id")); %>" method="post">
-                       <textarea cols="40" rows="3"></textarea><br>
+                <form action="AddComment?poll_id=<% out.print(pollMap.get("poll_id")); %>&event_id=<%= eventMap.get("event_id") %>" method="post">
+                       <textarea name="Comment" cols="40" rows="3"></textarea><br>
                        <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
                        <input type="submit" value="submit" name="submit">
                  </form>
