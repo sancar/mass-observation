@@ -17,9 +17,14 @@ function showComments(val){
 <%
     databaseConnections database=new databaseConnections();
     database.connect();
+if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
+%> 
+    <p style="color:red;">You are not allowed to see this page. <br>
+    <a href="RequestPerm?event_id=<%= id %>&type=see">Click</a> to request permission from user</p>
+<%    
+}else{
 %>
 <%
-    
     ArrayList<HashMap<String, Object>> Oevent = new ArrayList<HashMap<String, Object>>();
     Oevent = database.return_an_event(id); 
     HashMap<String, Object> eventMap = (HashMap<String, Object>) Oevent.get(0);
@@ -29,7 +34,7 @@ function showComments(val){
         <p class="font_normal"><% out.print(eventMap.get("event_summary")); %></p>
         <!-- TEXT OBSERVATIONS -->
 <%
-if((Integer)eventMap.get("text") == 1){
+    if((Integer)eventMap.get("text") == 1){
 %>
         <div class="c1of2">
             <a class="font_header">Text Observations</a><br>
@@ -91,8 +96,8 @@ if((Integer)eventMap.get("text") == 1){
             </form>
         </div>
  <%
-}
-if((Integer)eventMap.get("poll") == 1){
+    }
+    if((Integer)eventMap.get("poll") == 1){
 %>
         <div class="c1of2">
             <!-- POLL OBSERVATIONS -->
@@ -177,8 +182,8 @@ if((Integer)eventMap.get("poll") == 1){
  %>
         </div>
  <%
- }
-if((Integer)eventMap.get("image") == 1){
+    }
+    if((Integer)eventMap.get("image") == 1){
 %>
         <div class="c1of2">
             <a class="font_header">Image Observations</a><br>
@@ -195,20 +200,21 @@ if((Integer)eventMap.get("image") == 1){
             </form>
         </div>
 <%
-}
-if((Integer)eventMap.get("audio") == 1){
-%>
-        <div class="c1of2">
-            <a class="font_header">Audio Observations</a><br>
-        </div>
-<%
-}
-if((Integer)eventMap.get("video") == 1){
-%>
-        <div class="c1of2">
-            <a class="font_header">Video Observations</a><br>
-        </div>
-<%
+    }
+    if((Integer)eventMap.get("audio") == 1){
+    %>
+            <div class="c1of2">
+                <a class="font_header">Audio Observations</a><br>
+            </div>
+    <%
+    }
+    if((Integer)eventMap.get("video") == 1){
+    %>
+            <div class="c1of2">
+                <a class="font_header">Video Observations</a><br>
+            </div>
+    <%
+    }
 }
 %>
     </div>

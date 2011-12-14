@@ -46,7 +46,11 @@ public class databaseConnections {
    		 String query = "SELECT * FROM created_events WHERE public_to_observe = '1' ";
    	 	return returnListQuery(query);	 
    	 }  	 
-   
+          public ArrayList<HashMap<String, Object>> return_all_events()
+   	 {
+   		 String query = "SELECT * FROM created_events";
+   	 	return returnListQuery(query);	 
+   	 }
    	public ArrayList<HashMap<String, Object>> return_an_event(String id)
    	 {
    		String query = "SELECT * FROM created_events WHERE event_id = '"+id+"' ";
@@ -72,6 +76,39 @@ public class databaseConnections {
    		 String query = "SELECT * FROM poll_choices WHERE poll_id = '"+poll_id+"' ";
    	 	return returnListQuery(query);   		 
    	 }
+           /*
+           * email : id of user which will be checked
+           * id    : id of event that is checked
+           * type : is either see or observe .
+           */
+          public boolean isAllowed(String email, String id, String type){
+              String query = "SELECT * FROM created_events WHERE event_id = '"+id+ "' ";
+              int pblc = 0;
+              int allowed = 0;
+              String message = "s";
+              try{
+                  statement=connection.createStatement();
+                  resultSet=statement.executeQuery(query);
+                  boolean next = resultSet.next();
+                  pblc = (Integer)resultSet.getObject("public_to_"+type);
+              }catch(SQLException e){
+                  message = e.getMessage();
+              }
+              if(pblc == 1) return true;
+              query = "SELECT * FROM users_can_"+type+" WHERE event_id = '"+id+"' AND user = '"+email+"' ";
+              try{
+                  statement=connection.createStatement();
+                  resultSet=statement.executeQuery(query);
+                  if(resultSet.next()){
+                      allowed++;
+                  }
+              }catch(Exception e){
+                  allowed = -1;
+              }
+              if(allowed != 0)  return true;
+              
+              return false;
+          }
           public boolean voteCheck(String poll_id, String email)
           {
               
