@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package newpackage;
 
 import java.io.IOException;
@@ -17,20 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.sql.*;
 import javax.servlet.RequestDispatcher;
-/**
- *
- * @author Betul
- */
+
 @WebServlet(name = "RequestPerm", urlPatterns = {"/RequestPerm"})
 public class RequestPerm extends HttpServlet {
 
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     private static final long serialVersionUID = 1L;
     String dbUrl = "jdbc:mysql://titan.cmpe.boun.edu.tr:3306/database3";
     String username = "project3";
@@ -38,19 +26,11 @@ public class RequestPerm extends HttpServlet {
     
     databaseConnections database = new databaseConnections();
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String name = (String) session.getAttribute("name");
         String email = (String) session.getAttribute("email");
         
@@ -64,7 +44,7 @@ public class RequestPerm extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        //-----------------------------------------
+        
          String query="";
               if(type.equals("see"))
               query="SELECT * FROM users_request WHERE event_id = "+event_id+" AND user_email = '"+ email + "' AND see=1 ";
@@ -88,7 +68,7 @@ public class RequestPerm extends HttpServlet {
                   
               }
              
-        //-----------------------------------------
+        
         if(rowCount>0) 
         {     
          RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/welcome.jsp");
@@ -103,9 +83,7 @@ public class RequestPerm extends HttpServlet {
             see = 1;
         else if(type.equals("observe"))
             observe = 1;
-            
-        
-        
+
         
         try
         {
@@ -118,11 +96,7 @@ public class RequestPerm extends HttpServlet {
                    
                     + " VALUES("+event_id+ ",'"+email+ "',"+see+","+observe+" )";
             statement.executeUpdate(sql);
-
-
-
-
-            
+         
         }
         
         catch (SQLException e)
@@ -137,19 +111,11 @@ public class RequestPerm extends HttpServlet {
 
     }
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
    
     }
 
-   
 
 }
