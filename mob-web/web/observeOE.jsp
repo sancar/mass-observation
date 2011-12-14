@@ -53,7 +53,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 HashMap<String, Object> textMap = (HashMap<String, Object>) OEtextList.get(i);
  
                 if((Integer)textMap.get("name_visible") == 1){
- %>                <a class="font_normal">by <% out.print(textMap.get("supplied_by")); %></a><br>                         
+ %>                <a class="font_normal">by <% out.print(database.getUserName(textMap.get("supplied_by").toString())); %></a><br>                         
  <%             }else{
  %>                <a class="font_normal">by Anonymous</a><br>    
  <%             }
@@ -70,7 +70,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
          <%             }else{
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
@@ -118,7 +118,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 HashMap<String, Object> pollMap = (HashMap<String, Object>) OEpollList.get(i);
  
                 if((Integer)pollMap.get("name_visible") == 1){
- %>                <a class="font_normal">by <% out.print(pollMap.get("supplied_by")); %></a><br>                         
+ %>                <a class="font_normal">by <% out.print(database.getUserName(pollMap.get("supplied_by").toString())); %></a><br>                         
  <%             }else{
  %>                <a class="font_normal">by Anonymous</a><br>    
  <%             }
@@ -164,7 +164,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
          <%             }else{
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
@@ -211,7 +211,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
          <%             }else{
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
@@ -269,7 +269,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
          <%             }else{
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
@@ -333,7 +333,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
                         if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(commentMap.get("owner")); %></a><br>                         
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
          <%             }else{
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
