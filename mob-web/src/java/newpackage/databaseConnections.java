@@ -71,6 +71,21 @@ public class databaseConnections {
    		 String query = "SELECT * FROM observations_poll WHERE event_id = '"+event_id+"' ";
    	 	return returnListQuery(query);   		 
    	 }
+          public ArrayList<HashMap<String, Object>> return_images(String event_id)
+   	 {
+   		 String query = "SELECT * FROM observations_image WHERE event_id = '"+event_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+          public ArrayList<HashMap<String, Object>> return_audios(String event_id)
+   	 {
+   		 String query = "SELECT * FROM observations_audio WHERE event_id = '"+event_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+          public ArrayList<HashMap<String, Object>> return_videos(String event_id)
+   	 {
+   		 String query = "SELECT * FROM observations_video WHERE event_id = '"+event_id+"' ";
+   	 	return returnListQuery(query);   		 
+   	 }
           public ArrayList<HashMap<String, Object>> return_choices(String poll_id)
    	 {
    		 String query = "SELECT * FROM poll_choices WHERE poll_id = '"+poll_id+"' ";
