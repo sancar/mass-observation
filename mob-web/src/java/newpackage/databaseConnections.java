@@ -96,6 +96,22 @@ public class databaseConnections {
            * id    : id of event that is checked
            * type : is either see or observe .
            */
+          public String getUserName(String email) {
+              String name="";
+              String query="SELECT * FROM users WHERE email= '"+email+ "' ";
+              String message="";
+              try{
+                  statement=connection.createStatement();
+                  resultSet=statement.executeQuery(query);
+                  boolean next=resultSet.next();
+                  name=resultSet.getObject("name").toString();
+              }
+              catch(SQLException e) {
+                  message=e.getMessage();
+              }
+              
+              return name;
+          }
           public boolean isAllowed(String email, String id, String type){
               String query = "SELECT * FROM created_events WHERE event_id = '"+id+ "' ";
               int pblc = 0;
