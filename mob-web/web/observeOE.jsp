@@ -20,13 +20,13 @@ function showComments(val){
     boolean isAllowedToObserve = database.isAllowed(session.getAttribute("email").toString(),id,"observe");
 if(!isAllowedToObserve){
 %> 
-    <p style="color:red;">You are not allowed to add observation to this event.
+    <p style="color:red;">*You are not allowed to add observation to this event.
     <a href="RequestPerm?event_id=<%= id %>&type=observe">Click</a> to request permission from user</p>
 <%
 }
 if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
 %> 
-    <p style="color:red;">You are not allowed to see this page. <br>
+    <p style="color:red;">*You are not allowed to see this page. 
     <a href="RequestPerm?event_id=<%= id %>&type=see">Click</a> to request permission from user</p>
 <%    
 }else{
@@ -101,9 +101,10 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 <textarea name="textOE" cols="50" rows="5"></textarea><br>
                 <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
                 <input type="submit" value="submit" name="submit">
-            </form>
-        </div>
+            </form>     
  <%     }
+ %>    </div>
+ <%
     }
     if((Integer)eventMap.get("poll") == 1){
 %>
@@ -205,7 +206,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 <div class="comment" id="imagecomment<%= i %>" style="display: none;">
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(((Integer)imageMap.get("url")).toString(),"image");
+                commentList = database.return_comments(imageMap.get("url").toString(),"image");
                 if(!commentList.isEmpty()) {
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
@@ -238,9 +239,10 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
               <input type="file" name="first" />
               <br />
               <input type="submit" name="button" value="upload" />
-            </form>
-        </div>
+            </form>        
 <%      }
+%>   </div>
+<%
     }
     if((Integer)eventMap.get("audio") == 1){
     %>
@@ -262,7 +264,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 <div class="comment" id="audiocomment<%= i %>" style="display: none;">
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(((Integer)audioMap.get("url")).toString(),"audio");
+                commentList = database.return_comments(audioMap.get("url").toString(),"audio");
                 if(!commentList.isEmpty()) {
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
@@ -296,9 +298,9 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
               <br />
               <input type="submit" name="button" value="upload" />
             </form>
-        </div>
 <%      }
-   
+%>   </div>
+<%  
     }
     if((Integer)eventMap.get("video") == 1){
     %>
@@ -326,7 +328,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 <div class="comment" id="videocomment<%= i %>" style="display: none;">
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(((Integer)videoMap.get("url")).toString(),"video");
+                commentList = database.return_comments(videoMap.get("url").toString(),"video");
                 if(!commentList.isEmpty()) {
                     for(int j=0;j<commentList.size();j++) {
                          HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
@@ -360,9 +362,9 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
               <br />
               <input type="submit" name="button" value="upload" />
             </form>
-        </div>
 <%      }
-   
+%>      </div>
+<%  
     }
 }
 %>
