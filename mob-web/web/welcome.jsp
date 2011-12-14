@@ -50,6 +50,12 @@
 <div class="container">      
     <div class="c1of3">
         <a class="font_header">Edit Observation Events created by me</a><br>
+        <form action="Search" name="Search" method="post">
+             <input type="text" name="txt_search" size="48">
+             <input type="button" value="Search" name="btn_search">
+             
+        </form>
+        <br>
 <%
         ArrayList<HashMap<String, Object>> OEList = new ArrayList<HashMap<String, Object>>();
         OEList = database.return_my_events((String)session.getAttribute("email"));
@@ -70,17 +76,23 @@
 
     <div class="c1of3">
         <a class="font_header">Joined Observation Events</a><br>
-       
+       <form action="Search" name="Search" method="post">
+             <input type="text" name="txt_search" size="48">
+             <input type="button" value="Search" name="btn_search">
+             
+        </form>
+        <br>
     </div>
 
     <div class="c1of3">
+        
+        <a class="font_header">All Observation Events</a><br>
         <form action="Search" name="Search" method="post">
              <input type="text" name="txt_search" size="48">
              <input type="button" value="Search" name="btn_search">
              
         </form>
         <br>
-        <a class="font_header">All Observation Events</a><br>
          <%
         ArrayList<HashMap<String, Object>> OEpublicList = new ArrayList<HashMap<String, Object>>();
         OEpublicList = database.return_all_events();
