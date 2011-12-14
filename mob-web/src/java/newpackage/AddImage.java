@@ -31,14 +31,15 @@ public class AddImage extends HttpServlet {
     String username = "project3";
     String password = "i52jm";
 
+        @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 
-	
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             
-            HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String name = (String) session.getAttribute("name");
         String email = (String) session.getAttribute("email");
         
@@ -49,18 +50,18 @@ public class AddImage extends HttpServlet {
         String name_visible;
         if("anonymous".equals(request.getParameter("anonymous"))) name_visible="0";
         else name_visible="1";
-       // String date_added=sdf.format(date);
+       
         
 
         
         
         FileItemFactory factory = new DiskFileItemFactory();
 
-// Create a new file upload handler
-ServletFileUpload upload = new ServletFileUpload(factory);
+        // Create a new file upload handler
+        ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             // Parse the request
-                List<FileItem> items = upload.parseRequest(request);
+               List<FileItem> items = upload.parseRequest(request);
                String s = items.get(0).getFieldName();
                s = items.get(0).getName();
         
@@ -69,41 +70,38 @@ ServletFileUpload upload = new ServletFileUpload(factory);
         FileItem item = (FileItem) items.get(0);
  
   
-  String itemName = item.getName();
-  Random generator = new Random();
-  int r = Math.abs(generator.nextInt());
+        String itemName = item.getName();
+        Random generator = new Random();
+        int r = Math.abs(generator.nextInt());
 
-  String reg = "[.*]";
-  String replacingtext = "";
-  
-  Pattern pattern = Pattern.compile(reg);
-  Matcher matcher = pattern.matcher(itemName);
-  StringBuffer buffer = new StringBuffer();
+        String reg = "[.*]";
+        String replacingtext = "";
 
-  while (matcher.find()) {
-  matcher.appendReplacement(buffer, replacingtext);
-  }
-  int IndexOf = itemName.indexOf("."); 
-  String domainName = itemName.substring(IndexOf);
-  System.out.println("domainName: "+domainName);
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(itemName);
+        StringBuffer buffer = new StringBuffer();
 
-  String finalimage = buffer.toString()+"_"+r+domainName;
-  System.out.println("Final Image==="+finalimage);
+        while (matcher.find()) {
+        matcher.appendReplacement(buffer, replacingtext);
+        }
+        int IndexOf = itemName.indexOf("."); 
+        String domainName = itemName.substring(IndexOf);
+        System.out.println("domainName: "+domainName);
+
+        String finalimage = buffer.toString()+"_"+r+domainName;
+        System.out.println("Final Image==="+finalimage);
 
         
             
             
-            Connection connection = DriverManager.getConnection(dbUrl , username, password);
-            Statement statement;
-            statement=connection.createStatement();
-            
-            String sql="INSERT INTO observations_image( url, event_id, supplied_by, comment_id, score"
-                    + ", name_visible)"
-                    + " VALUES('"+ finalimage + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
-            statement.executeUpdate(sql);
+        Connection connection = DriverManager.getConnection(dbUrl , username, password);
+        Statement statement;
+        statement=connection.createStatement();
 
-
-
+        String sql="INSERT INTO observations_image( url, event_id, supplied_by, comment_id, score"
+                + ", name_visible)"
+                + " VALUES('"+ finalimage + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
+        statement.executeUpdate(sql);
 
             
         }
