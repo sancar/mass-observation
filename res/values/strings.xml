@@ -10,5 +10,8 @@
     <string name="a">a</string>
     <string name="Login">Login</string>
     <string name="text_observation">Text</string>
+    <string name="takeaphoto">Take a photo!</string>
+    <string name="upload">Upload</string>
+    <string name="selectfromstorage">Browse</string>
 
 </resources>

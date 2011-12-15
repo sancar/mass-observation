@@ -41,7 +41,7 @@ public class TabWidget extends TabActivity {
 	    tabHost.setCurrentTab(1);
 	}
 	private void getCredentials() {
-		username = getIntent().getExtras().getString("username");
-	    password = getIntent().getExtras().getString("password");
+			username = getIntent().getExtras().getString("username");
+	    	password = getIntent().getExtras().getString("password");
 	}
 }

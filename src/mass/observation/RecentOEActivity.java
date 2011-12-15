@@ -78,6 +78,7 @@ public class RecentOEActivity extends ListActivity {
 						}
 						else if(types[item] == "Image"){
 							Intent intent = new Intent(RecentOEActivity.this,PhotoActivity.class);
+							intent.putExtra("oe_id", oe.getId());
 							startActivity(intent);
 						}
 						else if(types[item] == "Audio"){
