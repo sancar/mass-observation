@@ -93,3 +93,9 @@ body{
 .font_normal{
     color: #000080;
 }
+.leftRed{
+    color: red;
+   position: absolute;
+   right:  10%;
+   font-size: 20px;
+}

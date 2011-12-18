@@ -27,7 +27,7 @@
     }
 </script>
 <% 
-	if(session.getAttribute("name") == null){ 
+	if(session.getAttribute("name") == null || session.getAttribute("email") == null){ 
 		response.sendRedirect("./login.jsp");           
         }
 %>
@@ -66,6 +66,7 @@
                 <a class="font_normal" href="./editOE.jsp?id=<%= newMap.get("event_id") %>"> <% out.print(newMap.get("event_name")); %></a> 
                 <br>
                 <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
+                <hr width="100%" size="2"> 
  <%
                 }
         }
@@ -107,13 +108,13 @@
                 
              <%
                 
-            if(database.isInitiator(newMap.get("event_id").toString(), session.getAttribute("email").toString())) {
+            if(database.isInitiator(newMap.get("event_id").toString(), (String)session.getAttribute("email"))) {
                 isAllowedToObserve=true;
                 isAllowedToSee=true;
             }
             else {
-                isAllowedToObserve = database.isAllowed(session.getAttribute("email").toString(),newMap.get("event_id").toString(),"observe");
-                isAllowedToSee=database.isAllowed(session.getAttribute("email").toString(),newMap.get("event_id").toString(),"see");
+                isAllowedToObserve = database.isAllowed((String)session.getAttribute("email"),newMap.get("event_id").toString(),"observe");
+                isAllowedToSee=database.isAllowed((String)session.getAttribute("email"),newMap.get("event_id").toString(),"see");
             }
                 if(isAllowedToSee) {
                     %><img src="pics/see.png" alt="You can see observations" title="You can see observations" /><%
@@ -133,6 +134,7 @@
                <a id="observe<%= i %>"></a>    
                 <br>
                 <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
+                <hr width="100%" size="2"> 
  <%
                 }
         }
