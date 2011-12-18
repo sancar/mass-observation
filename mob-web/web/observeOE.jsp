@@ -145,12 +145,16 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                              <a class="font_normal"><% out.print(choiceMap.get("choice_name")); %></a>
                              <a class="font_normal">(<% out.print(database.return_n_answers(((Integer)choiceMap.get("choice_id")).toString())) ; %>)</a>   
  <%                    if(isAllowedToObserve){                            
- %>                          <input type="radio" value="<% out.print(choiceMap.get("choice_id")); %>"  name="poll_answer"><br>                                     
+ %>                          <input type="radio" value="<% out.print(choiceMap.get("choice_id")); %>"  name="poll_answer">                                     
  <%
                        }
+%>                      <br>
+<%
                     }
+                     if(isAllowedToObserve){                     
  %>                     <input type="submit" name="Vote" value="Vote" > 
-                      </form>    
+ <%                    }
+ %>                    </form>    
  <%
               }
            
