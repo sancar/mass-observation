@@ -10,6 +10,7 @@ function showComments(val){
     
 </script>
 <%
+    String baseUrl = "http://titan.cmpe.boun.edu.tr:8082";//it will be used in showing multimedia(image,audio,video) as base url
     String id = (String) request.getParameter("id");
     if(id == null)
         response.sendRedirect("welcome.jsp");
@@ -204,7 +205,7 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
             for(int i=0;i<OEimageList.size();i++) {
                 HashMap<String, Object> imageMap = (HashMap<String, Object>) OEimageList.get(i);
  %>              <!--- IMAGE OBSERVATIONS --->
-                <img src="<%= imageMap.get("url").toString() %>" />
+                <img src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" />
                 <!-- IMAGE OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('imagecomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="imagecomment<%= i %>" style="display: none;">
@@ -260,8 +261,8 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 HashMap<String, Object> audioMap = (HashMap<String, Object>) OEaudioList.get(i);
  %>              <!--- audio OBSERVATIONS --->
                  <audio controls="controls">
-                  <source src="<%= audioMap.get("url").toString() %>" type="audio/mpeg" />                 
-                  <embed height="50px" width="100px" src="<%= audioMap.get("url").toString() %>" />
+                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/mpeg" />                 
+                  <embed height="50px" width="100px" src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" />
                 </audio>
                 <!-- audio OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('audiocomment<%= i %>');" >Show Comments</a><br>
@@ -318,11 +319,11 @@ if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
                 HashMap<String, Object> videoMap = (HashMap<String, Object>) OEvideoList.get(i);
  %>              <!--- video OBSERVATIONS --->
                     <video width="320" height="240" controls="controls">
-                      <source src="<%= videoMap.get("url").toString() %>" type="video/ogg" />
-                      <source src="<%= videoMap.get("url").toString() %>" type="video/mp4" />
-                      <source src="<%= videoMap.get("url").toString() %>" type="video/webm" />
-                    <object width="320" height="240" src="<%= videoMap.get("url").toString() %>">
-                    <embed width="320" height="240" src="<%= videoMap.get("url").toString() %>">
+                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" />
+                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" />
+                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/webm" />
+                    <object width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
+                    <embed width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
                     Your browser does not support video
                     </embed>
                     </object>
