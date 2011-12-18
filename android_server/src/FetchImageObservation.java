@@ -62,7 +62,7 @@ public class FetchImageObservation extends HttpServlet {
 		String photoUrl = "";
 		InputStream is = request.getInputStream();
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-		factory.setRepository(new File("/home/project3/images"));
+		factory.setRepository(new File("/home/project3/tomcat/webapps/observations/images"));
 		//factory.setRepository(new File("C:\\Users\\TOSHIBA\\workspace\\myServer"));
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		try {
@@ -79,7 +79,7 @@ public class FetchImageObservation extends HttpServlet {
 					Calendar cal = Calendar.getInstance();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_hhmmssSSS");
 					photoUrl = sdf.format(cal.getTime()) +".jpg";
-					File uploadedFile = new File("/home/project3/images/"+photoUrl);
+					File uploadedFile = new File("/home/project3/tomcat/webapps/observations/images/"+photoUrl);
 					item.write(uploadedFile);
 				}
 			}
