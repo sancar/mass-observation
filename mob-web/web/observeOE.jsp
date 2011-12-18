@@ -18,14 +18,23 @@ function showComments(val){
 <%
     databaseConnections database=new databaseConnections();
     database.connect();
-    boolean isAllowedToObserve = database.isAllowed(session.getAttribute("email").toString(),id,"observe");
+    boolean isAllowedToObserve;
+    boolean isAllowedToSee;
+    if(database.isInitiator(id, session.getAttribute("email").toString())) {
+        isAllowedToObserve=true;
+        isAllowedToSee=true;
+    }
+    else {
+        isAllowedToObserve = database.isAllowed(session.getAttribute("email").toString(),id,"observe");
+        isAllowedToSee=database.isAllowed(session.getAttribute("email").toString(),id,"see");
+    }
 if(!isAllowedToObserve){
 %> 
     <p style="color:red;">*You are not allowed to add observation to this event.
     <a href="RequestPerm?event_id=<%= id %>&type=observe">Click</a> to request permission from user</p>
 <%
 }
-if(!database.isAllowed(session.getAttribute("email").toString(),id,"see")){
+if(!isAllowedToSee){
 %> 
     <p style="color:red;">*You are not allowed to see this page. 
     <a href="RequestPerm?event_id=<%= id %>&type=see">Click</a> to request permission from user</p>

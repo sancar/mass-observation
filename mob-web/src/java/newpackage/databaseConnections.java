@@ -112,6 +112,25 @@ public class databaseConnections {
               
               return name;
           }
+          public boolean isInitiator(String event_id, String email) {
+              String query= "SELECT * FROM created_events WHERE event_id = '"+event_id+ "' ";
+              String message="";
+              String created_by="";
+              try{
+                  statement=connection.createStatement();
+                  resultSet=statement.executeQuery(query);
+                  boolean next=resultSet.next();
+                  created_by=resultSet.getObject("created_by").toString();
+              }
+              catch(SQLException e) {
+                  message=e.getMessage();
+              }
+              if(created_by.equals(email))
+                  return true;
+              return false;
+              
+              
+          }
           public boolean isAllowed(String email, String id, String type){
               String query = "SELECT * FROM created_events WHERE event_id = '"+id+ "' ";
               int pblc = 0;

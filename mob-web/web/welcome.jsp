@@ -96,6 +96,9 @@
          <%
         ArrayList<HashMap<String, Object>> OEpublicList = new ArrayList<HashMap<String, Object>>();
         OEpublicList = database.return_all_events();
+        boolean isAllowedToObserve;
+        boolean isAllowedToSee;
+        
         if(!OEpublicList.isEmpty()) {
             for(int i=0;i<OEpublicList.size();i++) {
                 HashMap<String, Object> newMap = (HashMap<String, Object>) OEpublicList.get(i);
@@ -103,8 +106,16 @@
                 <a class="font_normal" href="./observeOE.jsp?id=<%= newMap.get("event_id") %>"> <% out.print(newMap.get("event_name")); %></a> 
                 
              <%
-             
-                if((Integer)newMap.get("public_to_see") == 1  ){
+                
+            if(database.isInitiator(newMap.get("event_id").toString(), session.getAttribute("email").toString())) {
+                isAllowedToObserve=true;
+                isAllowedToSee=true;
+            }
+            else {
+                isAllowedToObserve = database.isAllowed(session.getAttribute("email").toString(),newMap.get("event_id").toString(),"observe");
+                isAllowedToSee=database.isAllowed(session.getAttribute("email").toString(),newMap.get("event_id").toString(),"see");
+            }
+                if(isAllowedToSee) {
                     %><img src="pics/see.png" alt="You can see observations" title="You can see observations" /><%
                 }else{
                     %><a href="RequestPerm?event_id=<%= newMap.get("event_id") %>&type=see"  ><img src="pics/not_see.png"  onmouseover="showExpSee(<%= i %>)"  onmouseout="hideExpSee(<%= i %>)"  /></a><% 
@@ -113,7 +124,7 @@
                 <a id="see<%= i %>"></a>
                
              <%   
-                if((Integer)newMap.get("public_to_observe") == 1){
+                if(isAllowedToObserve){
                     %><img src="pics/add.png" alt="You can add observations" title="You can add observations" /><%
                 }else{
                     %><a href="RequestPerm?event_id=<%= newMap.get("event_id") %>&type=observe" ><img src="pics/not_add.png"  onmouseover="showExpObserve(<%= i %>)" onmouseout="hideExpObserve(<%= i %>)" /></a><%
