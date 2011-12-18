@@ -91,6 +91,16 @@ public class databaseConnections {
    		 String query = "SELECT * FROM poll_choices WHERE poll_id = '"+poll_id+"' ";
    	 	return returnListQuery(query);   		 
    	 }
+           public ArrayList<HashMap<String, Object>> return_see_requests(String event_id)
+   	 {
+   		 String query = "SELECT * FROM users_request WHERE event_id = '"+event_id+"' AND see = '1' ";
+   	 	return returnListQuery(query);   		 
+   	 }
+           public ArrayList<HashMap<String, Object>> return_observe_requests(String event_id)
+   	 {
+   		String query = "SELECT * FROM users_request WHERE event_id = '"+event_id+"' AND observe = '1' ";
+   	 	return returnListQuery(query);   		 
+   	 }
            /*
            * email : id of user which will be checked
            * id    : id of event that is checked

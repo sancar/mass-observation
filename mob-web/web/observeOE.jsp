@@ -9,6 +9,11 @@ function showComments(val){
 }   
     
 </script>
+<% 
+	if(session.getAttribute("name") == null){ 
+		response.sendRedirect("./login.jsp");           
+        }
+%>
 <%
     String baseUrl = "http://titan.cmpe.boun.edu.tr:8082/observations";
     String id = (String) request.getParameter("id");
@@ -30,13 +35,13 @@ function showComments(val){
     }
 if(!isAllowedToObserve){
 %> 
-    <p style="color:red;">*You are not allowed to add observation to this event.
+    <p style="color:red;" class="font_header">You are not allowed to add observation to this event.
     <a href="RequestPerm?event_id=<%= id %>&type=observe">Click</a> to request permission from user</p>
 <%
 }
 if(!isAllowedToSee){
 %> 
-    <p style="color:red;">*You are not allowed to see this page. 
+    <p style="color:red;" class="font_header">You are not allowed to see this page. 
     <a href="RequestPerm?event_id=<%= id %>&type=see">Click</a> to request permission from user</p>
 <%    
 }else{
@@ -47,7 +52,7 @@ if(!isAllowedToSee){
     HashMap<String, Object> eventMap = (HashMap<String, Object>) Oevent.get(0);
 %>
     <div class="container">
-        <a class="font_header" href="./editOE.jsp?id=<%= id %>"> <% out.print(eventMap.get("event_name")); %></a> <br>
+        <a class="font_header"> <% out.print(eventMap.get("event_name")); %></a> <br>
         <p class="font_normal"><% out.print(eventMap.get("event_summary")); %></p>
         <!-- TEXT OBSERVATIONS -->
 <%
