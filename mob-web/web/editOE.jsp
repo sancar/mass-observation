@@ -25,7 +25,7 @@
 <div class="container">
     
     <a class="font_header"> <% out.print(eventMap.get("event_name")); %></a> 
-    <a class="leftRed" href="DeleteOE?event_id<%= id%>">Delete this event completely !!!</a>
+    <a class="leftRed" href="DeleteOE?event_id=<%= id%>">Delete this event completely !!!</a>
     <br>
     <p class="font_normal"><% out.print(eventMap.get("event_summary")); %></p>
     <div class="c1of2">
@@ -38,7 +38,7 @@
                 HashMap<String, Object> seeMap = (HashMap<String, Object>) seeList.get(i);
 %>
                 <a class="font_normal"><%= database.getUserName(seeMap.get("user_email").toString()) %></a>
-                <a class="font_normal" href="GivePerm?type=see&event_id<%= id %>&email=<%= seeMap.get("user_email").toString() %>">Let in</a><br>
+                <a class="font_normal" href="GivePerm?type=see&event_id=<%= id %>&email=<%= seeMap.get("user_email").toString() %>">Let in</a><br>
                 <hr width="100%" size="2"> 
 <%
             }
@@ -56,7 +56,7 @@
                 HashMap<String, Object> observeMap = (HashMap<String, Object>) observeList.get(i);
 %>
                 <a class="font_normal"><%= database.getUserName(observeMap.get("user_email").toString()) %></a>
-                <a class="font_normal" href="GivePerm?type=observe&event_id<%= id %>&email=<%= observeMap.get("user_email").toString() %>">Let in</a><br>
+                <a class="font_normal" href="GivePerm?type=observe&event_id=<%= id %>&email=<%= observeMap.get("user_email").toString() %>">Let in</a><br>
                 <hr width="100%" size="2"> 
                 
 <%
