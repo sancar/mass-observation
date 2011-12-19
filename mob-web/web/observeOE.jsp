@@ -219,7 +219,7 @@ if(!isAllowedToSee){
             for(int i=0;i<OEimageList.size();i++) {
                 HashMap<String, Object> imageMap = (HashMap<String, Object>) OEimageList.get(i);
  %>              <!--- IMAGE OBSERVATIONS --->
-                <img src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" />
+                <a href="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" ><img height="300px" width="480px" src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" /></a><br>
                 <!-- IMAGE OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('imagecomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="imagecomment<%= i %>" style="display: none;">
