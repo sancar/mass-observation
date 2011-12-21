@@ -46,8 +46,23 @@ public class RequestPerm extends HttpServlet {
         
         
          String query="";
+         query="SELECT * FROM users_request WHERE event_id = "+event_id+" AND user_email = '"+ email + "' ";
+         int requestNum=0;
+         try{
+             Connection connection=DriverManager.getConnection(dbUrl, username, password);
+             Statement statement;
+             statement=connection.createStatement();
+             ResultSet resultSet=statement.executeQuery(query);
+             while(resultSet.next()) {
+                 requestNum++;
+             }
+         }
+         catch(SQLException e) {
+             e.printStackTrace();
+         }
               if(type.equals("see"))
               query="SELECT * FROM users_request WHERE event_id = "+event_id+" AND user_email = '"+ email + "' AND see=1 ";
+              
               else if(type.equals("observe"))
               query="SELECT * FROM users_request WHERE event_id = "+event_id+" AND user_email = '"+ email + "' AND observe=1 ";
               
@@ -91,10 +106,19 @@ public class RequestPerm extends HttpServlet {
             Connection connection = DriverManager.getConnection(dbUrl , username, password);
             Statement statement;
             statement=connection.createStatement();
-            
-            String sql="INSERT INTO users_request(event_id, user_email, see, observe)"
+            String sql="";
+            //if this is the first request by the user:
+            if(requestNum==0) {
+            sql="INSERT INTO users_request(event_id, user_email, see, observe)"
                    
                     + " VALUES("+event_id+ ",'"+email+ "',"+see+","+observe+" )";
+            
+            }
+            //we have to consider the case, where this user has made another request 
+            //to the same event before, so this request is already in the table, and must be updated. 
+            else {
+            sql="UPDATE users_request SET "+type+"=1 WHERE event_id = "+event_id+ " AND user_email = '"+ email + "'";
+            }
             statement.executeUpdate(sql);
          
         }
