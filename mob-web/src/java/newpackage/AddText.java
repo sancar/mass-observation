@@ -47,7 +47,7 @@ public class AddText extends HttpServlet {
         String text="";
         String event_id=request.getParameter("event_id");
         String supplied_by=email;
-        String comment_id="";
+       
         String score="0";
         String name_visible;
         if("anonymous".equals(request.getParameter("anonymous"))) name_visible="0";
@@ -70,9 +70,9 @@ public class AddText extends HttpServlet {
             Statement statement;
             statement=connection.createStatement();
             
-            String sql="INSERT INTO observations_text( text, event_id, supplied_by, comment_id, score"
+            String sql="INSERT INTO observations_text( text, event_id, supplied_by, score"
                     + ", name_visible)"
-                    + " VALUES('"+ text + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
+                    + " VALUES('"+ text + "',"+event_id+ ",'"+email+"',"+score+","+name_visible+" )";
             statement.executeUpdate(sql);
 
 
