@@ -1,8 +1,7 @@
 package newpackage;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import java.io.PrintWriter;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
@@ -51,74 +48,58 @@ public class AddImage extends HttpServlet {
         if("anonymous".equals(request.getParameter("anonymous"))) name_visible="0";
         else name_visible="1";
        
-        
 
-        
-        
-        FileItemFactory factory = new DiskFileItemFactory();
-
-        // Create a new file upload handler
+        String photoUrl = "";
+               
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setRepository(new File("/home/project3/tomcat/webapps/observations/images"));
+                
         ServletFileUpload upload = new ServletFileUpload(factory);
+        
         try {
-            // Parse the request
-               List<FileItem> items = upload.parseRequest(request);
-               String s = items.get(0).getFieldName();
-               s = items.get(0).getName();
-        
-      
-        
-        FileItem item = (FileItem) items.get(0);
- 
-  
-        String itemName = item.getName();
-        Random generator = new Random();
-        int r = Math.abs(generator.nextInt());
+               List items = upload.parseRequest(request);
+               Iterator iter = items.iterator();
+               while(iter.hasNext()){
+                     FileItem item = (FileItem) iter.next();
+                     if(item.isFormField()){
+                            String fieldName = item.getFieldName();
+                            if(fieldName.equals("oe_id"))event_id = item.getString();
+                            else if(fieldName.equals("username")) username = item.getString();
+                     }
+                     else {
+                            Calendar cal = Calendar.getInstance();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_hhmmssSSS");
+                            photoUrl = sdf.format(cal.getTime()) +".jpg";
+                            File uploadedFile = new File("/home/project3/tomcat/webapps/observations/images/"+photoUrl);
+                            item.write(uploadedFile);
+                     }
+               }
+               Connection connection = DriverManager.getConnection(dbUrl , username, password);
+               Statement statement;
+               statement=connection.createStatement();
 
-        String reg = "[.*]";
-        String replacingtext = "";
-
-        Pattern pattern = Pattern.compile(reg);
-        Matcher matcher = pattern.matcher(itemName);
-        StringBuffer buffer = new StringBuffer();
-
-        while (matcher.find()) {
-        matcher.appendReplacement(buffer, replacingtext);
-        }
-        int IndexOf = itemName.indexOf("."); 
-        String domainName = itemName.substring(IndexOf);
-        System.out.println("domainName: "+domainName);
-
-        String finalimage = buffer.toString()+"_"+r+domainName;
-        System.out.println("Final Image==="+finalimage);
-
-        
+               String sql="INSERT INTO observations_image( url, event_id, supplied_by, comment_id, score"
+                          + ", name_visible)"
+                          + " VALUES('"+ photoUrl + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
+               statement.executeUpdate(sql);
+                        
+                } catch (FileUploadException e) {
+                        
+                        e.printStackTrace();
+                } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                }
             
-            
-        Connection connection = DriverManager.getConnection(dbUrl , username, password);
-        Statement statement;
-        statement=connection.createStatement();
-
-        String sql="INSERT INTO observations_image( url, event_id, supplied_by, comment_id, score"
-                + ", name_visible)"
-                + " VALUES('"+ finalimage + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
-        statement.executeUpdate(sql);
+        
+        
+        
+                session.setAttribute("email", email);
+                session.setAttribute("name", name);
+                response.sendRedirect("./observeOE.jsp?id="+event_id);
 
             
         }
-        catch (SQLException ex) {
-            Logger.getLogger(AddImage.class.getName()).log(Level.SEVERE, null, ex);
-        }        
-        catch (FileUploadException ex) {
-            Logger.getLogger(AddImage.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        session.setAttribute("email", email);
-        session.setAttribute("name", name);
-        response.sendRedirect("./observeOE.jsp?id="+event_id);
-        
-        }
- 
-        
-        
+     
 
 }
