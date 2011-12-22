@@ -275,7 +275,10 @@ if(!isAllowedToSee){
                 HashMap<String, Object> audioMap = (HashMap<String, Object>) OEaudioList.get(i);
  %>              <!--- audio OBSERVATIONS --->
                  <audio controls="controls">
-                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/mpeg" />                 
+                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/mp3" />
+                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/wav" />
+                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/m4a" />
+                  <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/wma" />
                   <embed height="50px" width="100px" src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" />
                 </audio>
                 <!-- audio OBSERVATIONS COMMENTS -->                 
