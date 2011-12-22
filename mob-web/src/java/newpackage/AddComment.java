@@ -81,7 +81,21 @@ public class AddComment extends HttpServlet {
             observation_id=request.getParameter("poll_id");
             observation_type = "poll";
         }
-        
+        else if(!(request.getParameter("image_url")==null))
+        {
+            observation_id=request.getParameter("image_url");
+            observation_type="image";
+        }
+        else if(!(request.getParameter("video_url")==null))
+        {
+            observation_id=request.getParameter("video_url");
+            observation_type="video";
+        }
+        else if(!(request.getParameter("audio_url")==null))
+        {
+            observation_id=request.getParameter("audio_url");
+            observation_type="audio";
+        }
 
         PrintWriter out = response.getWriter();
         
