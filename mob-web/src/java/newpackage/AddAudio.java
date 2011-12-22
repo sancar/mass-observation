@@ -59,14 +59,14 @@ public class AddAudio extends HttpServlet {
                      else {
                             Calendar cal = Calendar.getInstance();
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd_hhmmssSSS");
-                            if(item.getName().endsWith("mp3"))
-                            audioUrl = sdf.format(cal.getTime()) +".mp3";
-                            else if(item.getName().endsWith("wav"))
-                                audioUrl = sdf.format(cal.getTime()) +".wav";
-                            else if(item.getName().endsWith("m4a"))
-                                audioUrl = sdf.format(cal.getTime()) +".m4a";
-                            else if(item.getName().endsWith("wma"))
-                                audioUrl = sdf.format(cal.getTime()) +".wma";
+                            if(item.getName().endsWith("mpeg"))
+                            audioUrl = sdf.format(cal.getTime()) +".mpeg";
+//                            else if(item.getName().endsWith("wav"))
+//                                audioUrl = sdf.format(cal.getTime()) +".wav";
+//                            else if(item.getName().endsWith("m4a"))
+//                                audioUrl = sdf.format(cal.getTime()) +".m4a";
+//                            else if(item.getName().endsWith("wma"))
+//                                audioUrl = sdf.format(cal.getTime()) +".wma";
                             else {
                                 session.setAttribute("email", email);
                                 session.setAttribute("name", name);
