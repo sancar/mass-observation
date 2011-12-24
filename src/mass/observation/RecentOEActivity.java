@@ -79,6 +79,8 @@ public class RecentOEActivity extends ListActivity {
 						else if(types[item] == "Image"){
 							Intent intent = new Intent(RecentOEActivity.this,PhotoActivity.class);
 							intent.putExtra("oe_id", oe.getId());
+							intent.putExtra("oe_name",oe.getName());
+							intent.putExtra("oe_desc",oe.getDesc());
 							startActivity(intent);
 						}
 						else if(types[item] == "Audio"){
@@ -87,6 +89,8 @@ public class RecentOEActivity extends ListActivity {
 						else if(types[item] == "Video"){
 							Intent intent = new Intent(RecentOEActivity.this,VideoActivity.class);
 							intent.putExtra("oe_id",oe.getId());
+							intent.putExtra("oe_name",oe.getName());
+							intent.putExtra("oe_desc",oe.getDesc());
 							startActivity(intent);
 						}
 						else {

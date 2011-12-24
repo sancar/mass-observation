@@ -36,6 +36,8 @@ import android.widget.Toast;
 public class VideoActivity extends Activity {
 	private Uri fileUri;
 	private int OEID;
+	private String OEName;
+	private String OEDesc;
 	private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
 	private static final int MEDIA_TYPE_IMAGE = 1;
 	private static final int MEDIA_TYPE_VIDEO = 2;
@@ -45,6 +47,10 @@ public class VideoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video);
 		OEID = getIntent().getExtras().getInt("oe_id");
+		OEName = getIntent().getExtras().getString("oe_name");
+		OEDesc = getIntent().getExtras().getString("oe_desc");
+		((TextView)findViewById(R.id.oename_video)).setText(OEName);
+		((TextView)findViewById(R.id.oedesc_video)).setText(OEDesc);
 		Button VideoRecordButton = (Button) findViewById(R.id.VideoRecordButton);
 		//record button onclick handler
 		VideoRecordButton.setOnClickListener(new OnClickListener(){

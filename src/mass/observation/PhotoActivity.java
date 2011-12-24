@@ -39,11 +39,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.*;
 import android.widget.Toast;
 
 public class PhotoActivity extends Activity {
 	private Uri fileUri;
 	private int OEID;
+	private String OEName;
+	private String OEDesc;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int MEDIA_TYPE_IMAGE = 1;
 	private static final int MEDIA_TYPE_VIDEO = 2;
@@ -53,6 +56,8 @@ public class PhotoActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		fileUri = (Uri) getLastNonConfigurationInstance();
 		OEID = getIntent().getExtras().getInt("oe_id");
+		OEName = getIntent().getExtras().getString("oe_name");
+		OEDesc = getIntent().getExtras().getString("oe_desc");
 		if(fileUri != null){
 			File imgFile = new File(fileUri.getPath());
 			if(imgFile.exists()){
@@ -63,6 +68,8 @@ public class PhotoActivity extends Activity {
 		}
 		
 		setContentView(R.layout.photo);
+		((TextView)findViewById(R.id.oename_photo)).setText(OEName);
+		((TextView)findViewById(R.id.oedesc_photo)).setText(OEDesc);
 		Button b = (Button)findViewById(R.id.PhotoButton);
 		b.setOnClickListener(new OnClickListener(){
 
