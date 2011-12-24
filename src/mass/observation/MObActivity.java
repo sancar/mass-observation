@@ -16,6 +16,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -102,7 +105,9 @@ public class MObActivity extends Activity {
 				public String connectToServer(List<NameValuePair> n)
 				throws UnsupportedEncodingException, IOException,
 				ClientProtocolException {
-					HttpClient hc = new DefaultHttpClient();
+					HttpParams params = new BasicHttpParams();
+					HttpConnectionParams.setConnectionTimeout(params, 60000);
+					HttpClient hc = new DefaultHttpClient(params);
 					//HttpPost post = new HttpPost("http://10.0.2.2:8080/myServer/MyServlet");
 					HttpPost post = new HttpPost("http://titan.cmpe.boun.edu.tr:8082/myServer/MyServlet");
 					post.setEntity(new UrlEncodedFormEntity(n));

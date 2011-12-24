@@ -85,10 +85,12 @@ public class RecentOEActivity extends ListActivity {
 							
 						}
 						else if(types[item] == "Video"){
-							
+							Intent intent = new Intent(RecentOEActivity.this,VideoActivity.class);
+							intent.putExtra("oe_id",oe.getId());
+							startActivity(intent);
 						}
 						else {
-							//WHAT THE FUCK IS THIS?
+							//WHAT THE F.K IS THIS?
 						}
 					}});
 				AlertDialog alert = builder.create();

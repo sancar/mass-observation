@@ -79,7 +79,7 @@ public class TextObservationActivity extends Activity{
 				private String connectToServer(List<NameValuePair> list) throws IllegalStateException, IOException {
 					HttpClient hc = new DefaultHttpClient();
 					HttpPost post = new HttpPost("http://titan.cmpe.boun.edu.tr:8082/myServer/fetchTextObservation");
-					//HttpPost post = new HttpPost("http://10.0.2.2:8080/myServer/fetchObservation");
+					//HttpPost post = new HttpPost("http://192.168.1.113:8080/myServer/fetchObservation");
 					post.setEntity(new UrlEncodedFormEntity(list));
 					HttpResponse response = hc.execute(post);
 					InputStream is = response.getEntity().getContent();

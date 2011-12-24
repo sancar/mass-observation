@@ -13,5 +13,6 @@
     <string name="takeaphoto">Take a photo!</string>
     <string name="upload">Upload</string>
     <string name="selectfromstorage">Browse</string>
+    <string name="recordavideo">Record a video!</string>
 
 </resources>
