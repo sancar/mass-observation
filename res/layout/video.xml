@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/VideoRecordButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/recordavideo" />
+
+    <Button
+        android:id="@+id/VideoRecordBrowseButton"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:text="@string/selectfromstorage" />
+
+    <TextView
+        android:id="@+id/VideoRecordFinished"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/VideoRecordUploadButton"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:text="@string/upload" />
+
+</LinearLayout>
