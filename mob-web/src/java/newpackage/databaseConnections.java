@@ -35,12 +35,31 @@ public class databaseConnections {
    	 statement = connection.createStatement(
    			 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
    		 
-    }  	   	 
+    }  	   
+    /*
    	 public ArrayList<HashMap<String, Object>> return_my_events(String email)
    	 {            
    		 String query = "SELECT * FROM created_events WHERE created_by = '" + email + "'";   		 
    	 	return returnListQuery(query);  		 
-   	 } 
+   	 }*/ 
+         public ArrayList<HashMap<String, Object>> search_my_events(String email,String from, String orderby, String search)
+   	 {
+   		String query = "SELECT * FROM created_events WHERE (event_name LIKE '%"+search+"%' OR event_summary LIKE '%"+search+"%') AND created_by = '" + email + "'  ORDER BY " + orderby+" DESC  LIMIT " + from + ", 4 ";
+   	 	return returnListQuery(query);	 
+   	 }
+         /** Not implemented yet
+           * Currently searching according to tag is missing
+           * @param from  = offset for starting point
+           * @param orderby = data OR score
+           * @param search = search query
+           * @return 
+           */
+         public ArrayList<HashMap<String, Object>> search_joined_events(String email,String from, String orderby, String search)
+   	 {
+   		String query = "SELECT * FROM joined_events WHERE (event_name LIKE '%"+search+"%' OR event_summary LIKE '%"+search+"%') AND email = '" + email + "' ORDER BY " + orderby+" DESC  LIMIT " + from + ", 4 ";
+   	 	return returnListQuery(query);	 
+   	 }
+         /*
    	 public ArrayList<HashMap<String, Object>> return_public_events()
    	 {
    		 String query = "SELECT * FROM created_events WHERE public_to_observe = '1' ";
@@ -48,7 +67,19 @@ public class databaseConnections {
    	 }  	 
           public ArrayList<HashMap<String, Object>> return_all_events()
    	 {
-   		 String query = "SELECT * FROM created_events";
+   		 String query = "SELECT * FROM created_events  ORDER BY score DESC  LIMIT 0 , 4 ";
+   	 	return returnListQuery(query);	 
+   	 }*/
+          /**
+           * Currently searching according to tag is missing
+           * @param from  = offset for starting point
+           * @param orderby = data OR score
+           * @param search = search query
+           * @return 
+           */
+          public ArrayList<HashMap<String, Object>> search_all_events(String from, String orderby, String search)
+   	 {
+   		String query = "SELECT * FROM created_events WHERE event_name LIKE '%"+search+"%' OR event_summary LIKE '%"+search+"%'  ORDER BY " + orderby+" DESC  LIMIT " + from + ", 4 ";
    	 	return returnListQuery(query);	 
    	 }
    	public ArrayList<HashMap<String, Object>> return_an_event(String id)
@@ -231,7 +262,7 @@ public class databaseConnections {
    			 return list;
    		 }catch (SQLException e)
    		 {
-   			 e.printStackTrace();
+   			System.out.println(e.getMessage());
    			 return null;
    		 }
    		 finally
@@ -242,7 +273,7 @@ public class databaseConnections {
    				 resultSet.close();
    			 } catch (SQLException e)
    			 {
-   				 e.printStackTrace();
+   				System.out.println(e.getMessage());
    			 }
    		 }
    	 }
