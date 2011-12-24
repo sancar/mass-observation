@@ -99,3 +99,30 @@ body{
    right:  10%;
    font-size: 20px;
 }
+.classification { 
+        background-color: white;
+	position: relative;
+	width: 91px;
+	height: 17px;
+}
+.classification .cover {
+	position: absolute;
+	background: transparent url(pics/stars.png) top left no-repeat;
+	top: 0px;
+	left: 0px;
+	width: 91px;
+	height: 17px;
+	z-index: 101;
+}
+.classification .progress {
+	position: absolute;
+	background: transparent url(pics/stars_full.png) top left no-repeat;
+	top: 0px;
+	left: 0px;
+	height: 17px;
+	z-index: 102;
+}
+.small{
+    color: gray;
+    font-size: 15px;
+}

@@ -72,12 +72,24 @@ if(!isAllowedToSee){
  <%             }else{
  %>                <a class="font_normal">by Anonymous</a><br>    
  <%             }
- %>
+ %>             <!--- Vote system for text observations--->
+                <div>
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&text_id=<%= textMap.get("text_id")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(textMap.get("score").toString())/20 %>;"></div></div>
+               <!----------------------------------------->
                 <a class="font_normal" > <% out.print(textMap.get("text")); %></a> <br> 
-                
+                <a class="small"><% out.print(textMap.get("date_added")); %></a><br>
                 <a class="font_normal"  href="javascript:showComments('textcomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="textcomment<%= i %>" style="display: none;">
-                    <!-- TEXT OBSERVATIONS COMMENTS-->
+                <!-- TEXT OBSERVATIONS COMMENTS-->
  <%       
                 ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
                 commentList = database.return_comments(((Integer)textMap.get("text_id")).toString(),"text");
@@ -90,7 +102,8 @@ if(!isAllowedToSee){
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
          %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>   
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>
+                         <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
                         <hr width="100%" size="2">   
 <%                                              
                     }
@@ -131,12 +144,22 @@ if(!isAllowedToSee){
         if(!OEpollList.isEmpty()) {
             for(int i=0;i<OEpollList.size();i++) {
                 HashMap<String, Object> pollMap = (HashMap<String, Object>) OEpollList.get(i);
- 
-                if((Integer)pollMap.get("name_visible") == 1){
- %>                <a class="font_normal">by <% out.print(database.getUserName(pollMap.get("supplied_by").toString())); %></a><br>                         
- <%             }else{
- %>                <a class="font_normal">by Anonymous</a><br>    
- <%             }
+ %>
+                <!--- Vote system for poll observations--->
+                <div>
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&poll_id=<%= pollMap.get("poll_id")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(pollMap.get("score").toString())/20 %>;"></div></div>
+               <!----------------------------------------->
+                
+                <%
               if(database.voteCheck((pollMap.get("poll_id")).toString(),session.getAttribute("email").toString())) {
  %>                   <a class="font_normal" > <% out.print("You have voted for this poll!"); %></a> <br>
  <%               }
@@ -164,7 +187,7 @@ if(!isAllowedToSee){
  <%
                        }
 %>                      <br>
-<%
+<%      
                     }
                      if(isAllowedToObserve){                     
  %>                     <input type="submit" name="Vote" value="Vote" > 
@@ -173,7 +196,8 @@ if(!isAllowedToSee){
  <%
               }
            
-%>              <!-- POLL OBSERVATIONS COMMENTS -->                 
+%>              <a class="small"><% out.print(pollMap.get("date_added")); %></a><br>
+                <!-- POLL OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('pollcomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="pollcomment<%= i %>" style="display: none;">
  <%       
@@ -188,7 +212,8 @@ if(!isAllowedToSee){
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
          %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br> 
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>
+                        <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
                         <hr width="100%" size="2">   
 <%                                              
                     }
@@ -200,7 +225,7 @@ if(!isAllowedToSee){
                        <input type="submit" value="submit" name="submit">
                  </form>
             </div> 
-            <hr width="100%" size="2">    
+            <hr width="100%" size="2"> <br>    
 <%
             }
         }
@@ -219,7 +244,28 @@ if(!isAllowedToSee){
             for(int i=0;i<OEimageList.size();i++) {
                 HashMap<String, Object> imageMap = (HashMap<String, Object>) OEimageList.get(i);
  %>              <!--- IMAGE OBSERVATIONS --->
+ <%               if((Integer)imageMap.get("name_visible") == 1){
+ %>                <a class="font_normal">by <% out.print(database.getUserName(imageMap.get("supplied_by").toString())); %></a><br>                         
+ <%             }else{
+ %>                <a class="font_normal">by Anonymous</a><br>    
+ <%             }
+                %>
+                <!--- Vote system for image observations--->
+                <div>
+                    <form method="post" name="Vote" action="ShowParameters?event_id=<%= id %>&image_id=<%= imageMap.get("image_id")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(imageMap.get("score").toString())/20 %>;"></div></div>
+               <!----------------------------------------->
                 <a href="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" ><img height="300px" width="480px" src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" /></a><br>
+                <a class="small"><% out.print(imageMap.get("date_added")); %></a><br>
+                <hr width="100%" size="2"> 
                 <!-- IMAGE OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('imagecomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="imagecomment<%= i %>" style="display: none;">
@@ -235,12 +281,13 @@ if(!isAllowedToSee){
          %>                <a class="font_normal">by Anonymous</a><br>    
          <%             }
          %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br> 
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>
+                         <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
                         <hr width="100%" size="2">   
 <%                                              
                     }
                 }
-%>          <!-- ADD IMAGE OBSERVATIONS COMMENT -->
+%>              <!-- ADD IMAGE OBSERVATIONS COMMENT -->
                 <form action="AddComment?image_url=<% out.print(imageMap.get("url")); %>&event_id=<%= id %>" method="post">
                        <textarea name="Comment" cols="40" rows="3"></textarea><br>
                        <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
@@ -274,6 +321,25 @@ if(!isAllowedToSee){
             for(int i=0;i<OEaudioList.size();i++) {
                 HashMap<String, Object> audioMap = (HashMap<String, Object>) OEaudioList.get(i);
  %>              <!--- audio OBSERVATIONS --->
+ <%               if((Integer)audioMap.get("name_visible") == 1){
+ %>                <a class="font_normal">by <% out.print(database.getUserName(audioMap.get("supplied_by").toString())); %></a><br>                         
+ <%             }else{
+ %>                <a class="font_normal">by Anonymous</a><br>    
+ <%             }
+ %>
+                <!--- Vote system for audio observations--->
+                <div>
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&audio_id=<%= audioMap.get("audio_id")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(audioMap.get("score").toString())/20 %>;"></div></div>
+               <!----------------------------------------->
                  <audio controls="controls">
                   <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/mp3" />
                   <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/wav" />
@@ -281,6 +347,8 @@ if(!isAllowedToSee){
                   <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/wma" />
                   <embed height="50px" width="100px" src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" />
                 </audio>
+                 <a class="small"><% out.print(audioMap.get("date_added")); %></a><br>
+                    <hr width="100%" size="2">  <br>
                 <!-- audio OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('audiocomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="audiocomment<%= i %>" style="display: none;">
@@ -297,6 +365,7 @@ if(!isAllowedToSee){
          <%             }
          %>                      
                         <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br> 
+                        <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
                         <hr width="100%" size="2">   
 <%                                              
                     }
@@ -335,6 +404,25 @@ if(!isAllowedToSee){
             for(int i=0;i<OEvideoList.size();i++) {
                 HashMap<String, Object> videoMap = (HashMap<String, Object>) OEvideoList.get(i);
  %>              <!--- video OBSERVATIONS --->
+  <%               if((Integer)videoMap.get("name_visible") == 1){
+ %>                <a class="font_normal">by <% out.print(database.getUserName(videoMap.get("supplied_by").toString())); %></a><br>                         
+ <%             }else{
+ %>                <a class="font_normal">by Anonymous</a><br>    
+ <%             }
+ %>
+                <!--- Vote system for video observations--->
+                <div>
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&video_id=<%= videoMap.get("video_id")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString())/20 %>;"></div></div>
+               <!----------------------------------------->
                     <video width="320" height="240" controls="controls">
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" />
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" />
@@ -344,7 +432,9 @@ if(!isAllowedToSee){
                     Your browser does not support video
                     </embed>
                     </object>
-                    </video>
+                    </video><br>
+                    <a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
+                    <hr width="100%" size="2">  <br>
                 <!-- video OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('videocomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="videocomment<%= i %>" style="display: none;">
@@ -361,6 +451,7 @@ if(!isAllowedToSee){
          <%             }
          %>                      
                         <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br> 
+                        <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
                         <hr width="100%" size="2">   
 <%                                              
                     }
