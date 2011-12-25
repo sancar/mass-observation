@@ -44,6 +44,7 @@ public class MObActivity extends Activity {
 			public void onClick(View view) {
 				String username = ((EditText) findViewById(R.id.UsernameInput)).getText().toString();
 			    String password = ((EditText) findViewById(R.id.PasswordInput)).getText().toString();
+			    password = MD5(password);
 			    new LoginTask().execute(username,password);
 			}
 			class LoginTask extends AsyncTask<String,Void,String>{
@@ -92,14 +93,15 @@ public class MObActivity extends Activity {
 					}
 					else if(res.equals("NOT-AUTHORIZED")){
 						dialog.dismiss();
+						Toast.makeText(MObActivity.this, "Invalid login or password.", Toast.LENGTH_SHORT).show();
 					}
 					else if(res.equals("ERROR")){
 						dialog.dismiss();
-						//Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+						Toast.makeText(MObActivity.this, "Connection error. Please retry.", Toast.LENGTH_SHORT).show();
 					}
 					else {
 						dialog.dismiss();
-						//Toast.makeText(getApplicationContext(), res, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "Unknown error.", Toast.LENGTH_SHORT).show();
 					}
 				}
 				public String connectToServer(List<NameValuePair> n)
@@ -119,6 +121,20 @@ public class MObActivity extends Activity {
 			}
         });
     }
+    
+    public String MD5(String md5) {
+  	   try {
+  	        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+  	        byte[] array = md.digest(md5.getBytes());
+  	        StringBuffer sb = new StringBuffer();
+  	        for (int i = 0; i < array.length; ++i) {
+  	          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+  	       }
+  	        return sb.toString();
+  	    } catch (java.security.NoSuchAlgorithmException e) {
+  	    }
+  	    return null;
+ 	}
     
     public static String convertToString(InputStream is) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));

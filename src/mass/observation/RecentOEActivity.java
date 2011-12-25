@@ -84,7 +84,11 @@ public class RecentOEActivity extends ListActivity {
 							startActivity(intent);
 						}
 						else if(types[item] == "Audio"){
-							
+							Intent intent = new Intent(RecentOEActivity.this,AudioActivity.class);
+							intent.putExtra("oe_id", oe.getId());
+							intent.putExtra("oe_name",oe.getName());
+							intent.putExtra("oe_desc",oe.getDesc());
+							startActivity(intent);
 						}
 						else if(types[item] == "Video"){
 							Intent intent = new Intent(RecentOEActivity.this,VideoActivity.class);
