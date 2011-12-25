@@ -22,7 +22,7 @@
             document.getElementById(type+"results").innerHTML += xmlhttp.responseText;
         }
       }
-      
+    
     xmlhttp.open("GET","./ajax/search"+type+".jsp?q="+q+"&o="+offset+"&a="+list,true);
     xmlhttp.send();
     }
@@ -30,6 +30,12 @@
     function callMore(q,offset,type,list){
         document.getElementById(type+"wait").style.visibility = "visible";
         document.getElementById(type+"results").removeChild(document.getElementById(type+'more'));
+        var list;
+         if( document.getElementById(type+"list").checked ){
+             list = "score";
+         }else{
+             list = "date_added";
+         }
         more(q,offset,type,list);
     }
     function callSearch(type){
@@ -47,6 +53,7 @@
          }else{
              list = "date_added";
          }
+           
          more(q,0,type,list);
     }
     function showExpSee(vid){
@@ -93,10 +100,10 @@
 %>
 
 <div class="container">      
-    <div class="c1of3" id="edit">
+    <div class="c1of2" id="edit">
         <a class="font_header">Edit Observation Events created by me</a><br>
              <input type="text" id="editquery" name="txt_search" size="45">
-             <input type="button" value="Search" onclick="callSearch('edit')">
+             <input type="button" value="Search" onclick="callSearch('edit')"><br>
              <input type="radio"  name="editlist_" checked="checked" value="date_added" /><a>Most Recent</a>
              <input type="radio" name="editlist_" id="editlist" value="score" /><a>Top Rated</a>
         <br>
@@ -127,21 +134,22 @@
             <a id="editwait" style="color : red; visibility: hidden;" >Please Wait</a>
     </div><!-- END OF EDIT DIV --->
 
+    <!--
     <div class="c1of3" id="joined">
         <a class="font_header">Joined Observation Events</a><br>
              <input type="text" id="joinedquery" name="txt_search" size="45">
-             <input type="button" value="Search" onclick="callSearch('joined')">
+             <input type="button" value="Search" onclick="callSearch('joined')"><br>
              <input type="radio" name="joinedlist_" checked="checked" value="date_added" /><a>Most Recent</a>
              <input type="radio" name="joinedlist_" id="joinedlist" value="score" /><a>Top Rated</a>
              <h2>NOT IMPLEMENTED YET</h2>
         <br>
     </div>
-
-    <div class="c1of3" id="all">
+-->
+    <div class="c1of2" id="all">
         
         <a class="font_header">All Observation Events</a><br>
              <input type="text" id="allquery" name="txt_search" size="45">
-             <input type="button" value="Search" onclick="callSearch('all')">
+             <input type="button" value="Search" onclick="callSearch('all')"><br>
              <input type="radio" name="alllist_" checked="checked" value="date_added" /><a>Most Recent</a>
              <input type="radio"  name="alllist_" id="alllist" value="score" /><a>Top Rated</a>
         <br>
