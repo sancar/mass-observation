@@ -44,6 +44,8 @@ public class VoteEvent extends HttpServlet {
         String event_id=request.getParameter("event_id");
         
         String vote=request.getParameter("vote");
+        
+        int num_of_scores=1;
        
         try
         {
@@ -52,8 +54,29 @@ public class VoteEvent extends HttpServlet {
        
             statement = connection.createStatement();
             
-            String sql="UPDATE created_events SET score=score+"+Integer.parseInt(vote)*20+", number_of_scores=number_of_scores+1  WHERE event_id="+event_id;
+            String sql = " INSERT INTO user_votes(email, id, type, given_score) VALUES('"+email+"',"+event_id+",'event',"+Integer.parseInt(vote)*20+")";
+            
             statement.executeUpdate(sql);
+            
+            statement.close();
+            
+            sql  = "SELECT COUNT(*) FROM user_votes WHERE type='event' AND id="+event_id;
+            
+            statement = connection.createStatement();
+            
+            ResultSet rs= statement.executeQuery(sql);
+            
+            if(rs.next())
+                num_of_scores = rs.getInt(1);
+            
+            rs.close();
+            statement.close();
+            
+            statement = connection.createStatement();
+            
+            sql="UPDATE created_events SET score=score/"+num_of_scores+"+"+(Integer.parseInt(vote)*20)/num_of_scores+ " WHERE event_id="+event_id;
+            statement.executeUpdate(sql);
+
 
         }
         
