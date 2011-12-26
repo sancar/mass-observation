@@ -131,9 +131,9 @@ public class CreateOE extends HttpServlet {
                                 Connection connection = DriverManager.getConnection(dbUrl , username, password);
                                 Statement statement = connection.createStatement();                                                                                         //           " VALUES ("+name +","+ txt_eventname + ","+txt_summary+","+public_to_observe +","+ 
                                 
-                                int result = statement.executeUpdate("INSERT INTO created_events ( created_by, event_name, event_summary, public_to_observe, public_to_see, score, number_of_scores, poll, text, image, audio, video )" + 
+                                int result = statement.executeUpdate("INSERT INTO created_events ( created_by, event_name, event_summary, public_to_observe, public_to_see, score, poll, text, image, audio, video )" + 
                                                                                                                                        "VALUES ('"+email +"','"+ txt_eventname + "','"+txt_summary+"',"+public_to_observe +","+ 
-                                                                                                                                       public_to_see +"," + " 0 , 0, "+cb_Poll + "," + cb_Text + "," + cb_Image + "," + cb_Audio +
+                                                                                                                                       public_to_see +"," + " 0 , "+cb_Poll + "," + cb_Text + "," + cb_Image + "," + cb_Audio +
                                                                                                                                        "," + cb_Video + " )");
                           
                                  statement.close();
