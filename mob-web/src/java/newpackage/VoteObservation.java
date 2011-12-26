@@ -46,6 +46,7 @@ public class VoteObservation extends HttpServlet {
         
         String type="";
         String id="";
+        int num_of_scores=1;
         
         if(request.getParameter("text_id")!=null)
         {
@@ -83,7 +84,27 @@ public class VoteObservation extends HttpServlet {
        
             statement = connection.createStatement();
             
-            String sql="UPDATE observations_"+type+" SET score=score+"+Integer.parseInt(vote)*20+" WHERE "+type+"_id="+id;
+            String sql = " INSERT INTO user_votes(email, id, type, given_score) VALUES('"+email+"',"+id+",'"+type+"',"+Integer.parseInt(vote)*20+")";
+            
+            statement.executeUpdate(sql);
+            
+            statement.close();
+            
+            sql  = "SELECT COUNT(*) FROM user_votes WHERE type='"+type+"' AND id="+id;
+            
+            statement = connection.createStatement();
+            
+            ResultSet rs= statement.executeQuery(sql);
+            
+            if(rs.next())
+                num_of_scores = rs.getInt(1);
+            
+            rs.close();
+            statement.close();
+            
+            statement = connection.createStatement();
+            
+            sql="UPDATE observations_"+type+" SET score=score/"+num_of_scores+"+"+(Integer.parseInt(vote)*20)/num_of_scores+ " WHERE "+type+"_id="+id;
             statement.executeUpdate(sql);
 
         }
