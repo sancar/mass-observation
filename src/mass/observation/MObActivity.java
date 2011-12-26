@@ -44,6 +44,8 @@ public class MObActivity extends Activity {
 			public void onClick(View view) {
 				String username = ((EditText) findViewById(R.id.UsernameInput)).getText().toString();
 			    String password = ((EditText) findViewById(R.id.PasswordInput)).getText().toString();
+			    User.setUsername(username);
+			    User.setPassword(password);
 			    password = MD5(password);
 			    new LoginTask().execute(username,password);
 			}

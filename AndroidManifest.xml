@@ -26,6 +26,7 @@
         <activity android:name=".PhotoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".VideoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".AudioActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".DummyActivity" ></activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 <uses-permission android:name="android.permission.CAMERA"></uses-permission>

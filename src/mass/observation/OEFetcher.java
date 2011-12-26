@@ -22,11 +22,13 @@ import org.json.JSONObject;
 
 public class OEFetcher {
 	
-	public static ArrayList<ObservationEvent> getPopularOES() throws JSONException, IOException{
-		ArrayList<ObservationEvent> PopularOES = new ArrayList<ObservationEvent>();
+	public static ArrayList<ObservationEvent> getOES(String url) throws JSONException, IOException{
+		ArrayList<ObservationEvent> OES = new ArrayList<ObservationEvent>();
 		StringBuilder builder = new StringBuilder();
-		InputStream is = connectTo("http://titan.cmpe.boun.edu.tr:8082/myServer/getPopularOE");
-		//InputStream is = connectTo("http://192.168.149.110:8080/myServer/getPopularOE");
+		List<NameValuePair> list = new ArrayList<NameValuePair>();
+		list.add(new BasicNameValuePair("username",User.getUsername()));
+		InputStream is = connectToWithList(url,list);
+		//InputStream is = connectToWithList("http://192.168.149.244:8080/myServer/getPopularOE",list);
 		BufferedReader reader = new BufferedReader(
 				new InputStreamReader(is));
 		String line;
@@ -46,27 +48,13 @@ public class OEFetcher {
 			oe.setPoll(jason.getString("poll"));
 			oe.setText(jason.getString("text"));
 			oe.setVideo(jason.getString("video"));
-			PopularOES.add(oe);
+			if(jason.isNull("user")){System.out.println("+++++++++++++++++++++");oe.setObservable(false);}
+			else {System.out.println("---------------");oe.setObservable(true);}
+			OES.add(oe);
 		}
-		return PopularOES;
+		return OES;
 	}
-	public static boolean canObserve(int id) throws ClientProtocolException, IOException{
-		StringBuilder builder = new StringBuilder();
-		List<NameValuePair> list = new ArrayList<NameValuePair>();
-		list.add(new BasicNameValuePair("oe_id",String.valueOf(id)));
-		list.add(new BasicNameValuePair("username",User.getUsername()));
-		InputStream is = connectToWithList("http://titan.cmpe.boun.edu.tr:8082/myServer/canobserveOE",list);
-		//InputStream is = connectToWithList("http://192.168.149.110:8080/myServer/canobserveOE",list);
-		BufferedReader reader = new BufferedReader(
-				new InputStreamReader(is));
-		String line;
-		while ((line = reader.readLine()) != null) {
-			builder.append(line);
-		}
-		String result = builder.toString();
-		if(result.equals("1"))return true;
-		else return false;
-	}
+	
 	private static InputStream connectToWithList(String url,
 			List<NameValuePair> list) throws ClientProtocolException, IOException {
 		HttpClient hc = new DefaultHttpClient();

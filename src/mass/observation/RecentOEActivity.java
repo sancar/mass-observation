@@ -98,7 +98,7 @@ public class RecentOEActivity extends ListActivity {
 							startActivity(intent);
 						}
 						else {
-							//WHAT THE F.K IS THIS?
+							//WHAT THE F..K IS THIS?
 						}
 					}});
 				AlertDialog alert = builder.create();

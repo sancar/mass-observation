@@ -30,7 +30,7 @@ public class TabWidget extends TabActivity {
 	    tabHost.addTab(spec);
 
 	    // Do the same for the other tabs
-	    intent = new Intent().setClass(this, RecentOEActivity.class);
+	    intent = new Intent().setClass(this, DummyActivity.class);
 	    intent.putExtra("username", username);
 	    intent.putExtra("password", password);
 	    spec = tabHost.newTabSpec("recoe").setIndicator("Recent",
@@ -38,7 +38,7 @@ public class TabWidget extends TabActivity {
 	                  .setContent(intent);
 	    tabHost.addTab(spec);
 
-	    tabHost.setCurrentTab(1);
+	    tabHost.setCurrentTab(0);
 	}
 	private void getCredentials() {
 			username = getIntent().getExtras().getString("username");

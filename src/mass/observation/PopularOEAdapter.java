@@ -21,11 +21,8 @@ public class PopularOEAdapter extends BaseAdapter {
 	ArrayList<ObservationEvent> OES;
 	public PopularOEAdapter(Context c) throws JSONException, IOException{
 		context = c;
-		OES = OEFetcher.getPopularOES();
-		for(int i=0;i<OES.size();i++){
-			boolean canObs = OEFetcher.canObserve(OES.get(i).getId());
-			OES.get(i).setObservable(canObs);
-		}
+		OES = OEFetcher.getOES("http://titan.cmpe.boun.edu.tr:8082/myServer/getPopularOE");
+		//OES = OEFetcher.getOES("http://192.168.149.244:8080/myServer/getPopularOE");
 	}
 	@Override
 	public int getCount() {
@@ -50,8 +47,16 @@ public class PopularOEAdapter extends BaseAdapter {
 		}
 		TextView PopularOEText = (TextView)convertView.findViewById(R.id.PopularOEName);
 		PopularOEText.setText(OES.get(position).getName());
-		if(OES.get(position).isObservable())PopularOEText.setTextColor(Color.WHITE);
-		else PopularOEText.setTextColor(Color.RED);
+		TextView PopularOEDesc = (TextView) convertView.findViewById(R.id.PopularOEDesc);
+		PopularOEDesc.setText(OES.get(position).getDesc());
+		if(OES.get(position).isObservable()){
+			PopularOEText.setTextColor(Color.WHITE);
+			PopularOEDesc.setTextColor(Color.WHITE);
+		}
+		else {
+			PopularOEText.setTextColor(Color.DKGRAY);
+			PopularOEDesc.setTextColor(Color.DKGRAY);
+		}
 		return convertView;
 	}
 
