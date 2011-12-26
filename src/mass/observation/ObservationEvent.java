@@ -62,6 +62,12 @@ public class ObservationEvent {
 	public String getImage() {
 		return image;
 	}
+	public void setObservable(boolean canObservable) {
+		this.canObservable = canObservable;
+	}
+	public boolean isObservable() {
+		return canObservable;
+	}
 	private int id;
 	private String name;
 	private String desc;
@@ -70,5 +76,6 @@ public class ObservationEvent {
 	private String video;
 	private String audio;
 	private String image;
+	private boolean canObservable;
 	static int OE_MAX = 10;
 }
