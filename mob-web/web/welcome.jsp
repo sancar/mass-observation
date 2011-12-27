@@ -118,7 +118,7 @@
                 HashMap<String, Object> newMap = (HashMap<String, Object>) OEList.get(i);
                 %>
                 <a class="font_normal" href="./editOE.jsp?id=<%= newMap.get("event_id") %>"> <% out.print(newMap.get("event_name")); %></a> 
-                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(newMap.get("score").toString())/20 %>;"></div></div>
+                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(newMap.get("score").toString()) %>%;"></div></div>
                 <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
                 <a class="small"><% out.print(newMap.get("date_added")); %></a>
                 <hr width="100%" size="2"> 
@@ -205,7 +205,7 @@
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(newMap.get("score").toString())/20 %>;"></div></div>
+                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(newMap.get("score").toString()) %>%;"></div></div>
                 <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
                 <a class="small"><% out.print(newMap.get("date_added")); %></a>
                 <hr width="100%" size="2"> 

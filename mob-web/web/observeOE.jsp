@@ -83,7 +83,7 @@ if(!isAllowedToSee){
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(textMap.get("score").toString())/20 %>;"></div></div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(textMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
                 <a class="font_normal" > <% out.print(textMap.get("text")); %></a> <br> 
                 <a class="small"><% out.print(textMap.get("date_added")); %></a><br>
@@ -156,7 +156,7 @@ if(!isAllowedToSee){
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(pollMap.get("score").toString())/20 %>;"></div></div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(pollMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
                 
                 <%
@@ -261,7 +261,7 @@ if(!isAllowedToSee){
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(imageMap.get("score").toString())/20 %>;"></div></div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(imageMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
                 <a href="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" ><img height="300px" width="480px" src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" /></a><br>
                 <a class="small"><% out.print(imageMap.get("date_added")); %></a><br>
@@ -338,7 +338,7 @@ if(!isAllowedToSee){
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(audioMap.get("score").toString())/20 %>;"></div></div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(audioMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
                  <audio controls="controls">
                   <source src="<%= baseUrl %>/audios/<%= audioMap.get("url").toString() %>" type="audio/mp3" />
@@ -421,7 +421,7 @@ if(!isAllowedToSee){
                        <input type="submit" name="Vote" value="Vote" />
                    </form>
                </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString())/20 %>;"></div></div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
                     <video width="320" height="240" controls="controls">
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" />
