@@ -134,17 +134,6 @@
             <a id="editwait" style="color : red; visibility: hidden;" >Please Wait</a>
     </div><!-- END OF EDIT DIV --->
 
-    <!--
-    <div class="c1of3" id="joined">
-        <a class="font_header">Joined Observation Events</a><br>
-             <input type="text" id="joinedquery" name="txt_search" size="45">
-             <input type="button" value="Search" onclick="callSearch('joined')"><br>
-             <input type="radio" name="joinedlist_" checked="checked" value="date_added" /><a>Most Recent</a>
-             <input type="radio" name="joinedlist_" id="joinedlist" value="score" /><a>Top Rated</a>
-             <h2>NOT IMPLEMENTED YET</h2>
-        <br>
-    </div>
--->
     <div class="c1of2" id="all">
         
         <a class="font_header">All Observation Events</a><br>
