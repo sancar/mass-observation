@@ -56,7 +56,17 @@ public class SignIn extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 		
-		
+                if(request.getParameter("name").contains("'") || request.getParameter("email").contains("'") 
+				|| request.getParameter("password1").contains("'") || request.getParameter("password2").contains("'"))
+                {
+                
+                                        String message = "Disallowed character usage.";
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/signin.jsp");
+					request.setAttribute("message", message);
+					dispatcher.forward(request, response);
+                }
+		else
+                {
 		if (request.getParameter("name")!= null && request.getParameter("email") != null 
 				&&	request.getParameter("password1") != null && request.getParameter("password2") != null){
 			name = request.getParameter("name");
@@ -134,6 +144,7 @@ public class SignIn extends HttpServlet {
 		}else{
 			out.print("invalid input to sign in");
 		}
+                }
 	}
 
 }

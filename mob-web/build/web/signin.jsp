@@ -47,6 +47,9 @@
             </table>
         </form>
     </div>
+    <div class="c1of2">
+        <img style="margin-left: 90px;  margin-right: 90px;" src="pics/observe.GIF" height="430"></img>
+    </div>
     <br style="clear: left; clear: right;" />
 </div>
 

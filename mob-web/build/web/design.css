@@ -1,4 +1,7 @@
-
+@font-face {
+	font-family: cool_font;
+	src: url('cool_font.ttf');
+}
 /* logo */
 body{
     height: 700px;
@@ -93,9 +96,26 @@ body{
 .font_normal{
     color: #000080;
 }
-.slogan{
+.slogan0{
+    text-align:  center;
+    color: #003AFA;
+    font-size: 40px;
+    font-family: cool_font; 
+    font-weight: bold;
+}
+.slogan1{
+    text-align:  center;
+    color: #000080;
     font-size: 20px;
-    font-family: 
+    font-family: cool_font; 
+    font-weight: bold;
+}
+.slogan2{
+    text-align:  center;
+    color: #003AFA;
+    font-size: 30px;
+    font-family: cool_font; 
+    font-weight: bold;
 }
 .leftRed{
     color: red;
