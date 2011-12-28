@@ -137,7 +137,7 @@ public class CreateOE extends HttpServlet {
                                                                                                                                        public_to_see +"," + " 0 , "+cb_Poll + "," + cb_Text + "," + cb_Image + "," + cb_Audio +
                                                                                                                                        "," + cb_Video +")");
                           
-                                 statement.close();
+                                statement.close();
                                 Statement stmt = connection.createStatement();
                                 ResultSet rs = stmt.executeQuery( "select LAST_INSERT_ID()" );
                                 if ( rs.next() )
