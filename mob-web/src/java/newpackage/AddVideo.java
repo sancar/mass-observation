@@ -75,8 +75,8 @@ public class AddVideo extends HttpServlet {
                                 videoUrl = sdf.format(cal.getTime()) +".ogg";
                             else if(item.getName().endsWith("webm"))
                                 videoUrl = sdf.format(cal.getTime()) +".webm";
-                          //  else if(item.getName().endsWith("wmv"))
-                            //    videoUrl = sdf.format(cal.getTime()) +".wmv";
+                            else if(item.getName().endsWith("wmv"))
+                                videoUrl = sdf.format(cal.getTime()) +".wmv";
                             else
                             {
                                 

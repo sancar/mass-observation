@@ -84,13 +84,13 @@ public class VoteObservation extends HttpServlet {
        
             statement = connection.createStatement();
             
-            String sql = " INSERT INTO user_votes(email, id, type, given_score) VALUES('"+email+"',"+id+",'"+type+"',"+Integer.parseInt(vote)*20+")";
+            String sql = " INSERT INTO user_votes(email, id, type, given_score) VALUES('"+email+"','"+id+"','"+type+"',"+Integer.parseInt(vote)*20+")";
             
             statement.executeUpdate(sql);
             
             statement.close();
             
-            sql  = "SELECT COUNT(*) FROM user_votes WHERE type='"+type+"' AND id="+id;
+            sql  = "SELECT COUNT(*) FROM user_votes WHERE type='"+type+"' AND id='"+id+"'";
             
             statement = connection.createStatement();
             
@@ -103,8 +103,11 @@ public class VoteObservation extends HttpServlet {
             statement.close();
             
             statement = connection.createStatement();
-            
-            sql="UPDATE observations_"+type+" SET score=score/"+num_of_scores+"+"+(Integer.parseInt(vote)*20)/num_of_scores+ " WHERE "+type+"_id="+id;
+            String sqlType="";
+            if(type.equals("audio") || type.equals("image") || type.equals("video")) sqlType="url";
+            else if(type.equals("poll")) sqlType="poll_id";
+            else if(type.equals("text")) sqlType="text_id";
+            sql="UPDATE observations_"+type+" SET score=score/"+num_of_scores+"+"+(Integer.parseInt(vote)*20)/num_of_scores+ " WHERE "+sqlType+"= '"+id+"'";
             statement.executeUpdate(sql);
 
         }
