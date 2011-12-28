@@ -82,9 +82,9 @@ public class AddAudio extends HttpServlet {
                Connection connection = DriverManager.getConnection(dbUrl , username, password);
                Statement statement;
                statement=connection.createStatement();
-
+                
                String sql="INSERT INTO observations_audio( url, event_id, supplied_by, comment_id, score"
-                          + ", name_visible)"
+                          + " ,name_visible)"
                           + " VALUES('"+ audioUrl + "',"+event_id+ ",'"+email+"',0,"+score+","+name_visible+" )";
                statement.executeUpdate(sql);
                         
