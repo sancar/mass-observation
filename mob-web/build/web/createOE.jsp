@@ -12,6 +12,65 @@
     var countPolls = 0;
     var countOptions = 0;
     var countTags = 0;
+function checkForm(){
+    var x=document.forms["CreateOE"];
+    var errorDiv = document.getElementById("error");
+    var flag = 0;
+    var newError;
+    while (errorDiv.hasChildNodes()) {
+        errorDiv.removeChild(errorDiv.lastChild);
+    }
+
+
+    if(x["txt_eventname"].value == "" || x["txt_eventname"] == null){
+        newError = document.createElement("a");
+        newError.style.color = "red";  
+        newError.innerHTML =("please enter an event name<br>");
+        errorDiv.appendChild(newError);
+        flag = 1;
+    }
+    if(x["txt_summary"].value == "" || x["txt_summary"] == null){
+        newError = document.createElement("a");
+        newError.style.color = "red";  
+        newError.innerHTML =("please enter a summary<br>");
+        errorDiv.appendChild(newError);
+        flag = 1;
+    }
+    if(!document.getElementById("radio_3").checked &&
+       !document.getElementById("radio_1").checked &&
+       !document.getElementById("radio_2").checked) {
+        newError = document.createElement("a");         
+        newError.style.color = "red";          
+        newError.innerHTML =("please select who can participate (upload observation) to this event<br>");
+        errorDiv.appendChild(newError);
+        flag = 1;
+    }
+    if(!document.getElementById("radio2_3").checked &&
+       !document.getElementById("radio2_1").checked &&
+       !document.getElementById("radio2_2").checked){
+        newError = document.createElement("a");         
+        newError.style.color = "red";         
+        newError.innerHTML =("please select who can see this event<br>");
+        errorDiv.appendChild(newError);
+        flag = 1;
+    }
+    if(!document.getElementById("cb_Poll").checked &&
+       !document.getElementById("cb_Text").checked &&
+       !document.getElementById("cb_Audio").checked &&
+       !document.getElementById("cb_Video").checked &&
+       !document.getElementById("cb_Image").checked )
+   {
+        newError = document.createElement("a");         
+       newError.style.color = "red";           
+        newError.innerHTML =("please select at least one observation event type<br>");
+        errorDiv.appendChild(newError);
+        flag = 1;
+   }
+   if(flag)
+       return false;
+   else
+       return true;
+}    
 function addText(val) {
     if (val.value == "radio_mail_part") {
 
@@ -98,9 +157,11 @@ function addTag(){
 }
 </script>
 
-<form action="CreateOE" name="CreateOE" method = "post" >
+<form action="CreateOE" name="CreateOE" method = "post" onsubmit="return checkForm()" >
 <div class="container">
-
+    <div id="error">
+        
+    </div>
     <div class="c1of3"> 
         <a class="font_header">Name of the Observation Event </a><br>
         <input type="text" name="txt_eventname" size="30"><br>
@@ -115,18 +176,18 @@ function addTag(){
    
     <div class="c1of3">
         <a class="font_header">  Who can participate? </a><br>       
-        <input type="radio" name="radio" value="radio_anyone_part" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
-        <input type="radio" name="radio" value="radio_mail_part" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
+        <input type="radio" id="radio_1" name="radio" value="radio_anyone_part" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
+        <input type="radio" id="radio_2" name="radio" value="radio_mail_part" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
         <input type="text" name="text_mail_part" style="display:none;">
-        <input type="radio" name="radio" value="radio_name_part" onclick="removeText(this);"><a class="font_normal"> Select by approval system</a><br>
+        <input type="radio" id="radio_3" name="radio" value="radio_name_part" onclick="removeText(this);"><a class="font_normal"> Select by approval system</a><br>
         <br>
         <br>
         <a class="font_header">  Who can see? </a>
         <br>
-        <input type="radio" name="radio2" value="radio_anyone_see" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
-        <input type="radio" name="radio2" value="radio_mail_see" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
+        <input type="radio" id="radio2_1" name="radio2" value="radio_anyone_see" onclick="removeText(this);"><a class="font_normal"> Anyone(public) </a><br>
+        <input type="radio" id="radio2_2" name="radio2" value="radio_mail_see" onclick="addText(this);"><a class="font_normal"> Select by mail </a><br>
         <input type="text" name="text_mail_see" style="display:none;"  >
-        <input type="radio" name="radio2" value="radio_name_see" onclick="removeText(this);"><a class="font_normal"> Select by approval system </a><br>
+        <input type="radio" id="radio2_3" name="radio2" value="radio_name_see" onclick="removeText(this);"><a class="font_normal"> Select by approval system </a><br>
    </div>
 
     <div class="c1of3">
@@ -134,12 +195,12 @@ function addTag(){
         <a class="font_header">What are the types of the observations? </a>
         <br>
         <br>
-                <input type="checkbox" name="cb_Poll" value="Poll"  onclick="checkbox(this)"><a class="font_normal"> Poll</a>
+                <input type="checkbox" id="cb_Poll" name="cb_Poll" value="Poll"  onclick="checkbox(this)"><a class="font_normal"> Poll</a>
                 <input type="button" onClick="addPoll()"  value="Add a new poll" id="newpoll" style="display: none;" ><br>
-                <input type="checkbox" name="cb_Text" value="Text"><a class="font_normal"> Text</a><br>
-                <input type="checkbox" name="cb_Image" value="Image"><a class="font_normal"> Image</a><br>
-                <input type="checkbox" name="cb_Audio" value="Audio record"><a class="font_normal"> Audio record</a><br>
-                <input type="checkbox" name="cb_Video" value="Video record"><a class="font_normal"> Video record</a><br>
+                <input type="checkbox" id="cb_Text" name="cb_Text" value="Text"><a class="font_normal"> Text</a><br>
+                <input type="checkbox" id="cb_Image" name="cb_Image" value="Image"><a class="font_normal"> Image</a><br>
+                <input type="checkbox" id="cb_Audio" name="cb_Audio" value="Audio record"><a class="font_normal"> Audio record</a><br>
+                <input type="checkbox" id="cb_Video" name="cb_Video" value="Video record"><a class="font_normal"> Video record</a><br>
                 <br>
                 <br>
                 <input type="submit" name="CREATE" value="Create" >   

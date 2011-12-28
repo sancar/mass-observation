@@ -101,7 +101,7 @@
 
 <div class="container">      
     <div class="c1of2" id="edit">
-        <a class="font_header">Edit Observation Events created by me</a><br>
+        <a class="font_header" color="black">Edit Observation Events created by me</a><br>
              <input type="text" id="editquery" name="txt_search" size="45">
              <input type="button" value="Search" onclick="callSearch('edit')"><br>
              <input type="radio"  name="editlist_" checked="checked" value="date_added" /><a>Most Recent</a>
