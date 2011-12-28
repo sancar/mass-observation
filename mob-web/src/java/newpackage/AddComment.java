@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import javax.servlet.RequestDispatcher;
 
 /**
  *
@@ -100,7 +101,15 @@ public class AddComment extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        
+        if(comment.contains("'"))
+        {
+            String message = "Disallowed character usage.";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/observeOE.jsp?id="+event_id);
+            request.setAttribute("message", message);
+            dispatcher.forward(request, response);
+        }
+        else
+        {
         try
         {
             
@@ -135,6 +144,7 @@ public class AddComment extends HttpServlet {
         session.setAttribute("email", email);
         session.setAttribute("name", name);
         response.sendRedirect("./observeOE.jsp?id="+event_id);
+        }
     }
 
     /** 

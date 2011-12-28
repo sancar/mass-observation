@@ -16,7 +16,7 @@
 	if(session.getAttribute("name") != null){
 	%>	
         <div style="float:right;"> 
-            <a class="font_normal">Welcome <% out.print(session.getAttribute("name"));%></a>
+            <a class="font_normal">Welcome <% out.print(session.getAttribute("name"));%></a><br><br>
             <a href="./Logout">Log Out</a>  
         </div>
         <%                

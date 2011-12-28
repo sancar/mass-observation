@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.Date;
 import java.text.*;
+import javax.servlet.RequestDispatcher;
 
 @WebServlet("/AddText")
 public class AddText extends HttpServlet {
@@ -59,8 +60,15 @@ public class AddText extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         
-        
-        
+          if(text.contains("'"))
+        {
+            String message = "Disallowed character usage.";
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/observeOE.jsp?id="+event_id);
+            request.setAttribute("message", message);
+            dispatcher.forward(request, response);
+        }
+        else
+          {
         try
         {
             
@@ -86,7 +94,7 @@ public class AddText extends HttpServlet {
                                     out.print("error");
                                     e.printStackTrace(out);
                             }
-        
+          }
         session.setAttribute("email", email);
         session.setAttribute("name", name);
         response.sendRedirect("./observeOE.jsp?id="+event_id);

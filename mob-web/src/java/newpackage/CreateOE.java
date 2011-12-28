@@ -45,6 +45,7 @@ public class CreateOE extends HttpServlet {
                 String[] tags = {""};
                 PrintWriter out = response.getWriter();
                 boolean error = false;
+                boolean error2 = false;
         
                 if(request.getParameter("txt_eventname") == null ){
                         error = true;
@@ -122,6 +123,22 @@ public class CreateOE extends HttpServlet {
                         cb_Video = 0;
                 }
                 
+                if(request.getParameter("txt_eventname").contains("'") ){
+                        error2 = true;
+                        message = "Disallowed character usage.<br/>";
+                }
+                if(request.getParameter("txt_summary").contains("'") ){
+                        error2 = true;
+                        message = "Disallowed character usage.<br/>";
+                }
+                if(error2)
+                {
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/createOE.jsp");
+                        request.setAttribute("message", message);
+                        dispatcher.forward(request, response);
+                }
+                else
+                {
                 if(error){
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/createOE.jsp");
                         request.setAttribute("message", message);
@@ -267,6 +284,7 @@ public class CreateOE extends HttpServlet {
                         session.setAttribute("name", name);
                         response.sendRedirect("./welcome.jsp");
                 }
+        }
                 
                         /*
                         "txt_eventname"

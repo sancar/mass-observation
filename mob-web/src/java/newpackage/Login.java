@@ -50,7 +50,16 @@ public class Login extends HttpServlet {
 		if(request.getParameter("email") != null && request.getParameter("password1") != null){
 			email = request.getParameter("email");
 			password1 = request.getParameter("password1");
-			
+                        
+                        if(email.contains("'") || password1.contains("'"))
+                        {
+                            String message = "Disallowed character usage.";
+		            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+			    request.setAttribute("message", message);
+			    dispatcher.forward(request, response);
+                        }
+                        else
+                        {
 			if(!email.isEmpty() && !password1.isEmpty()){
 				try {
 					Connection connection = DriverManager.getConnection(dbUrl , username, password);
@@ -81,11 +90,12 @@ public class Login extends HttpServlet {
 				}
 			}else{
 				String message = "please enter email and password to login";
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("./login.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 				request.setAttribute("message", message);
 				dispatcher.forward(request, response);
 				
 			}
+                        }
 		}else{
 			out.print("invalid input to login");
 		}
