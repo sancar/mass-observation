@@ -424,54 +424,22 @@ if(!isAllowedToSee){
                </div>
                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
-<!--<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" 
-codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="320" height="240" >
-<param value="src" value="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" >
-<param name="autoplay" value="false" >
-<param name="controller" value="true">
-<embed src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/quicktime" controller="true"
-pluginspage="http://www.apple.com/quicktime/download" width="320" height="240" autoplay="false"></embed>
+
+<object classid="clsid:67DABFBF-D0AB-41fa-9C46-CC0F21721616" width="320" height="260" codebase="http://go.divx.com/plugin/DivXBrowserPlugin.cab">
+
+ <param name="custommode" value="none" />
+
+  <param name="autoPlay" value="false" />
+  <param name="src" value="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" />
+
+<embed type="video/divx" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" custommode="none" width="320" height="260" autoPlay="false"  pluginspage="http://go.divx.com/plugin/download/">
+</embed>
 </object>
-<br>--->
+<br />No video? <a href="http://www.divx.com/software/divx-plus/web-player" target="_blank">Download</a> the DivX Plus Web Player.
 
-<video width="320" height="240" controls preload="none">
-    
-    
-    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" /><!-- WebKit video    -->
-    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/webm" /><!-- Chrome / Newest versions of Firefox and Opera -->
-    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" /><!-- Firefox / Opera -->
-    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/wmv" /><!-- Firefox / Opera -->
-    <!-- fallback to Flash: -->
-    <object width="320" height="270" type="application/x-shockwave-flash" data="__FLASH__.SWF">
-        <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
-        <param name="movie" value="__FLASH__.SWF" />
-        <param name="flashvars" value="image=__POSTER__.JPG&amp;file=<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" />
-        <!-- fallback image. note the title field below, put the title of the video there -->
-        <img src="__VIDEO__.JPG" width="640" height="360" alt="__TITLE__"
-             title="No video playback capabilities, please download the video below" />
-    </object>
-</video>
-<!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
-<p> <strong>Download Video:</strong>
-    <a href="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">"DOWNLOAD"</a>
-    
-</p>
 
-<a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
-                    <hr width="100%" size="2">  <br>
-             <!--  <video width="320" height="240" controls="controls">
-                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" />
-                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" />
-                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/webm" />
-                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/wmv" />
-                    <object width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
-                    <embed width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
-                    Your browser does not support video
-                    </embed>
-                    </object>
-                    </video><br>
                     <a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
-                    <hr width="100%" size="2">  <br> -->
+                    <hr width="100%" size="2">  <br> 
                 <!-- video OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('videocomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="videocomment<%= i %>" style="display: none;">
