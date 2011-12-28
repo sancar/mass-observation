@@ -252,7 +252,7 @@ if(!isAllowedToSee){
                 %>
                 <!--- Vote system for image observations--->
                 <div>
-                    <form method="post" name="Vote" action="ShowParameters?event_id=<%= id %>&image_id=<%= imageMap.get("image_id")%>" onsubmit="return checkVote()">
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&image_id=<%= imageMap.get("url")%>" onsubmit="return checkVote()">
                        <input type="radio" name="vote" value="1" /><a>1</a>
                        <input type="radio" name="vote" value="2" /><a>2</a>
                        <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
@@ -329,7 +329,7 @@ if(!isAllowedToSee){
  %>
                 <!--- Vote system for audio observations--->
                 <div>
-                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&audio_id=<%= audioMap.get("audio_id")%>" onsubmit="return checkVote()">
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&audio_id=<%= audioMap.get("url")%>" onsubmit="return checkVote()">
                        <input type="radio" name="vote" value="1" /><a>1</a>
                        <input type="radio" name="vote" value="2" /><a>2</a>
                        <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
@@ -412,7 +412,7 @@ if(!isAllowedToSee){
  %>
                 <!--- Vote system for video observations--->
                 <div>
-                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&video_id=<%= videoMap.get("video_id")%>" onsubmit="return checkVote()">
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&video_id=<%= videoMap.get("url")%>" onsubmit="return checkVote()">
                        <input type="radio" name="vote" value="1" /><a>1</a>
                        <input type="radio" name="vote" value="2" /><a>2</a>
                        <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
@@ -423,10 +423,22 @@ if(!isAllowedToSee){
                </div>
                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
-                    <video width="320" height="240" controls="controls">
+<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" 
+codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="320" height="240" >
+<param value="src" value="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" >
+<param name="autoplay" value="false" >
+<param name="controller" value="true">
+<embed src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/quicktime" controller="true"
+pluginspage="http://www.apple.com/quicktime/download" width="320" height="240" autoplay="false"></embed>
+</object>
+<br>
+<a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
+                    <hr width="100%" size="2">  <br>
+             <!--  <video width="320" height="240" controls="controls">
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" />
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" />
                       <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/webm" />
+                      <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/wmv" />
                     <object width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
                     <embed width="320" height="240" src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">
                     Your browser does not support video
@@ -434,7 +446,7 @@ if(!isAllowedToSee){
                     </object>
                     </video><br>
                     <a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
-                    <hr width="100%" size="2">  <br>
+                    <hr width="100%" size="2">  <br> -->
                 <!-- video OBSERVATIONS COMMENTS -->                 
                 <a class="font_normal"  href="javascript:showComments('videocomment<%= i %>');" >Show Comments</a><br>
                 <div class="comment" id="videocomment<%= i %>" style="display: none;">
