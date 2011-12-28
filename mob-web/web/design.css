@@ -93,6 +93,10 @@ body{
 .font_normal{
     color: #000080;
 }
+.slogan{
+    font-size: 20px;
+    font-family: 
+}
 .leftRed{
     color: red;
    position: absolute;

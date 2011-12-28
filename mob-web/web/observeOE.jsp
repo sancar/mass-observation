@@ -233,83 +233,6 @@ if(!isAllowedToSee){
         </div>
  <%
     }
-    if((Integer)eventMap.get("image") == 1){
- %>
-        <div class="c1of2">
-            <a class="font_header">Image Observations</a><br>  
- <%
-        ArrayList<HashMap<String, Object>> OEimageList = new ArrayList<HashMap<String, Object>>();
-        OEimageList = database.return_images(id);
-        if(!OEimageList.isEmpty()) {
-            for(int i=0;i<OEimageList.size();i++) {
-                HashMap<String, Object> imageMap = (HashMap<String, Object>) OEimageList.get(i);
- %>              <!--- IMAGE OBSERVATIONS --->
- <%               if((Integer)imageMap.get("name_visible") == 1){
- %>                <a class="font_normal">by <% out.print(database.getUserName(imageMap.get("supplied_by").toString())); %></a><br>                         
- <%             }else{
- %>                <a class="font_normal">by Anonymous</a><br>    
- <%             }
-                %>
-                <!--- Vote system for image observations--->
-                <div>
-                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&image_id=<%= imageMap.get("url")%>" onsubmit="return checkVote()">
-                       <input type="radio" name="vote" value="1" /><a>1</a>
-                       <input type="radio" name="vote" value="2" /><a>2</a>
-                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
-                       <input type="radio" name="vote" value="4" /><a>4</a>
-                       <input type="radio" name="vote" value="5" /><a>5</a>
-                       <input type="submit" name="Vote" value="Vote" />
-                   </form>
-               </div>
-               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(imageMap.get("score").toString()) %>%;"></div></div>
-               <!----------------------------------------->
-                <a href="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" ><img height="300px" width="480px" src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" /></a><br>
-                <a class="small"><% out.print(imageMap.get("date_added")); %></a><br>
-                <hr width="100%" size="2"> 
-                <!-- IMAGE OBSERVATIONS COMMENTS -->                 
-                <a class="font_normal"  href="javascript:showComments('imagecomment<%= i %>');" >Show Comments</a><br>
-                <div class="comment" id="imagecomment<%= i %>" style="display: none;">
- <%       
-                ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
-                commentList = database.return_comments(imageMap.get("url").toString(),"image");
-                if(!commentList.isEmpty()) {
-                    for(int j=0;j<commentList.size();j++) {
-                         HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
-                        if((Integer)commentMap.get("name_visible") == 1){
-         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
-         <%             }else{
-         %>                <a class="font_normal">by Anonymous</a><br>    
-         <%             }
-         %>                      
-                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>
-                         <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
-                        <hr width="100%" size="2">   
-<%                                              
-                    }
-                }
-%>              <!-- ADD IMAGE OBSERVATIONS COMMENT -->
-                <form action="AddComment?image_url=<% out.print(imageMap.get("url")); %>&event_id=<%= id %>" method="post">
-                       <textarea name="Comment" cols="40" rows="3"></textarea><br>
-                       <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
-                       <input type="submit" value="submit" name="submit">
-                 </form>
-            </div> 
-                <hr width="100%" size="2">  
- <%           
-            }
-        }
-        if(isAllowedToObserve){ 
-%>          <!--- ADD IMAGE OBSERVATION --->
-            <form action="AddImage?event_id=<%= id %>" method="post" enctype="multipart/form-data">
-              Select a file: 
-              <input type="file" name="first" />
-              <br />
-              <input type="submit" name="button" value="upload" />
-            </form>        
-<%      }
-%>   </div>
-<%
-    }
     if((Integer)eventMap.get("audio") == 1){
     %>
             <div class="c1of2">
@@ -392,7 +315,85 @@ if(!isAllowedToSee){
 <%      }
 %>   </div>
 <%  
+    }    
+    if((Integer)eventMap.get("image") == 1){
+ %>
+        <div class="c1of2">
+            <a class="font_header">Image Observations</a><br>  
+ <%
+        ArrayList<HashMap<String, Object>> OEimageList = new ArrayList<HashMap<String, Object>>();
+        OEimageList = database.return_images(id);
+        if(!OEimageList.isEmpty()) {
+            for(int i=0;i<OEimageList.size();i++) {
+                HashMap<String, Object> imageMap = (HashMap<String, Object>) OEimageList.get(i);
+ %>              <!--- IMAGE OBSERVATIONS --->
+ <%               if((Integer)imageMap.get("name_visible") == 1){
+ %>                <a class="font_normal">by <% out.print(database.getUserName(imageMap.get("supplied_by").toString())); %></a><br>                         
+ <%             }else{
+ %>                <a class="font_normal">by Anonymous</a><br>    
+ <%             }
+                %>
+                <!--- Vote system for image observations--->
+                <div>
+                    <form method="post" name="Vote" action="VoteObservation?event_id=<%= id %>&image_id=<%= imageMap.get("url")%>" onsubmit="return checkVote()">
+                       <input type="radio" name="vote" value="1" /><a>1</a>
+                       <input type="radio" name="vote" value="2" /><a>2</a>
+                       <input type="radio" checked="checked" name="vote" value="3" /><a>3</a>
+                       <input type="radio" name="vote" value="4" /><a>4</a>
+                       <input type="radio" name="vote" value="5" /><a>5</a>
+                       <input type="submit" name="Vote" value="Vote" />
+                   </form>
+               </div>
+               <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(imageMap.get("score").toString()) %>%;"></div></div>
+               <!----------------------------------------->
+                <a href="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" ><img height="300px" width="480px" src="<%= baseUrl %>/images/<%= imageMap.get("url").toString() %>" /></a><br>
+                <a class="small"><% out.print(imageMap.get("date_added")); %></a><br>
+                <hr width="100%" size="2"> 
+                <!-- IMAGE OBSERVATIONS COMMENTS -->                 
+                <a class="font_normal"  href="javascript:showComments('imagecomment<%= i %>');" >Show Comments</a><br>
+                <div class="comment" id="imagecomment<%= i %>" style="display: none;">
+ <%       
+                ArrayList<HashMap<String, Object>> commentList = new ArrayList<HashMap<String, Object>>();
+                commentList = database.return_comments(imageMap.get("url").toString(),"image");
+                if(!commentList.isEmpty()) {
+                    for(int j=0;j<commentList.size();j++) {
+                         HashMap<String, Object> commentMap = (HashMap<String, Object>) commentList.get(j);
+                        if((Integer)commentMap.get("name_visible") == 1){
+         %>                <a class="font_normal">by <% out.print(database.getUserName(commentMap.get("owner").toString())); %></a><br>                         
+         <%             }else{
+         %>                <a class="font_normal">by Anonymous</a><br>    
+         <%             }
+         %>                      
+                        <a class="font_normal" > <% out.print(commentMap.get("comment")); %></a> <br>
+                         <a class="small"><% out.print(commentMap.get("date_added")); %></a><br>
+                        <hr width="100%" size="2">   
+<%                                              
+                    }
+                }
+%>              <!-- ADD IMAGE OBSERVATIONS COMMENT -->
+                <form action="AddComment?image_url=<% out.print(imageMap.get("url")); %>&event_id=<%= id %>" method="post">
+                       <textarea name="Comment" cols="40" rows="3"></textarea><br>
+                       <a class="font_normal">Anonymous</a><input type="checkbox" value="anonymous" name="anonymous" />
+                       <input type="submit" value="submit" name="submit">
+                 </form>
+            </div> 
+                <hr width="100%" size="2">  
+ <%           
+            }
+        }
+        if(isAllowedToObserve){ 
+%>          <!--- ADD IMAGE OBSERVATION --->
+            <form action="AddImage?event_id=<%= id %>" method="post" enctype="multipart/form-data">
+              Select a file: 
+              <input type="file" name="first" />
+              <br />
+              <input type="submit" name="button" value="upload" />
+            </form>        
+<%      }
+%>   </div>
+<%
     }
+    
     if((Integer)eventMap.get("video") == 1){
     %>
             <div class="c1of2">
@@ -423,7 +424,7 @@ if(!isAllowedToSee){
                </div>
                <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(videoMap.get("score").toString()) %>%;"></div></div>
                <!----------------------------------------->
-<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" 
+<!--<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" 
 codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="320" height="240" >
 <param value="src" value="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" >
 <param name="autoplay" value="false" >
@@ -431,7 +432,31 @@ codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="320" height="240" 
 <embed src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/quicktime" controller="true"
 pluginspage="http://www.apple.com/quicktime/download" width="320" height="240" autoplay="false"></embed>
 </object>
-<br>
+<br>--->
+
+<video width="320" height="240" controls preload="none">
+    
+    
+    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/mp4" /><!-- WebKit video    -->
+    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/webm" /><!-- Chrome / Newest versions of Firefox and Opera -->
+    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/ogg" /><!-- Firefox / Opera -->
+    <source src="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" type="video/wmv" /><!-- Firefox / Opera -->
+    <!-- fallback to Flash: -->
+    <object width="320" height="270" type="application/x-shockwave-flash" data="__FLASH__.SWF">
+        <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
+        <param name="movie" value="__FLASH__.SWF" />
+        <param name="flashvars" value="image=__POSTER__.JPG&amp;file=<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>" />
+        <!-- fallback image. note the title field below, put the title of the video there -->
+        <img src="__VIDEO__.JPG" width="640" height="360" alt="__TITLE__"
+             title="No video playback capabilities, please download the video below" />
+    </object>
+</video>
+<!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
+<p> <strong>Download Video:</strong>
+    <a href="<%= baseUrl %>/videos/<%= videoMap.get("url").toString() %>">"DOWNLOAD"</a>
+    
+</p>
+
 <a class="small"><% out.print(videoMap.get("date_added")); %></a><br>
                     <hr width="100%" size="2">  <br>
              <!--  <video width="320" height="240" controls="controls">

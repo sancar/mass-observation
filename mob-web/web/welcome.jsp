@@ -196,7 +196,7 @@
                </div>
                 <div class="classification"><div class="cover"></div><div class="progress" style="width: <%= Integer.parseInt(newMap.get("score").toString()) %>%;"></div></div>
                 <p class="font_normal"><% out.print(newMap.get("event_summary")); %></p>
-                <a class="small"><% out.print(newMap.get("date_added")); %></a>
+                <a class="small">created on <% out.print(newMap.get("date_added")); %> by <%= database.getUserName(newMap.get("created_by").toString()) %></a>
                 <hr width="100%" size="2"> 
  <%
                 }
