@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.74"
+        android:background="@color/White" >
+        
+        <Button
+            android:id="@+id/RecordAudioStartStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="26dp"
+            android:layout_toLeftOf="@+id/AudioUploadButton"
+            android:text="Start" />
+
+
+
+        <Button
+            android:id="@+id/AudioUploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
+            android:text="@string/upload" />
+
+
+
+
+        <Button
+            android:id="@+id/AudioBrowse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/RecordAudioStartStopButton"
+            android:layout_alignBottom="@+id/RecordAudioStartStopButton"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/AudioUploadButton"
+            android:text="@string/selectfromstorage" />
+
+        <TextView
+            android:id="@+id/AudioPathText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/RecordAudioStartStopButton"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    </RelativeLayout>
+
+</LinearLayout>
