@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MOb</string>
+    <string name="Welcome">Welcome</string>
+    <string name="User_Name">Username</string>
+    <string name="Password">Password</string>
+    <string name="byG3">by G3</string>
+    <string name="a">a</string>
+    <string name="Login">Login</string>
+    <string name="text_observation">Text</string>
+    <string name="takeaphoto">Take a photo!</string>
+    <string name="upload">Upload</string>
+    <string name="selectfromstorage">Browse</string>
+    <string name="recordavideo">Record a video!</string>
+    <string name="search_tag">Search by tags</string>
+    <string name="search_oe_name">Search by name</string>
+    <string name="search_oe_desc">Search by description</string>
+	<string name="search">Search</string>
+</resources>
