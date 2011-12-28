@@ -115,7 +115,7 @@ public class AddComment extends HttpServlet {
               sql = "SELECT ";
             }*/
             
-            sql="INSERT INTO comment_owner( owner, name_visible, comment, observation_type, observation_id)"
+            sql="INSERT INTO comment_owner( owner, name_visible, comment ,observation_type, observation_id)"
                    
                     + " VALUES('"+ owner + "',"+name_visible+ ",'"+comment+"','"+observation_type+"','"+observation_id+"' )";
             statement.executeUpdate(sql);
