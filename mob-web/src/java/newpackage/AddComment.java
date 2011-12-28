@@ -105,14 +105,19 @@ public class AddComment extends HttpServlet {
         {
             
             
-            
+            String sql = "";
             Connection connection = DriverManager.getConnection(dbUrl , username, password);
             Statement statement;
             statement=connection.createStatement();
+            /*
+            if(observation_type.equals("image") || observation_type.equals("audio") || observation_type.equals("video"))
+            {
+              sql = "SELECT ";
+            }*/
             
-            String sql="INSERT INTO comment_owner( owner, name_visible, comment, observation_type, observation_id)"
+            sql="INSERT INTO comment_owner( owner, name_visible, comment, observation_type, observation_id)"
                    
-                    + " VALUES('"+ owner + "',"+name_visible+ ",'"+comment+"','"+observation_type+"',"+observation_id+" )";
+                    + " VALUES('"+ owner + "',"+name_visible+ ",'"+comment+"','"+observation_type+"','"+observation_id+"' )";
             statement.executeUpdate(sql);
 
 
