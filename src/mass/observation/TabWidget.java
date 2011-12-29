@@ -6,9 +6,25 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+/** 
+ * A tab widget to show popular OEs, recent OEs and
+ * search OEs in tabbed view.
+ * 
+ *  @author Oguz Demir
+ *  @version 1.0
+ *  
+ */
+
 public class TabWidget extends TabActivity {
 	private String username;
 	private String password;
+	
+	
+	/** 
+	 * Overrides onCreate() 
+	 * 
+	 * @param savedInstanceState State of this instance.
+	 * */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
@@ -40,6 +56,10 @@ public class TabWidget extends TabActivity {
 
 	    tabHost.setCurrentTab(0);
 	}
+	
+	/**
+	 * Gets the credentials of the user for the intent.
+	 */
 	private void getCredentials() {
 			username = getIntent().getExtras().getString("username");
 	    	password = getIntent().getExtras().getString("password");
